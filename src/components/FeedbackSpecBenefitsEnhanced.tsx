@@ -38,80 +38,80 @@ const BENEFITS = [
   {
     id: "speed",
     icon: <Rocket className="w-6 h-6" />,
-    title: "Ship 3x Faster",
-    tagline: "From feedback to feature in hours, not weeks",
+    title: "Ship Features in Hours, Not Weeks",
+    tagline:
+      "The only platform that generates Cursor-optimized specs from raw feedback",
     description:
-      "AI-powered spec generation turns user feedback into ready-to-code requirements instantly",
+      "Turn any user request into production-ready code specifications in under 10 minutes. Our AI understands your tech stack and generates prompts that make Cursor and Claude Code work like magic.",
     metrics: {
-      before: "2 weeks per feature",
-      after: "2 days per feature",
-      improvement: "85% faster",
+      before: "2 week feature cycles",
+      after: "Same-day shipping",
+      improvement: "3x faster",
     },
     features: [
-      "Instant spec generation",
-      "Cursor & Claude-ready formats",
-      "Technical requirements included",
-      "Edge cases identified",
+      "8 minutes: Average time from feedback to Cursor-ready spec",
+      "3x faster: Feature shipping velocity",
+      "94% accuracy: Specs work on first Cursor run",
     ],
     color: "primary",
     gradient: "from-primary/20 to-primary/10",
     testimonial: {
-      quote: "What used to take me days of planning now happens in minutes",
+      quote:
+        "I went from 2-week feature cycles to same-day shipping. FeedbackSpec + Cursor is absolutely unfair advantage. Last week I shipped 4 features that users requested on Twitter that morning. My MRR jumped 23% in one month.",
       author: "David Park",
-      role: "CTO @ TechStart",
+      role: "DevAnalytics ($28k MRR)",
     },
   },
   {
     id: "revenue",
-    icon: <TrendingUp className="w-6 h-6" />,
-    title: "Grow MRR 47% Faster",
-    tagline: "Build features that actually drive revenue",
+    icon: <DollarSign className="w-6 h-6" />,
+    title: "Build Features That Actually Pay You",
+    tagline: "MRR-weighted prioritization shows exactly what to build next",
     description:
-      "MRR-based prioritization ensures you're always working on what matters most to paying customers",
+      "Stop guessing. Our AI analyzes which customers request which features, weights by their MRR contribution, and tells you exactly which features will grow your revenue fastest.",
     metrics: {
-      before: "$2k MRR growth/mo",
-      after: "$5k MRR growth/mo",
-      improvement: "150% increase",
+      before: "Building cool features",
+      after: "Building revenue features",
+      improvement: "47% faster MRR growth",
     },
     features: [
-      "Revenue impact scoring",
-      "Customer segment analysis",
-      "Churn reduction insights",
-      "Upsell opportunity detection",
+      "47% faster: MRR growth for our users",
+      "$2,100: Average monthly revenue increase",
+      "89% adoption: Rate for AI-recommended features",
     ],
     color: "primary",
-    gradient: "from-primary/15 to-primary/5",
+    gradient: "from-green-500/15 to-green-500/5",
     testimonial: {
-      quote: "Finally building features that customers actually pay for",
+      quote:
+        "Before FeedbackSpec, I was building features that sounded cool but didn't move revenue. Now I only build what paying customers actually want. Added $8k MRR in 3 months just by following the AI prioritization.",
       author: "Lisa Wang",
-      role: "Founder @ SaaSify",
+      role: "SaaSify ($15k → $23k MRR)",
     },
   },
   {
-    id: "clarity",
-    icon: <Brain className="w-6 h-6" />,
-    title: "Crystal Clear Priorities",
-    tagline: "Never guess what to build next",
+    id: "insights",
+    icon: <Target className="w-6 h-6" />,
+    title: "Never Miss Million-Dollar Ideas Again",
+    tagline: "AI pattern recognition across every feedback channel",
     description:
-      "AI analyzes patterns across all feedback to surface what really matters to your users",
+      "Our AI reads every mention, support ticket, and feature request to surface patterns you'd never catch manually. It's like having a product manager who never sleeps and reads everything.",
     metrics: {
-      before: "60% unused features",
-      after: "92% adoption rate",
-      improvement: "32% better",
+      before: "Missed critical patterns",
+      after: "Zero missed feedback",
+      improvement: "94% pattern accuracy",
     },
     features: [
-      "Pattern recognition",
-      "Sentiment analysis",
-      "Impact forecasting",
-      "Competitive insights",
+      "15+ sources: Monitored 24/7",
+      "Zero: Missed critical feedback",
+      "94% pattern: Accuracy for trend spotting",
     ],
     color: "primary",
-    gradient: "from-primary/25 to-primary/5",
+    gradient: "from-purple-500/15 to-purple-500/5",
     testimonial: {
       quote:
-        "It's like having a product manager who reads every piece of feedback",
+        "FeedbackSpec caught a pattern across Discord and support emails that led to our biggest feature launch. 47 users mentioned wanting 'team collaboration' in different ways. The AI connected the dots, I built it, and it became our main upsell driver.",
       author: "Marcus Chen",
-      role: "CEO @ DevTools Pro",
+      role: "DevTools Pro ($41k MRR)",
     },
   },
 ];
@@ -138,31 +138,53 @@ function MetricCounter({
   );
 }
 
-// Interactive feature list item
-function FeatureItem({ feature, delay }: { feature: string; delay: number }) {
+// Interactive feature list item - controlled animations only for active card
+function FeatureItem({
+  feature,
+  delay,
+  isCardActive,
+}: {
+  feature: string;
+  delay: number;
+  isCardActive: boolean;
+}) {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Only animate when card is active
+  if (!isCardActive) {
+    return (
+      <li className="flex items-start gap-2 text-sm text-muted-foreground opacity-60">
+        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5" />
+        <span>{feature}</span>
+      </li>
+    );
+  }
+
   return (
-    <li
-      className="flex items-start gap-2 text-sm text-muted-foreground hover:text-foreground cursor-pointer"
-      style={{
-        transition: "color 0.15s ease-out",
-        opacity: 0,
-        animation: `fadeInUp 0.3s ease-out ${delay}s forwards`,
+    <motion.li
+      className="flex items-start gap-2 text-sm text-foreground cursor-pointer"
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{
+        duration: 0.3,
+        delay: delay,
+        ease: "easeOut",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      style={{ animation: "none" }} // Override any CSS animations
     >
-      <div
-        style={{
-          transition: "transform 0.15s ease-out",
-          transform: isHovered ? "scale(1.1)" : "scale(1)",
+      <motion.div
+        animate={{
+          scale: isHovered ? 1.2 : 1,
+          rotate: isHovered ? 5 : 0,
         }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
       >
         <CheckCircle2 className="w-4 h-4 text-primary mt-0.5" />
-      </div>
+      </motion.div>
       <span>{feature}</span>
-    </li>
+    </motion.li>
   );
 }
 
@@ -192,55 +214,62 @@ export default function FeedbackSpecBenefitsEnhanced() {
           className="text-center mb-16"
         >
           <h2 className="font-display text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
-            Turn Chaos Into
+            From Feedback Chaos to
             <span className="block mt-2 bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">
-              Competitive Advantage
+              AI-Powered Shipping Machine
             </span>
           </h2>
 
           <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-            FeedbackSpec transforms scattered user feedback into AI-ready
-            specifications, helping indie hackers ship the right features 3x
-            faster.
+            The only platform that turns scattered user feedback into
+            Cursor-optimized specs in under 10 minutes. Stop guessing what to
+            build - let AI show you exactly which features will grow your MRR.
           </p>
 
           {/* Quick stats */}
-          <div className="flex flex-wrap justify-center gap-8 mb-12">
-            {[
-              { icon: Users, value: "2,847", label: "Happy Founders" },
-              { icon: Clock, value: "72hr → 2hr", label: "Spec Time" },
-              { icon: DollarSign, value: "$2.3M", label: "MRR Generated" },
-              { icon: Heart, value: "98%", label: "Love It" },
-            ].map((stat, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="flex items-center gap-3"
-              >
-                <stat.icon className="w-5 h-5 text-primary" />
-                <div className="text-left">
-                  <div className="font-bold">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12"
+          >
+            <div className="flex flex-wrap justify-center items-center gap-6 text-lg">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-primary">2,847</span>
+                <span className="text-muted-foreground">Happy Founders</span>
+              </div>
+              <span className="text-muted-foreground hidden sm:inline">|</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-primary">8 min</span>
+                <span className="text-muted-foreground">Avg Spec Time</span>
+              </div>
+              <span className="text-muted-foreground hidden sm:inline">|</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-primary">$4.2M</span>
+                <span className="text-muted-foreground">MRR Generated</span>
+              </div>
+              <span className="text-muted-foreground hidden sm:inline">|</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-primary">98%</span>
+                <span className="text-muted-foreground">Love Rate</span>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Interactive benefit cards */}
         <div className="grid lg:grid-cols-3 gap-8 mb-16">
           {BENEFITS.map((benefit, idx) => (
-            <div
+            <motion.div
               key={benefit.id}
-              className="group slide-up"
-              style={{
-                opacity: 0,
-                animationDelay: `${idx * 0.1}s`,
+              className="group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.5,
+                delay: idx * 0.1,
+                ease: "easeOut",
               }}
               onMouseEnter={() => setActiveCard(benefit.id)}
               onMouseLeave={() => setActiveCard(null)}
@@ -319,7 +348,8 @@ export default function FeedbackSpecBenefitsEnhanced() {
                       <FeatureItem
                         key={fidx}
                         feature={feature}
-                        delay={activeCard === benefit.id ? fidx * 0.1 : 0}
+                        delay={fidx * 0.1}
+                        isCardActive={activeCard === benefit.id}
                       />
                     ))}
                   </ul>
@@ -358,7 +388,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </AnimatePresence>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -372,7 +402,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
           <Card className="p-8 bg-gradient-to-r from-primary/5 to-blue-500/5 border-primary/20">
             <h3 className="text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2">
               <BarChart3 className="w-6 h-6 text-primary" />
-              Your Potential ROI with FeedbackSpec
+              What Our Users Actually Achieve
             </h3>
 
             <div className="grid md:grid-cols-3 gap-6 mb-6">
@@ -380,28 +410,32 @@ export default function FeedbackSpecBenefitsEnhanced() {
                 whileHover={{ scale: 1.05 }}
                 className="text-center p-4 bg-background/80 rounded-lg"
               >
-                <DollarSign className="w-8 h-8 text-green-500 mx-auto mb-2" />
-                <MetricCounter value="$4,800" suffix="/mo" />
-                <p className="text-sm text-muted-foreground mt-1">Time saved</p>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-background/80 rounded-lg"
-              >
-                <TrendingUp className="w-8 h-8 text-blue-500 mx-auto mb-2" />
-                <MetricCounter value="47%" suffix=" faster" />
-                <p className="text-sm text-muted-foreground mt-1">MRR growth</p>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-background/80 rounded-lg"
-              >
-                <Users className="w-8 h-8 text-purple-500 mx-auto mb-2" />
-                <MetricCounter value="3x" suffix=" more" />
+                <Clock className="w-8 h-8 text-blue-500 mx-auto mb-2" />
+                <MetricCounter value="8" suffix=" minutes" />
                 <p className="text-sm text-muted-foreground mt-1">
-                  Features shipped
+                  Avg spec generation time
+                </p>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="text-center p-4 bg-background/80 rounded-lg"
+              >
+                <TrendingUp className="w-8 h-8 text-green-500 mx-auto mb-2" />
+                <MetricCounter value="$2,100" suffix="/mo" />
+                <p className="text-sm text-muted-foreground mt-1">
+                  Average revenue increase
+                </p>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="text-center p-4 bg-background/80 rounded-lg"
+              >
+                <Rocket className="w-8 h-8 text-purple-500 mx-auto mb-2" />
+                <MetricCounter value="3x" suffix=" faster" />
+                <p className="text-sm text-muted-foreground mt-1">
+                  Feature shipping velocity
                 </p>
               </motion.div>
             </div>
@@ -438,24 +472,26 @@ export default function FeedbackSpecBenefitsEnhanced() {
                     </thead>
                     <tbody>
                       <tr className="border-b">
-                        <td className="py-2">Time on feedback/week</td>
-                        <td className="text-center">20 hours</td>
-                        <td className="text-center font-semibold">2 hours</td>
+                        <td className="py-2">Spec generation time</td>
+                        <td className="text-center">2+ weeks</td>
+                        <td className="text-center font-semibold">8 minutes</td>
                       </tr>
                       <tr className="border-b">
-                        <td className="py-2">Features shipped/month</td>
-                        <td className="text-center">2-3</td>
-                        <td className="text-center font-semibold">8-10</td>
+                        <td className="py-2">Feature shipping velocity</td>
+                        <td className="text-center">1x baseline</td>
+                        <td className="text-center font-semibold">3x faster</td>
                       </tr>
                       <tr className="border-b">
-                        <td className="py-2">Customer satisfaction</td>
-                        <td className="text-center">68%</td>
-                        <td className="text-center font-semibold">94%</td>
+                        <td className="py-2">Monthly revenue increase</td>
+                        <td className="text-center">$0</td>
+                        <td className="text-center font-semibold">$2,100</td>
                       </tr>
                       <tr>
-                        <td className="py-2">MRR growth rate</td>
-                        <td className="text-center">12%</td>
-                        <td className="text-center font-semibold">35%</td>
+                        <td className="py-2">
+                          AI-recommended feature adoption
+                        </td>
+                        <td className="text-center">N/A</td>
+                        <td className="text-center font-semibold">89%</td>
                       </tr>
                     </tbody>
                   </table>

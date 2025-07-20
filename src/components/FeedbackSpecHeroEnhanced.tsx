@@ -392,7 +392,7 @@ export function FeedbackSpecHeroEnhanced({
           transition={{ delay: 0.1 }}
         >
           <span className="bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
-            {title}!!!
+            {title}
           </span>
         </motion.h1>
 
@@ -431,7 +431,7 @@ export function FeedbackSpecHeroEnhanced({
             className="px-8 py-3 group"
             onClick={onPrimaryCtaClick}
           >
-            Try Free
+            Start Free 14-Day Trial
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </motion.div>

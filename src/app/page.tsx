@@ -54,9 +54,9 @@ export default function Home() {
 
       {/* Hero Section */}
       <FeedbackSpecHeroEnhanced
-        title="Turn scattered feedback into Cursor and Claude Code specs in minutes, not hours"
-        subtitle="For Indie Hackers Who Ship Fast"
-        description="The automated platform for indie hackers and solo founders that collects feedback from all sources and generates AI-ready specifications for instant feature development."
+        title="Turn scattered feedback into Cursor-ready specs in 8 minutes flat"
+        subtitle="The AI-Powered Feedback Engine for Indie Hackers Who Ship Daily"
+        description="Stop wasting 15+ hours weekly on manual feedback management. FeedbackSpec's AI automatically transforms user feedback from 15+ sources into production-ready specifications for Cursor, Claude Code, and GitHub Copilot."
         primaryCtaText="Try free for 14 days"
         secondaryCtaText="No card required • Instant setup"
         onPrimaryCtaClick={() => setIsFormOpen(true)}
