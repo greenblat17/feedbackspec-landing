@@ -22,24 +22,27 @@ export default function Home() {
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
-        
+
         /* GPU acceleration for animations */
         [data-animate] {
           will-change: transform, opacity;
         }
-        
+
         /* Reduce layout thrashing */
-        img, video {
+        img,
+        video {
           will-change: auto;
         }
-        
+
         /* Optimize scrolling */
         html {
           scroll-behavior: smooth;
         }
-        
+
         @media (prefers-reduced-motion: reduce) {
-          *, *::before, *::after {
+          *,
+          *::before,
+          *::after {
             animation-duration: 0.01ms !important;
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
@@ -69,9 +72,7 @@ export default function Home() {
       <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
 
       {/* Pricing Section */}
-      <FeedbackSpecPricingEnhanced 
-        onStartTrial={() => setIsFormOpen(true)}
-      />
+      <FeedbackSpecPricingEnhanced onStartTrial={() => setIsFormOpen(true)} />
 
       {/* CTA Section */}
       <FeedbackSpecCTA

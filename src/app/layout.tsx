@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { 
-  Space_Grotesk, 
-  Outfit, 
-  Plus_Jakarta_Sans, 
-  Manrope, 
-  JetBrains_Mono 
+import {
+  Space_Grotesk,
+  Outfit,
+  Plus_Jakarta_Sans,
+  Manrope,
+  JetBrains_Mono,
 } from "next/font/google";
 import "./globals.css";
 
