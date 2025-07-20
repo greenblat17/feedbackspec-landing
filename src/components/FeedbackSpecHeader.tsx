@@ -79,14 +79,14 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
       } ${className}`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <motion.div
             className="flex-shrink-0"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <a href="/" className="font-accent text-2xl font-bold text-primary tracking-tight">
+            <a href="/" className="font-accent text-xl font-bold text-primary tracking-tight">
               FeedbackSpec
             </a>
           </motion.div>

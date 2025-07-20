@@ -271,11 +271,6 @@ export default function FeedbackSpecPricingEnhanced({
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <Badge variant="default" className="mb-4 px-4 py-2">
-            <Crown className="w-4 h-4 mr-2" />
-            Pricing Plans
-          </Badge>
-
           <h2 className="font-display text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
             Choose Your
             <span className="block mt-2 bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">
@@ -319,7 +314,7 @@ export default function FeedbackSpecPricingEnhanced({
         </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-12 pt-12">
+        <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {PRICING_PLANS.map((plan, idx) => (
             <motion.div
               key={plan.id}

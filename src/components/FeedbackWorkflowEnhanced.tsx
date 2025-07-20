@@ -1,7 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
 import {
@@ -25,8 +30,18 @@ import {
   Target,
   Rocket,
   Eye,
+  Twitter,
+  Mail,
+  Github,
+  Star,
+  Monitor,
 } from "lucide-react";
-import { designSystem, getSpring, performanceConfig, animationVariants } from "@/lib/design-system";
+import {
+  designSystem,
+  getSpring,
+  performanceConfig,
+  animationVariants,
+} from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
 // Enhanced workflow steps with real-world examples
@@ -36,7 +51,8 @@ const WORKFLOW_STEPS = [
     step: "Connect",
     title: "Unified Feedback Collection",
     subtitle: "All sources, one dashboard",
-    description: "Connect Twitter, Discord, email, and 20+ platforms in minutes. No more platform switching.",
+    description:
+      "Connect Twitter, Discord, email, and 20+ platforms in minutes. No more platform switching.",
     icon: <Database className="w-6 h-6" />,
     details: [
       "OAuth integration with major platforms",
@@ -57,7 +73,8 @@ const WORKFLOW_STEPS = [
     step: "Analyze",
     title: "AI-Powered Intelligence",
     subtitle: "Patterns humans miss",
-    description: "Advanced NLP identifies themes, sentiment, and priority automatically across thousands of feedback items.",
+    description:
+      "Advanced NLP identifies themes, sentiment, and priority automatically across thousands of feedback items.",
     icon: <Brain className="w-6 h-6" />,
     details: [
       "Sentiment analysis and emotion detection",
@@ -78,7 +95,8 @@ const WORKFLOW_STEPS = [
     step: "Prioritize",
     title: "Smart Priority Scoring",
     subtitle: "Focus on what matters",
-    description: "MRR-based prioritization shows which features will actually grow your business, not just make users happy.",
+    description:
+      "MRR-based prioritization shows which features will actually grow your business, not just make users happy.",
     icon: <Target className="w-6 h-6" />,
     details: [
       "Revenue impact calculation",
@@ -88,7 +106,7 @@ const WORKFLOW_STEPS = [
     ],
     example: {
       before: "Guessing priorities",
-      after: "Data-driven decisions", 
+      after: "Data-driven decisions",
       time: "47% faster growth",
     },
     color: "primary",
@@ -99,7 +117,8 @@ const WORKFLOW_STEPS = [
     step: "Generate",
     title: "AI Specification Creation",
     subtitle: "Ready-to-code specs",
-    description: "Transform insights into detailed technical specifications optimized for Cursor, Claude, and modern AI coding tools.",
+    description:
+      "Transform insights into detailed technical specifications optimized for Cursor, Claude, and modern AI coding tools.",
     icon: <FileText className="w-6 h-6" />,
     details: [
       "Technical requirements generation",
@@ -120,7 +139,8 @@ const WORKFLOW_STEPS = [
     step: "Ship",
     title: "Development Integration",
     subtitle: "Seamless workflow",
-    description: "Export directly to your dev tools. GitHub, Linear, Notion, or custom integrations - we've got you covered.",
+    description:
+      "Export directly to your dev tools. GitHub, Linear, Notion, or custom integrations - we've got you covered.",
     icon: <GitBranch className="w-6 h-6" />,
     details: [
       "One-click export to dev tools",
@@ -141,7 +161,8 @@ const WORKFLOW_STEPS = [
     step: "Optimize",
     title: "Continuous Improvement",
     subtitle: "Learn and adapt",
-    description: "Track feature success, gather new feedback, and continuously improve your product-market fit.",
+    description:
+      "Track feature success, gather new feedback, and continuously improve your product-market fit.",
     icon: <TrendingUp className="w-6 h-6" />,
     details: [
       "Feature performance tracking",
@@ -161,17 +182,294 @@ const WORKFLOW_STEPS = [
 
 // Live demo data
 const DEMO_FEEDBACK = [
-  { platform: "Twitter", message: "Dark mode please!", sentiment: "positive", priority: "high" },
-  { platform: "Discord", message: "Export is broken", sentiment: "negative", priority: "critical" },
-  { platform: "Email", message: "Love the new dashboard", sentiment: "positive", priority: "low" },
-  { platform: "GitHub", message: "API rate limits too low", sentiment: "neutral", priority: "medium" },
+  {
+    platform: "Twitter",
+    message: "Dark mode please!",
+    sentiment: "positive",
+    priority: "high",
+  },
+  {
+    platform: "Discord",
+    message: "Export is broken",
+    sentiment: "negative",
+    priority: "critical",
+  },
+  {
+    platform: "Email",
+    message: "Love the new dashboard",
+    sentiment: "positive",
+    priority: "low",
+  },
+  {
+    platform: "GitHub",
+    message: "API rate limits too low",
+    sentiment: "neutral",
+    priority: "medium",
+  },
 ];
 
-export function FeedbackWorkflowEnhanced({ 
+// Step Screenshots Components
+function StepScreenshot({ step }: { step: number }) {
+  const stepData = WORKFLOW_STEPS[step];
+  
+  return (
+    <div className="relative bg-card border rounded-lg shadow-lg overflow-hidden mb-6">
+      {/* Browser Header */}
+      <div className="bg-muted px-3 py-2 border-b flex items-center gap-2">
+        <div className="flex gap-1">
+          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+          <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+        </div>
+        <div className="flex-1 text-center">
+          <div className="bg-background/50 rounded px-2 py-1 text-xs text-muted-foreground max-w-xs mx-auto">
+            app.feedbackspec.com/{stepData.step.toLowerCase()}
+          </div>
+        </div>
+      </div>
+
+      {/* Step Content */}
+      <div className="p-4 min-h-[200px]">
+        {step === 0 && <ConnectScreenshot />}
+        {step === 1 && <AnalyzeScreenshot />}
+        {step === 2 && <PrioritizeScreenshot />}
+        {step === 3 && <GenerateScreenshot />}
+        {step === 4 && <ShipScreenshot />}
+        {step === 5 && <OptimizeScreenshot />}
+      </div>
+    </div>
+  );
+}
+
+// Connect Step Screenshot
+function ConnectScreenshot() {
+  return (
+    <div>
+      <h4 className="font-semibold mb-4 flex items-center gap-2">
+        <Database className="w-4 h-4 text-primary" />
+        Connect Your Platforms
+      </h4>
+      <div className="grid grid-cols-2 gap-3">
+        {[
+          { name: "Twitter", icon: Twitter, status: "Connected", color: "text-green-600" },
+          { name: "GitHub", icon: Github, status: "Connected", color: "text-green-600" },
+          { name: "Discord", icon: MessageSquare, status: "Connecting...", color: "text-yellow-600" },
+          { name: "Email", icon: Mail, status: "Available", color: "text-muted-foreground" },
+        ].map((platform) => (
+          <div key={platform.name} className="flex items-center justify-between p-3 border rounded-lg">
+            <div className="flex items-center gap-2">
+              <platform.icon className="w-4 h-4" />
+              <span className="text-sm font-medium">{platform.name}</span>
+            </div>
+            <span className={`text-xs ${platform.color}`}>{platform.status}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 p-3 bg-primary/10 rounded-lg">
+        <p className="text-xs text-primary">✨ 47 new feedback items synced in the last hour</p>
+      </div>
+    </div>
+  );
+}
+
+// Analyze Step Screenshot
+function AnalyzeScreenshot() {
+  return (
+    <div>
+      <h4 className="font-semibold mb-4 flex items-center gap-2">
+        <Brain className="w-4 h-4 text-primary" />
+        AI Analysis Results
+      </h4>
+      <div className="space-y-3">
+        <div className="border rounded-lg p-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium">Dark Mode Requests</span>
+            <Badge variant="secondary" className="text-xs">Theme: UI/UX</Badge>
+          </div>
+          <div className="text-xs text-muted-foreground mb-2">Sentiment: 89% Positive</div>
+          <div className="w-full bg-muted rounded-full h-2">
+            <div className="bg-primary h-2 rounded-full" style={{ width: "89%" }}></div>
+          </div>
+        </div>
+        <div className="border rounded-lg p-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium">Export Issues</span>
+            <Badge variant="destructive" className="text-xs">Bug: Critical</Badge>
+          </div>
+          <div className="text-xs text-muted-foreground mb-2">Sentiment: 23% Negative</div>
+          <div className="w-full bg-muted rounded-full h-2">
+            <div className="bg-red-500 h-2 rounded-full" style={{ width: "23%" }}></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Prioritize Step Screenshot
+function PrioritizeScreenshot() {
+  return (
+    <div>
+      <h4 className="font-semibold mb-4 flex items-center gap-2">
+        <Target className="w-4 h-4 text-primary" />
+        Priority Matrix
+      </h4>
+      <div className="space-y-2">
+        {[
+          { feature: "Dark Mode Implementation", score: 94, impact: "$2.3k MRR", effort: "Medium" },
+          { feature: "Export Bug Fix", score: 87, impact: "$1.8k MRR", effort: "Low" },
+          { feature: "API Rate Limits", score: 72, impact: "$1.2k MRR", effort: "High" },
+          { feature: "Dashboard Polish", score: 45, impact: "$0.5k MRR", effort: "Low" },
+        ].map((item, idx) => (
+          <div key={idx} className="flex items-center justify-between p-3 border rounded-lg">
+            <div className="flex-1">
+              <div className="text-sm font-medium">{item.feature}</div>
+              <div className="text-xs text-muted-foreground">Impact: {item.impact} • Effort: {item.effort}</div>
+            </div>
+            <div className="text-right">
+              <div className="text-lg font-bold text-primary">{item.score}</div>
+              <div className="text-xs text-muted-foreground">Priority Score</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Generate Step Screenshot
+function GenerateScreenshot() {
+  return (
+    <div>
+      <h4 className="font-semibold mb-4 flex items-center gap-2">
+        <FileText className="w-4 h-4 text-primary" />
+        Generated Specification
+      </h4>
+      <div className="border rounded-lg p-4 bg-muted/30">
+        <div className="text-xs font-mono space-y-2">
+          <div className="text-primary font-bold"># Dark Mode Implementation</div>
+          <div className="text-muted-foreground">## User Story</div>
+          <div>As a user, I want to toggle between light and dark themes...</div>
+          <div className="text-muted-foreground">## Technical Requirements</div>
+          <div>- CSS custom properties for theme colors</div>
+          <div>- LocalStorage persistence</div>
+          <div>- System preference detection</div>
+          <div className="text-muted-foreground">## Acceptance Criteria</div>
+          <div>✅ Toggle persists across browser sessions</div>
+          <div>✅ Respects system preference on first visit</div>
+          <div>✅ Smooth transition animations</div>
+        </div>
+      </div>
+      <div className="mt-3 flex justify-between items-center">
+        <span className="text-xs text-muted-foreground">Generated in 2.3 seconds</span>
+        <Badge variant="default" className="text-xs">Ready for Cursor</Badge>
+      </div>
+    </div>
+  );
+}
+
+// Ship Step Screenshot
+function ShipScreenshot() {
+  return (
+    <div>
+      <h4 className="font-semibold mb-4 flex items-center gap-2">
+        <GitBranch className="w-4 h-4 text-primary" />
+        Export to Dev Tools
+      </h4>
+      <div className="space-y-3">
+        <div className="border rounded-lg p-3">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <Github className="w-4 h-4" />
+              <span className="text-sm font-medium">GitHub Issue #247</span>
+            </div>
+            <Badge variant="default" className="text-xs">Created</Badge>
+          </div>
+          <p className="text-xs text-muted-foreground">Dark mode implementation with detailed spec</p>
+        </div>
+        <div className="border rounded-lg p-3">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <Monitor className="w-4 h-4" />
+              <span className="text-sm font-medium">Linear Task</span>
+            </div>
+            <Badge variant="default" className="text-xs">Synced</Badge>
+          </div>
+          <p className="text-xs text-muted-foreground">Assigned to frontend team with priority: High</p>
+        </div>
+        <div className="border rounded-lg p-3">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4" />
+              <span className="text-sm font-medium">Notion Doc</span>
+            </div>
+            <Badge variant="default" className="text-xs">Updated</Badge>
+          </div>
+          <p className="text-xs text-muted-foreground">Technical specification added to project docs</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Optimize Step Screenshot
+function OptimizeScreenshot() {
+  return (
+    <div>
+      <h4 className="font-semibold mb-4 flex items-center gap-2">
+        <TrendingUp className="w-4 h-4 text-primary" />
+        Feature Performance
+      </h4>
+      <div className="space-y-3">
+        <div className="border rounded-lg p-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium">Dark Mode</span>
+            <Badge variant="default" className="text-xs">Shipped 2 weeks ago</Badge>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-xs">
+            <div>
+              <div className="text-muted-foreground">Adoption</div>
+              <div className="font-bold text-green-600">73%</div>
+            </div>
+            <div>
+              <div className="text-muted-foreground">Satisfaction</div>
+              <div className="font-bold text-green-600">4.8/5</div>
+            </div>
+            <div>
+              <div className="text-muted-foreground">Feedback</div>
+              <div className="font-bold text-primary">+127</div>
+            </div>
+          </div>
+        </div>
+        <div className="border rounded-lg p-3">
+          <div className="text-sm font-medium mb-2">User Feedback Trends</div>
+          <div className="space-y-1">
+            <div className="flex justify-between text-xs">
+              <span>😍 "Love the dark mode!"</span>
+              <div className="flex items-center gap-1">
+                <Star className="w-3 h-3 text-yellow-500" />
+                <span>89</span>
+              </div>
+            </div>
+            <div className="flex justify-between text-xs">
+              <span>🎨 "Perfect for night coding"</span>
+              <div className="flex items-center gap-1">
+                <Star className="w-3 h-3 text-yellow-500" />
+                <span>76</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function FeedbackWorkflowEnhanced({
   title = "How FeedbackSpec Works",
-  className 
-}: { 
-  title?: string; 
+  className,
+}: {
+  title?: string;
   className?: string;
 }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -188,9 +486,9 @@ export function FeedbackWorkflowEnhanced({
 
     const timer = setInterval(() => {
       if (progress < 100) {
-        setProgress(prev => prev + 5); // Much faster increment
+        setProgress((prev) => prev + 5); // Much faster increment
       } else {
-        setCurrentStep(prev => (prev + 1) % WORKFLOW_STEPS.length);
+        setCurrentStep((prev) => (prev + 1) % WORKFLOW_STEPS.length);
         setProgress(0);
       }
     }, 200); // Much longer interval
@@ -216,8 +514,11 @@ export function FeedbackWorkflowEnhanced({
   };
 
   return (
-    <section 
-      className={cn("py-24 bg-gradient-to-b from-muted/5 to-background overflow-hidden", className)}
+    <section
+      className={cn(
+        "py-24 bg-gradient-to-b from-muted/5 to-background overflow-hidden",
+        className
+      )}
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
@@ -227,11 +528,6 @@ export function FeedbackWorkflowEnhanced({
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <Badge variant="default" className="mb-4 px-4 py-2">
-            <Sparkles className="w-4 h-4 mr-2" />
-            The Process
-          </Badge>
-
           <h2 className="font-display text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
             From Chaos to
             <span className="block mt-2 bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">
@@ -240,7 +536,8 @@ export function FeedbackWorkflowEnhanced({
           </h2>
 
           <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-            Watch how FeedbackSpec transforms scattered feedback into production-ready features in 6 automated steps.
+            Watch how FeedbackSpec transforms scattered feedback into
+            production-ready features in 6 automated steps.
           </p>
 
           {/* Playback controls */}
@@ -251,7 +548,11 @@ export function FeedbackWorkflowEnhanced({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {isPlaying ? <PauseCircle className="w-4 h-4" /> : <PlayCircle className="w-4 h-4" />}
+              {isPlaying ? (
+                <PauseCircle className="w-4 h-4" />
+              ) : (
+                <PlayCircle className="w-4 h-4" />
+              )}
               {isPlaying ? "Pause Demo" : "Play Demo"}
             </motion.button>
 
@@ -299,12 +600,16 @@ export function FeedbackWorkflowEnhanced({
                         : "bg-muted border-muted-foreground/30 text-muted-foreground",
                       idx === currentStep && "ring-4 ring-primary/20 scale-110"
                     )}
-                    animate={idx === currentStep ? { 
-                      scale: 1.05
-                    } : {}}
-                    transition={{ 
-                      duration: 0.2, 
-                      ease: designSystem.motion.ease.out 
+                    animate={
+                      idx === currentStep
+                        ? {
+                            scale: 1.05,
+                          }
+                        : {}
+                    }
+                    transition={{
+                      duration: 0.2,
+                      ease: designSystem.motion.ease.out,
                     }}
                   >
                     {idx < currentStep ? (
@@ -334,7 +639,9 @@ export function FeedbackWorkflowEnhanced({
                           stroke="currentColor"
                           strokeWidth="4"
                           strokeDasharray={`${2 * Math.PI * 28}`}
-                          strokeDashoffset={`${2 * Math.PI * 28 * (1 - progress / 100)}`}
+                          strokeDashoffset={`${
+                            2 * Math.PI * 28 * (1 - progress / 100)
+                          }`}
                           className="text-primary-foreground/30"
                         />
                       </svg>
@@ -343,14 +650,18 @@ export function FeedbackWorkflowEnhanced({
 
                   {/* Step info */}
                   <div className="text-center">
-                    <p className={cn(
-                      "text-sm font-medium",
-                      idx === currentStep ? "text-primary" : "text-muted-foreground"
-                    )}>
+                    <p
+                      className={cn(
+                        "text-sm font-medium",
+                        idx === currentStep
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                      )}
+                    >
                       {step.step}
                     </p>
                     <p className="text-xs text-muted-foreground max-w-20">
-                      {step.title.split(' ')[0]}
+                      {step.title.split(" ")[0]}
                     </p>
                   </div>
                 </motion.button>
@@ -376,8 +687,11 @@ export function FeedbackWorkflowEnhanced({
             <motion.div
               className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full"
               initial={{ width: 0 }}
-              animate={{ 
-                width: `${(currentStep / (WORKFLOW_STEPS.length - 1)) * 100 + (progress / (WORKFLOW_STEPS.length - 1))}%` 
+              animate={{
+                width: `${
+                  (currentStep / (WORKFLOW_STEPS.length - 1)) * 100 +
+                  progress / (WORKFLOW_STEPS.length - 1)
+                }%`,
               }}
               transition={{ duration: 0.3 }}
             />
@@ -402,11 +716,17 @@ export function FeedbackWorkflowEnhanced({
                       animate={{ rotate: [0, -10, 10, 0] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      {React.cloneElement(WORKFLOW_STEPS[currentStep].icon, { className: "w-8 h-8" })}
+                      {React.cloneElement(WORKFLOW_STEPS[currentStep].icon, {
+                        className: "w-8 h-8",
+                      })}
                     </motion.div>
                     <div className="text-left">
-                      <h3 className="text-3xl font-bold">{WORKFLOW_STEPS[currentStep].title}</h3>
-                      <p className="text-lg text-primary font-medium">{WORKFLOW_STEPS[currentStep].subtitle}</p>
+                      <h3 className="text-3xl font-bold">
+                        {WORKFLOW_STEPS[currentStep].title}
+                      </h3>
+                      <p className="text-lg text-primary font-medium">
+                        {WORKFLOW_STEPS[currentStep].subtitle}
+                      </p>
                     </div>
                   </div>
                   <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -416,48 +736,74 @@ export function FeedbackWorkflowEnhanced({
 
                 <CardContent>
                   <div className="grid lg:grid-cols-2 gap-8">
-                    {/* Features */}
+                    {/* Screenshot Preview */}
                     <div>
                       <h4 className="font-semibold mb-4 flex items-center gap-2">
-                        <Zap className="w-4 h-4 text-primary" />
-                        Key Features
+                        <Monitor className="w-4 h-4 text-primary" />
+                        Live Preview
                       </h4>
-                      <div className="space-y-3">
-                        {WORKFLOW_STEPS[currentStep].details.map((detail, idx) => (
-                          <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.1 }}
-                            className="flex items-start gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
-                          >
-                            <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span className="text-sm">{detail}</span>
-                          </motion.div>
-                        ))}
-                      </div>
+                      <StepScreenshot step={currentStep} />
                     </div>
 
-                    {/* Before/After comparison */}
-                    <div>
-                      <h4 className="font-semibold mb-4 flex items-center gap-2">
-                        <TrendingUp className="w-4 h-4 text-green-500" />
-                        Impact
-                      </h4>
-                      <div className="space-y-4">
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="p-4 bg-destructive/10 rounded-lg border border-destructive/20">
-                            <p className="text-xs font-medium text-destructive mb-2">Before</p>
-                            <p className="text-sm font-bold">{WORKFLOW_STEPS[currentStep].example.before}</p>
-                          </div>
-                          <div className="p-4 bg-green-500/10 rounded-lg border border-green-500/20">
-                            <p className="text-xs font-medium text-green-600 mb-2">After</p>
-                            <p className="text-sm font-bold">{WORKFLOW_STEPS[currentStep].example.after}</p>
-                          </div>
+                    {/* Features and Impact */}
+                    <div className="space-y-6">
+                      {/* Features */}
+                      <div>
+                        <h4 className="font-semibold mb-4 flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-primary" />
+                          Key Features
+                        </h4>
+                        <div className="space-y-3">
+                          {WORKFLOW_STEPS[currentStep].details.map(
+                            (detail, idx) => (
+                              <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: idx * 0.1 }}
+                                className="flex items-start gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
+                              >
+                                <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                                <span className="text-sm">{detail}</span>
+                              </motion.div>
+                            )
+                          )}
                         </div>
-                        <div className="p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
-                          <p className="text-xs font-medium text-primary mb-1">Result</p>
-                          <p className="text-lg font-bold">{WORKFLOW_STEPS[currentStep].example.time}</p>
+                      </div>
+
+                      {/* Before/After comparison */}
+                      <div>
+                        <h4 className="font-semibold mb-4 flex items-center gap-2">
+                          <TrendingUp className="w-4 h-4 text-green-500" />
+                          Impact
+                        </h4>
+                        <div className="space-y-4">
+                          <div className="grid grid-cols-2 gap-3">
+                            <div className="p-4 bg-destructive/10 rounded-lg border border-destructive/20">
+                              <p className="text-xs font-medium text-destructive mb-2">
+                                Before
+                              </p>
+                              <p className="text-sm font-bold">
+                                {WORKFLOW_STEPS[currentStep].example.before}
+                              </p>
+                            </div>
+                            <div className="p-4 bg-green-500/10 rounded-lg border border-green-500/20">
+                              <p className="text-xs font-medium text-green-600 mb-2">
+                                After
+                              </p>
+                              <p className="text-sm font-bold">
+                                {WORKFLOW_STEPS[currentStep].example.after}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
+                            <p className="text-xs font-medium text-primary mb-1">
+                              Result
+                            </p>
+                            <p className="text-lg font-bold">
+                              {WORKFLOW_STEPS[currentStep].example.time}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -489,20 +835,29 @@ export function FeedbackWorkflowEnhanced({
                                 <Badge variant="outline" className="text-xs">
                                   {feedback.platform}
                                 </Badge>
-                                <Badge 
-                                  variant={feedback.priority === "critical" ? "destructive" : "secondary"}
+                                <Badge
+                                  variant={
+                                    feedback.priority === "critical"
+                                      ? "destructive"
+                                      : "secondary"
+                                  }
                                   className="text-xs"
                                 >
                                   {feedback.priority}
                                 </Badge>
                               </div>
                               <p className="text-sm">{feedback.message}</p>
-                              <div className={cn(
-                                "text-xs mt-2",
-                                feedback.sentiment === "positive" && "text-green-500",
-                                feedback.sentiment === "negative" && "text-red-500",
-                                feedback.sentiment === "neutral" && "text-yellow-500"
-                              )}>
+                              <div
+                                className={cn(
+                                  "text-xs mt-2",
+                                  feedback.sentiment === "positive" &&
+                                    "text-green-500",
+                                  feedback.sentiment === "negative" &&
+                                    "text-red-500",
+                                  feedback.sentiment === "neutral" &&
+                                    "text-yellow-500"
+                                )}
+                              >
                                 {feedback.sentiment} sentiment
                               </div>
                             </motion.div>
@@ -541,7 +896,9 @@ export function FeedbackWorkflowEnhanced({
               >
                 <stat.icon className="w-8 h-8 text-primary mx-auto mb-2" />
                 <div className="text-2xl font-bold">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-sm text-muted-foreground">
+                  {stat.label}
+                </div>
               </motion.div>
             ))}
           </div>

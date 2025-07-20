@@ -1,13 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { 
-  Zap, 
-  Target, 
-  MessageSquare, 
+import {
+  Zap,
+  Target,
+  MessageSquare,
   TrendingUp,
   Clock,
   DollarSign,
@@ -21,7 +26,11 @@ import {
   Rocket,
   Heart,
 } from "lucide-react";
-import { designSystem, getSpring, animationVariants } from "@/lib/design-system";
+import {
+  designSystem,
+  getSpring,
+  animationVariants,
+} from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
 // Interactive benefit cards with real metrics
@@ -31,7 +40,8 @@ const BENEFITS = [
     icon: <Rocket className="w-6 h-6" />,
     title: "Ship 3x Faster",
     tagline: "From feedback to feature in hours, not weeks",
-    description: "AI-powered spec generation turns user feedback into ready-to-code requirements instantly",
+    description:
+      "AI-powered spec generation turns user feedback into ready-to-code requirements instantly",
     metrics: {
       before: "2 weeks per feature",
       after: "2 days per feature",
@@ -56,7 +66,8 @@ const BENEFITS = [
     icon: <TrendingUp className="w-6 h-6" />,
     title: "Grow MRR 47% Faster",
     tagline: "Build features that actually drive revenue",
-    description: "MRR-based prioritization ensures you're always working on what matters most to paying customers",
+    description:
+      "MRR-based prioritization ensures you're always working on what matters most to paying customers",
     metrics: {
       before: "$2k MRR growth/mo",
       after: "$5k MRR growth/mo",
@@ -81,7 +92,8 @@ const BENEFITS = [
     icon: <Brain className="w-6 h-6" />,
     title: "Crystal Clear Priorities",
     tagline: "Never guess what to build next",
-    description: "AI analyzes patterns across all feedback to surface what really matters to your users",
+    description:
+      "AI analyzes patterns across all feedback to surface what really matters to your users",
     metrics: {
       before: "60% unused features",
       after: "92% adoption rate",
@@ -93,10 +105,11 @@ const BENEFITS = [
       "Impact forecasting",
       "Competitive insights",
     ],
-    color: "primary", 
+    color: "primary",
     gradient: "from-primary/25 to-primary/5",
     testimonial: {
-      quote: "It's like having a product manager who reads every piece of feedback",
+      quote:
+        "It's like having a product manager who reads every piece of feedback",
       author: "Marcus Chen",
       role: "CEO @ DevTools Pro",
     },
@@ -104,7 +117,13 @@ const BENEFITS = [
 ];
 
 // Animated metric counter
-function MetricCounter({ value, suffix = "" }: { value: string; suffix?: string }) {
+function MetricCounter({
+  value,
+  suffix = "",
+}: {
+  value: string;
+  suffix?: string;
+}) {
   return (
     <motion.div
       initial={{ scale: 0.5, opacity: 0 }}
@@ -113,7 +132,8 @@ function MetricCounter({ value, suffix = "" }: { value: string; suffix?: string 
       transition={getSpring("bouncy")}
       className="text-2xl font-bold"
     >
-      {value}{suffix}
+      {value}
+      {suffix}
     </motion.div>
   );
 }
@@ -128,7 +148,7 @@ function FeatureItem({ feature, delay }: { feature: string; delay: number }) {
       style={{
         transition: "color 0.15s ease-out",
         opacity: 0,
-        animation: `fadeInUp 0.3s ease-out ${delay}s forwards`
+        animation: `fadeInUp 0.3s ease-out ${delay}s forwards`,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -136,7 +156,7 @@ function FeatureItem({ feature, delay }: { feature: string; delay: number }) {
       <div
         style={{
           transition: "transform 0.15s ease-out",
-          transform: isHovered ? "scale(1.1)" : "scale(1)"
+          transform: isHovered ? "scale(1.1)" : "scale(1)",
         }}
       >
         <CheckCircle2 className="w-4 h-4 text-primary mt-0.5" />
@@ -160,7 +180,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-primary/20 to-transparent rounded-full blur-3xl" />
       </div>
 
-      <motion.div 
+      <motion.div
         className="container mx-auto px-6 max-w-7xl"
         style={{ scale }}
       >
@@ -171,11 +191,6 @@ export default function FeedbackSpecBenefitsEnhanced() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <Badge variant="default" className="mb-4 px-4 py-2">
-            <Sparkles className="w-4 h-4 mr-2" />
-            The Solution
-          </Badge>
-
           <h2 className="font-display text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
             Turn Chaos Into
             <span className="block mt-2 bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">
@@ -184,8 +199,9 @@ export default function FeedbackSpecBenefitsEnhanced() {
           </h2>
 
           <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-            FeedbackSpec transforms scattered user feedback into AI-ready specifications, 
-            helping indie hackers ship the right features 3x faster.
+            FeedbackSpec transforms scattered user feedback into AI-ready
+            specifications, helping indie hackers ship the right features 3x
+            faster.
           </p>
 
           {/* Quick stats */}
@@ -207,7 +223,9 @@ export default function FeedbackSpecBenefitsEnhanced() {
                 <stat.icon className="w-5 h-5 text-primary" />
                 <div className="text-left">
                   <div className="font-bold">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground">{stat.label}</div>
+                  <div className="text-xs text-muted-foreground">
+                    {stat.label}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -222,12 +240,12 @@ export default function FeedbackSpecBenefitsEnhanced() {
               className="group slide-up"
               style={{
                 opacity: 0,
-                animationDelay: `${idx * 0.1}s`
+                animationDelay: `${idx * 0.1}s`,
               }}
               onMouseEnter={() => setActiveCard(benefit.id)}
               onMouseLeave={() => setActiveCard(null)}
             >
-              <Card 
+              <Card
                 className={cn(
                   "h-full overflow-hidden cursor-pointer border-2",
                   `bg-gradient-to-br ${benefit.gradient}`,
@@ -235,10 +253,14 @@ export default function FeedbackSpecBenefitsEnhanced() {
                 )}
                 style={{
                   transition: "all 0.2s ease-out",
-                  transform: activeCard === benefit.id ? "translateY(-2px)" : "translateY(0)",
-                  boxShadow: activeCard === benefit.id 
-                    ? "0 8px 25px -8px rgba(59, 130, 246, 0.2)" 
-                    : "0 2px 4px -1px rgba(0, 0, 0, 0.1)"
+                  transform:
+                    activeCard === benefit.id
+                      ? "translateY(-2px)"
+                      : "translateY(0)",
+                  boxShadow:
+                    activeCard === benefit.id
+                      ? "0 8px 25px -8px rgba(59, 130, 246, 0.2)"
+                      : "0 2px 4px -1px rgba(0, 0, 0, 0.1)",
                 }}
               >
                 <CardHeader className="pb-4">
@@ -247,7 +269,10 @@ export default function FeedbackSpecBenefitsEnhanced() {
                       className="p-3 rounded-xl bg-primary/20 text-primary"
                       style={{
                         transition: "transform 0.15s ease-out",
-                        transform: activeCard === benefit.id ? "scale(1.05)" : "scale(1)"
+                        transform:
+                          activeCard === benefit.id
+                            ? "scale(1.05)"
+                            : "scale(1)",
                       }}
                     >
                       {benefit.icon}
@@ -271,21 +296,29 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   {/* Before/After comparison */}
                   <div className="grid grid-cols-2 gap-3 mb-4">
                     <div className="p-3 bg-muted rounded-lg">
-                      <p className="text-xs font-medium text-muted-foreground mb-1">Before</p>
-                      <p className="text-sm font-bold">{benefit.metrics.before}</p>
+                      <p className="text-xs font-medium text-muted-foreground mb-1">
+                        Before
+                      </p>
+                      <p className="text-sm font-bold">
+                        {benefit.metrics.before}
+                      </p>
                     </div>
                     <div className="p-3 bg-primary/10 rounded-lg">
-                      <p className="text-xs font-medium text-primary mb-1">After</p>
-                      <p className="text-sm font-bold">{benefit.metrics.after}</p>
+                      <p className="text-xs font-medium text-primary mb-1">
+                        After
+                      </p>
+                      <p className="text-sm font-bold">
+                        {benefit.metrics.after}
+                      </p>
                     </div>
                   </div>
 
                   {/* Features list */}
                   <ul className="space-y-2 mb-4">
                     {benefit.features.map((feature, fidx) => (
-                      <FeatureItem 
-                        key={fidx} 
-                        feature={feature} 
+                      <FeatureItem
+                        key={fidx}
+                        feature={feature}
                         delay={activeCard === benefit.id ? fidx * 0.1 : 0}
                       />
                     ))}
@@ -306,11 +339,18 @@ export default function FeedbackSpecBenefitsEnhanced() {
                         </blockquote>
                         <div className="flex items-center gap-2">
                           <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold">
-                            {benefit.testimonial.author.split(' ').map(n => n[0]).join('')}
+                            {benefit.testimonial.author
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")}
                           </div>
                           <div>
-                            <p className="text-xs font-semibold">{benefit.testimonial.author}</p>
-                            <p className="text-xs text-muted-foreground">{benefit.testimonial.role}</p>
+                            <p className="text-xs font-semibold">
+                              {benefit.testimonial.author}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {benefit.testimonial.role}
+                            </p>
                           </div>
                         </div>
                       </motion.div>
@@ -360,7 +400,9 @@ export default function FeedbackSpecBenefitsEnhanced() {
               >
                 <Users className="w-8 h-8 text-purple-500 mx-auto mb-2" />
                 <MetricCounter value="3x" suffix=" more" />
-                <p className="text-sm text-muted-foreground mt-1">Features shipped</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Features shipped
+                </p>
               </motion.div>
             </div>
 
@@ -386,8 +428,12 @@ export default function FeedbackSpecBenefitsEnhanced() {
                     <thead>
                       <tr className="border-b">
                         <th className="text-left py-2">Metric</th>
-                        <th className="text-center py-2 text-destructive">Without</th>
-                        <th className="text-center py-2 text-green-600">With FeedbackSpec</th>
+                        <th className="text-center py-2 text-destructive">
+                          Without
+                        </th>
+                        <th className="text-center py-2 text-green-600">
+                          With FeedbackSpec
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -427,7 +473,11 @@ export default function FeedbackSpecBenefitsEnhanced() {
           className="text-center mt-12"
         >
           <p className="text-lg text-muted-foreground mb-4">
-            Join <span className="font-bold text-foreground">2,847 indie hackers</span> who ship faster with AI-powered feedback management
+            Join{" "}
+            <span className="font-bold text-foreground">
+              2,847 indie hackers
+            </span>{" "}
+            who ship faster with AI-powered feedback management
           </p>
           <Badge variant="secondary" className="text-sm">
             <Shield className="w-4 h-4 mr-2" />

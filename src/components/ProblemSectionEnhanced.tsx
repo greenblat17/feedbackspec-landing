@@ -125,14 +125,6 @@ export default function ProblemSectionEnhanced() {
           viewport={performanceConfig.viewport}
           className="text-center mb-16"
         >
-          <Badge
-            variant="default"
-            className="mb-4 px-4 py-2 bg-primary text-primary-foreground"
-          >
-            <AlertTriangle className="w-4 h-4 mr-2" />
-            The Hidden Crisis
-          </Badge>
-
           <h2 className="font-display text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 leading-tight tracking-display">
             <span className="text-foreground">While You Sleep,</span>
             <br />
