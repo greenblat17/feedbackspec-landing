@@ -306,65 +306,6 @@ export function FeedbackSpecCTA({
               </div>
             </motion.div>
           )}
-
-          {/* Enhanced Trust Indicators */}
-          <motion.div variants={itemVariants}>
-            <div className="mx-auto max-w-4xl">
-              <div className="relative overflow-hidden rounded-2xl bg-background/30 backdrop-blur-sm border border-border/30 p-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                  {[
-                    {
-                      icon: Shield,
-                      title: "SOC 2 Compliant",
-                      desc: "Enterprise security",
-                    },
-                    {
-                      icon: Clock,
-                      title: "99.9% Uptime",
-                      desc: "Always available",
-                    },
-                    {
-                      icon: Users,
-                      title: "2,847+ Users",
-                      desc: "Trusted by indie hackers",
-                    },
-                  ].map((item, idx) => (
-                    <motion.div
-                      key={idx}
-                      className="group"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <item.icon className="w-8 h-8 text-primary mx-auto mb-3 group-hover:text-primary/80 transition-colors" />
-                      <h4 className="font-semibold text-foreground mb-1 font-heading">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
-                        {item.desc}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Animated Border */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, transparent, rgba(var(--primary), 0.1), transparent)",
-                  }}
-                  animate={{
-                    x: isHovered ? ["-100%", "100%"] : "0%",
-                  }}
-                  transition={{
-                    duration: 2,
-                    ease: "linear",
-                    repeat: isHovered ? Infinity : 0,
-                  }}
-                />
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
