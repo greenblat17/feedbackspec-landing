@@ -90,19 +90,15 @@ const PLATFORM_ICONS = [
 
 export default function ProblemSectionEnhanced() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0.1, 0.3], [0.3, 1]);
+  // Removed scroll-based animations for performance
 
   return (
     <section className="relative py-24 overflow-hidden bg-gradient-to-b from-background via-background to-muted/10">
-      {/* Animated background */}
-      <motion.div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{ opacity }}
-      >
+      {/* Static background for performance */}
+      <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(59,130,246,0.05),transparent_50%)]" />
-      </motion.div>
+      </div>
 
       {/* Static platform icons for performance */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
@@ -119,29 +115,28 @@ export default function ProblemSectionEnhanced() {
       <div className="container relative mx-auto px-6 max-w-7xl">
         {/* Header with emotional hook */}
         <motion.div
-          variants={animationVariants.viewportSlide}
-          initial="hidden"
-          whileInView="visible"
-          viewport={performanceConfig.viewport}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-12 sm:mb-16 px-4 sm:px-0"
         >
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 leading-tight tracking-display">
-            <span className="text-foreground">While You Sleep,</span>
+            <span className="text-foreground">While You Code,</span>
             <br />
             <motion.span
               className="text-primary"
               animate={{ opacity: [1, 0.7, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              Your Users Are Leaving
+              Your Best Ideas Are Dying
             </motion.span>
           </h2>
 
           <p className="font-body text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-            Every day, indie hackers lose{" "}
-            <AnimatedCounter value={47} suffix="%" /> of potential customers
-            because critical feedback is buried in{" "}
-            <AnimatedCounter value={23} suffix="+" /> different platforms.
+            Right now, <AnimatedCounter value={47} suffix="%" /> of your next
+            $10k MRR is buried in scattered feedback across Twitter, Discord,
+            email, Reddit, and 19 other platforms.
           </p>
         </motion.div>
 
@@ -287,7 +282,9 @@ export default function ProblemSectionEnhanced() {
                       })}
                     </motion.div>
                     <div>
-                      <h3 className="text-lg sm:text-xl font-bold mb-2">{pain.title}</h3>
+                      <h3 className="text-lg sm:text-xl font-bold mb-2">
+                        {pain.title}
+                      </h3>
                       <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                         {pain.story}
                       </p>
@@ -299,8 +296,12 @@ export default function ProblemSectionEnhanced() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: activeCard === idx ? 1 : 0.8, x: 0 }}
                   >
-                    <span className="text-xs sm:text-sm font-medium">Real Impact:</span>
-                    <span className={cn("font-bold text-xs sm:text-sm", pain.color)}>
+                    <span className="text-xs sm:text-sm font-medium">
+                      Real Impact:
+                    </span>
+                    <span
+                      className={cn("font-bold text-xs sm:text-sm", pain.color)}
+                    >
                       {pain.impact}
                     </span>
                   </motion.div>

@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
 import {
@@ -191,8 +186,6 @@ function FeatureItem({
 export default function FeedbackSpecBenefitsEnhanced() {
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [showComparison, setShowComparison] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const scale = useTransform(scrollYProgress, [0.3, 0.5], [0.95, 1]);
 
   return (
     <section className="relative py-24 bg-gradient-to-b from-background to-muted/5 overflow-hidden">
@@ -202,10 +195,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-primary/20 to-transparent rounded-full blur-3xl" />
       </div>
 
-      <motion.div
-        className="container mx-auto px-6 max-w-7xl"
-        style={{ scale }}
-      >
+      <div className="container mx-auto px-6 max-w-7xl">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -222,8 +212,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
 
           <p className="font-body text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed px-4 sm:px-0">
             The only platform that turns scattered user feedback into
-            Cursor-optimized specs in under 10 minutes. Stop guessing what to
-            build - let AI show you exactly which features will grow your MRR.
+            Cursor-optimized specs in under 10 minutes.
           </p>
 
           {/* Quick stats */}
@@ -311,7 +300,9 @@ export default function FeedbackSpecBenefitsEnhanced() {
                     </Badge>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold mb-2">{benefit.title}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">
+                    {benefit.title}
+                  </h3>
                   <p className="text-xs sm:text-sm font-medium text-muted-foreground">
                     {benefit.tagline}
                   </p>
@@ -520,7 +511,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
             14-day free trial • No credit card required
           </Badge>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
