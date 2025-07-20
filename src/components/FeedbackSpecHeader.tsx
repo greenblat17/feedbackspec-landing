@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
+import { FeedbackSpecLogo } from "./ui/FeedbackSpecLogo";
 
 interface FeedbackSpecHeaderProps {
   className?: string;
@@ -79,15 +80,15 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
       } ${className}`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
+        <div className="flex items-center justify-between h-16 pt-2">
           {/* Logo */}
           <motion.div
             className="flex-shrink-0"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <a href="/" className="font-accent text-xl font-bold text-primary tracking-tight">
-              FeedbackSpec
+            <a href="/" className="block">
+              <FeedbackSpecLogo size="lg" variant="default" />
             </a>
           </motion.div>
 

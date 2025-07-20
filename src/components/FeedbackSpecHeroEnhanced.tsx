@@ -392,7 +392,7 @@ export function FeedbackSpecHeroEnhanced({
           transition={{ delay: 0.1 }}
         >
           <span className="bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
-            {title}
+            {title}!!!
           </span>
         </motion.h1>
 

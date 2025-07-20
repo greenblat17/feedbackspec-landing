@@ -2,6 +2,7 @@ import React from "react";
 import { Github, Twitter, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
+import { FeedbackSpecLogo } from "./ui/FeedbackSpecLogo";
 
 interface FooterLink {
   label: string;
@@ -122,9 +123,9 @@ const Footer: React.FC<FooterProps> = ({
             {/* Company Info */}
             <div className="lg:col-span-4">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-foreground mb-4">
-                  {companyName}
-                </h3>
+                <div className="mb-4">
+                  <FeedbackSpecLogo size="lg" variant="default" />
+                </div>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                   {description}
                 </p>
