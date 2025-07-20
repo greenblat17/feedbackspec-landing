@@ -526,25 +526,25 @@ export function FeedbackWorkflowEnhanced({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16 px-4 sm:px-0"
         >
-          <h2 className="font-display text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
             From Chaos to
             <span className="block mt-2 bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">
               Shipping Machine
             </span>
           </h2>
 
-          <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="font-body text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
             Watch how FeedbackSpec transforms scattered feedback into
             production-ready features in 6 automated steps.
           </p>
 
           {/* Playback controls */}
-          <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8">
             <motion.button
               onClick={togglePlayback}
-              className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm sm:text-base w-full sm:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -558,7 +558,7 @@ export function FeedbackWorkflowEnhanced({
 
             <motion.button
               onClick={resetDemo}
-              className="flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors text-sm sm:text-base w-full sm:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -568,7 +568,7 @@ export function FeedbackWorkflowEnhanced({
 
             <motion.button
               onClick={() => setShowDemo(!showDemo)}
-              className="flex items-center gap-2 px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm sm:text-base w-full sm:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -579,9 +579,10 @@ export function FeedbackWorkflowEnhanced({
         </motion.div>
 
         {/* Progress visualization */}
-        <div className="max-w-5xl mx-auto mb-12">
+        <div className="max-w-5xl mx-auto mb-12 px-4 sm:px-0">
           {/* Step indicators */}
-          <div className="flex justify-between items-center mb-8">
+          <div className="hidden sm:flex justify-between items-center mb-8">
+            {/* Desktop step indicators */}
             {WORKFLOW_STEPS.map((step, idx) => (
               <React.Fragment key={step.id}>
                 <motion.button
@@ -682,6 +683,54 @@ export function FeedbackWorkflowEnhanced({
             ))}
           </div>
 
+          {/* Mobile step indicators - simplified horizontal scroll */}
+          <div className="sm:hidden mb-8">
+            <div className="flex overflow-x-auto pb-4 gap-4 scrollbar-hide">
+              {WORKFLOW_STEPS.map((step, idx) => (
+                <motion.button
+                  key={step.id}
+                  onClick={() => handleStepClick(idx)}
+                  className="flex flex-col items-center min-w-[80px] group cursor-pointer"
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {/* Step icon */}
+                  <motion.div
+                    className={cn(
+                      "relative w-12 h-12 rounded-full flex items-center justify-center border-3 transition-all duration-300 mb-2",
+                      idx <= currentStep
+                        ? "bg-primary border-primary text-primary-foreground shadow-lg"
+                        : "bg-muted border-muted-foreground/30 text-muted-foreground",
+                      idx === currentStep && "ring-3 ring-primary/20"
+                    )}
+                  >
+                    {idx < currentStep ? (
+                      <CheckCircle2 className="w-6 h-6" />
+                    ) : (
+                      React.cloneElement(step.icon, { className: "w-6 h-6" })
+                    )}
+                  </motion.div>
+
+                  {/* Step info */}
+                  <div className="text-center">
+                    <p
+                      className={cn(
+                        "text-xs font-medium",
+                        idx === currentStep
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                      )}
+                    >
+                      {step.step}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {step.title.split(" ")[0]}
+                    </p>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
           {/* Overall progress bar */}
           <div className="w-full bg-muted rounded-full h-3 mb-8">
             <motion.div
@@ -699,7 +748,7 @@ export function FeedbackWorkflowEnhanced({
         </div>
 
         {/* Current step details */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto px-4 sm:px-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
@@ -709,36 +758,36 @@ export function FeedbackWorkflowEnhanced({
               transition={{ duration: 0.4 }}
             >
               <Card className="overflow-hidden bg-gradient-to-br from-card to-card/50 border-2 border-primary/20">
-                <CardHeader className="text-center pb-6">
-                  <div className="flex items-center justify-center gap-4 mb-4">
+                <CardHeader className="text-center pb-4 sm:pb-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4">
                     <motion.div
-                      className="p-4 rounded-2xl bg-primary/20 text-primary"
+                      className="p-3 sm:p-4 rounded-2xl bg-primary/20 text-primary"
                       animate={{ rotate: [0, -10, 10, 0] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
                       {React.cloneElement(WORKFLOW_STEPS[currentStep].icon, {
-                        className: "w-8 h-8",
+                        className: "w-6 h-6 sm:w-8 sm:h-8",
                       })}
                     </motion.div>
-                    <div className="text-left">
-                      <h3 className="text-3xl font-bold">
+                    <div className="text-center sm:text-left">
+                      <h3 className="text-2xl sm:text-3xl font-bold">
                         {WORKFLOW_STEPS[currentStep].title}
                       </h3>
-                      <p className="text-lg text-primary font-medium">
+                      <p className="text-base sm:text-lg text-primary font-medium">
                         {WORKFLOW_STEPS[currentStep].subtitle}
                       </p>
                     </div>
                   </div>
-                  <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                  <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
                     {WORKFLOW_STEPS[currentStep].description}
                   </p>
                 </CardHeader>
 
                 <CardContent>
-                  <div className="grid lg:grid-cols-2 gap-8">
+                  <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
                     {/* Screenshot Preview */}
-                    <div>
-                      <h4 className="font-semibold mb-4 flex items-center gap-2">
+                    <div className="order-2 lg:order-1">
+                      <h4 className="font-semibold mb-4 flex items-center gap-2 text-sm sm:text-base">
                         <Monitor className="w-4 h-4 text-primary" />
                         Live Preview
                       </h4>
@@ -746,14 +795,14 @@ export function FeedbackWorkflowEnhanced({
                     </div>
 
                     {/* Features and Impact */}
-                    <div className="space-y-6">
+                    <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
                       {/* Features */}
                       <div>
-                        <h4 className="font-semibold mb-4 flex items-center gap-2">
+                        <h4 className="font-semibold mb-4 flex items-center gap-2 text-sm sm:text-base">
                           <Zap className="w-4 h-4 text-primary" />
                           Key Features
                         </h4>
-                        <div className="space-y-3">
+                        <div className="space-y-2 sm:space-y-3">
                           {WORKFLOW_STEPS[currentStep].details.map(
                             (detail, idx) => (
                               <motion.div
@@ -761,10 +810,10 @@ export function FeedbackWorkflowEnhanced({
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="flex items-start gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
+                                className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
                               >
-                                <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                                <span className="text-sm">{detail}</span>
+                                <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                                <span className="text-xs sm:text-sm">{detail}</span>
                               </motion.div>
                             )
                           )}
@@ -773,34 +822,34 @@ export function FeedbackWorkflowEnhanced({
 
                       {/* Before/After comparison */}
                       <div>
-                        <h4 className="font-semibold mb-4 flex items-center gap-2">
+                        <h4 className="font-semibold mb-4 flex items-center gap-2 text-sm sm:text-base">
                           <TrendingUp className="w-4 h-4 text-green-500" />
                           Impact
                         </h4>
-                        <div className="space-y-4">
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="p-4 bg-destructive/10 rounded-lg border border-destructive/20">
+                        <div className="space-y-3 sm:space-y-4">
+                          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                            <div className="p-3 sm:p-4 bg-destructive/10 rounded-lg border border-destructive/20">
                               <p className="text-xs font-medium text-destructive mb-2">
                                 Before
                               </p>
-                              <p className="text-sm font-bold">
+                              <p className="text-xs sm:text-sm font-bold">
                                 {WORKFLOW_STEPS[currentStep].example.before}
                               </p>
                             </div>
-                            <div className="p-4 bg-green-500/10 rounded-lg border border-green-500/20">
+                            <div className="p-3 sm:p-4 bg-green-500/10 rounded-lg border border-green-500/20">
                               <p className="text-xs font-medium text-green-600 mb-2">
                                 After
                               </p>
-                              <p className="text-sm font-bold">
+                              <p className="text-xs sm:text-sm font-bold">
                                 {WORKFLOW_STEPS[currentStep].example.after}
                               </p>
                             </div>
                           </div>
-                          <div className="p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
+                          <div className="p-3 sm:p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
                             <p className="text-xs font-medium text-primary mb-1">
                               Result
                             </p>
-                            <p className="text-lg font-bold">
+                            <p className="text-base sm:text-lg font-bold">
                               {WORKFLOW_STEPS[currentStep].example.time}
                             </p>
                           </div>

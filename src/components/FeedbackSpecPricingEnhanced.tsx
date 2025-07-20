@@ -269,16 +269,16 @@ export default function FeedbackSpecPricingEnhanced({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16 px-4 sm:px-0"
         >
-          <h2 className="font-display text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
             Choose Your
             <span className="block mt-2 bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">
               Growth Plan
             </span>
           </h2>
 
-          <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="font-body text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
             Start with a 14-day free trial. No credit card required. Cancel
             anytime. Join 2,847+ indie hackers already shipping faster.
           </p>
@@ -314,7 +314,7 @@ export default function FeedbackSpecPricingEnhanced({
         </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 mb-12 px-4 sm:px-0">
           {PRICING_PLANS.map((plan, idx) => (
             <motion.div
               key={plan.id}
@@ -346,10 +346,10 @@ export default function FeedbackSpecPricingEnhanced({
                       : "0 2px 4px -1px rgba(0, 0, 0, 0.1)",
                 }}
               >
-                <CardHeader className="text-center pb-6 relative">
+                <CardHeader className="text-center pb-4 sm:pb-6 relative">
                   {/* Popular badge */}
                   {plan.popular && (
-                    <Badge className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground px-3 py-1 shadow-lg font-semibold text-xs z-50">
+                    <Badge className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground px-2 sm:px-3 py-1 shadow-lg font-semibold text-xs z-50">
                       <Sparkles className="w-3 h-3 mr-1" />
                       Most Popular
                     </Badge>
@@ -357,77 +357,77 @@ export default function FeedbackSpecPricingEnhanced({
 
                   {/* Enterprise badge */}
                   {plan.enterprise && (
-                    <Badge className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground px-3 py-1 shadow-lg font-semibold text-xs z-50">
+                    <Badge className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground px-2 sm:px-3 py-1 shadow-lg font-semibold text-xs z-50">
                       <Crown className="w-3 h-3 mr-1" />
                       Enterprise
                     </Badge>
                   )}
-                  <CardTitle className="text-2xl font-bold">
+                  <CardTitle className="text-xl sm:text-2xl font-bold">
                     {plan.name}
                   </CardTitle>
-                  <p className="text-sm font-medium text-muted-foreground mb-4">
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-4">
                     {plan.tagline}
                   </p>
 
                   {/* Price */}
                   <div className="mb-4">
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-4xl font-bold">
+                      <span className="text-3xl sm:text-4xl font-bold">
                         ${getPrice(plan)}
                       </span>
-                      <span className="text-muted-foreground">
+                      <span className="text-muted-foreground text-sm sm:text-base">
                         /{billingCycle === "yearly" ? "mo" : "mo"}
                       </span>
                     </div>
                     {billingCycle === "yearly" && (
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs sm:text-sm text-muted-foreground">
                         Billed annually ($
                         {(plan.yearlyPrice * 12).toLocaleString()}/year)
                       </p>
                     )}
                     {getSavings(plan) && (
-                      <Badge variant="secondary" className="mt-2">
+                      <Badge variant="secondary" className="mt-2 text-xs">
                         {getSavings(plan)}
                       </Badge>
                     )}
                   </div>
 
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     {plan.description}
                   </p>
                 </CardHeader>
 
                 <CardContent>
                   {/* Key limits */}
-                  <div className="grid grid-cols-2 gap-3 mb-6 p-4 bg-background/50 rounded-lg">
+                  <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6 p-3 sm:p-4 bg-background/50 rounded-lg">
                     <div className="text-center">
                       <p className="text-xs text-muted-foreground">Sources</p>
-                      <p className="font-semibold text-sm">
+                      <p className="font-semibold text-xs sm:text-sm">
                         {plan.limits.sources}
                       </p>
                     </div>
                     <div className="text-center">
                       <p className="text-xs text-muted-foreground">Feedback</p>
-                      <p className="font-semibold text-sm">
+                      <p className="font-semibold text-xs sm:text-sm">
                         {plan.limits.feedback}
                       </p>
                     </div>
                     <div className="text-center">
                       <p className="text-xs text-muted-foreground">Team</p>
-                      <p className="font-semibold text-sm">
+                      <p className="font-semibold text-xs sm:text-sm">
                         {plan.limits.users}
                       </p>
                     </div>
                     <div className="text-center">
                       <p className="text-xs text-muted-foreground">Support</p>
-                      <p className="font-semibold text-sm">
+                      <p className="font-semibold text-xs sm:text-sm">
                         {plan.limits.support}
                       </p>
                     </div>
                   </div>
 
                   {/* Features */}
-                  <ul className="space-y-3 mb-6">
+                  <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                     {plan.features.map((feature, fidx) => (
                       <motion.li
                         key={fidx}
@@ -436,9 +436,9 @@ export default function FeedbackSpecPricingEnhanced({
                         transition={{
                           delay: selectedPlan === plan.id ? fidx * 0.05 : 0,
                         }}
-                        className="flex items-start gap-3 text-sm"
+                        className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm"
                       >
-                        <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                        <Check className="w-3 h-3 sm:w-4 sm:h-4 text-primary mt-0.5 flex-shrink-0" />
                         <span>{feature}</span>
                       </motion.li>
                     ))}
@@ -447,14 +447,14 @@ export default function FeedbackSpecPricingEnhanced({
                   {/* CTA */}
                   <Button
                     className={cn(
-                      "w-full magnetic-hover",
+                      "w-full magnetic-hover min-h-[44px]",
                       plan.popular && "bg-primary hover:bg-primary/90",
                       plan.enterprise && "bg-primary hover:bg-primary/90"
                     )}
                     size="lg"
                     onClick={onStartTrial}
                   >
-                    <span>Start Free Trial</span>
+                    <span className="text-sm sm:text-base">Start Free Trial</span>
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
 
@@ -472,14 +472,14 @@ export default function FeedbackSpecPricingEnhanced({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto px-4 sm:px-0"
         >
-          <Card className="p-8 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
-            <h3 className="text-2xl font-bold mb-6 text-center">
+          <Card className="p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center">
               All Plans Include
             </h3>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {[
                 {
                   icon: Shield,
@@ -510,9 +510,9 @@ export default function FeedbackSpecPricingEnhanced({
                   transition={{ delay: idx * 0.1 }}
                   className="text-center"
                 >
-                  <feature.icon className="w-8 h-8 text-primary mx-auto mb-3" />
-                  <h4 className="font-semibold mb-2">{feature.title}</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <feature.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary mx-auto mb-3" />
+                  <h4 className="font-semibold mb-2 text-sm sm:text-base">{feature.title}</h4>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     {feature.desc}
                   </p>
                 </motion.div>

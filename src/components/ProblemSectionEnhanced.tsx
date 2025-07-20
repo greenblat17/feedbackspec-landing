@@ -123,9 +123,9 @@ export default function ProblemSectionEnhanced() {
           initial="hidden"
           whileInView="visible"
           viewport={performanceConfig.viewport}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16 px-4 sm:px-0"
         >
-          <h2 className="font-display text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 leading-tight tracking-display">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 leading-tight tracking-display">
             <span className="text-foreground">While You Sleep,</span>
             <br />
             <motion.span
@@ -137,7 +137,7 @@ export default function ProblemSectionEnhanced() {
             </motion.span>
           </h2>
 
-          <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="font-body text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
             Every day, indie hackers lose{" "}
             <AnimatedCounter value={47} suffix="%" /> of potential customers
             because critical feedback is buried in{" "}
@@ -151,61 +151,61 @@ export default function ProblemSectionEnhanced() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-12 sm:mb-16 px-4 sm:px-0"
         >
-          <Card className="p-8 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
-            <h3 className="text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2">
-              <DollarSign className="w-6 h-6 text-primary" />
+          <Card className="p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2">
+              <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               Calculate Your Hidden Costs
             </h3>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-6">
+            <div className="grid md:grid-cols-3 gap-4 sm:gap-6 mb-6">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-background/50 rounded-lg"
+                className="text-center p-3 sm:p-4 bg-background/50 rounded-lg"
               >
-                <div className="text-3xl font-bold text-primary mb-2">
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
                   <AnimatedCounter value={20} suffix=" hrs/week" />
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Managing feedback
                 </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-background/50 rounded-lg"
+                className="text-center p-3 sm:p-4 bg-background/50 rounded-lg"
               >
-                <div className="text-3xl font-bold text-primary mb-2">
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
                   $<AnimatedCounter value={4800} suffix="/mo" />
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Opportunity cost
                 </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-background/50 rounded-lg"
+                className="text-center p-3 sm:p-4 bg-background/50 rounded-lg"
               >
-                <div className="text-3xl font-bold text-primary mb-2">
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
                   <AnimatedCounter value={67} suffix="%" />
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Features users don't want
                 </p>
               </motion.div>
             </div>
 
             <motion.div
-              className="text-center p-4 bg-primary/10 rounded-lg"
+              className="text-center p-3 sm:p-4 bg-primary/10 rounded-lg"
               whileHover={{ scale: 1.02 }}
             >
-              <p className="text-lg font-semibold mb-2">
+              <p className="text-base sm:text-lg font-semibold mb-2">
                 That's <span className="text-primary">$57,600/year</span> in
                 lost revenue
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Time you could spend shipping features that actually matter
               </p>
             </motion.div>
@@ -213,7 +213,7 @@ export default function ProblemSectionEnhanced() {
         </motion.div>
 
         {/* Pain Points - Interactive Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16 px-4 sm:px-0">
           {[
             {
               icon: <Clock className="w-8 h-8" />,
@@ -270,11 +270,11 @@ export default function ProblemSectionEnhanced() {
                   `bg-gradient-to-br ${pain.gradient}`
                 )}
               >
-                <div className="p-6">
-                  <div className="flex items-start gap-4 mb-4">
+                <div className="p-4 sm:p-6">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-4">
                     <motion.div
                       className={cn(
-                        "p-3 rounded-xl bg-background/50",
+                        "p-2 sm:p-3 rounded-xl bg-background/50",
                         pain.color
                       )}
                       animate={
@@ -282,23 +282,25 @@ export default function ProblemSectionEnhanced() {
                       }
                       transition={{ duration: 0.5 }}
                     >
-                      {pain.icon}
+                      {React.cloneElement(pain.icon, {
+                        className: "w-6 h-6 sm:w-8 sm:h-8",
+                      })}
                     </motion.div>
                     <div>
-                      <h3 className="text-xl font-bold mb-2">{pain.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+                      <h3 className="text-lg sm:text-xl font-bold mb-2">{pain.title}</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                         {pain.story}
                       </p>
                     </div>
                   </div>
 
                   <motion.div
-                    className="mt-4 p-3 bg-background/50 rounded-lg flex items-center justify-between"
+                    className="mt-4 p-2 sm:p-3 bg-background/50 rounded-lg flex items-center justify-between"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: activeCard === idx ? 1 : 0.8, x: 0 }}
                   >
-                    <span className="text-sm font-medium">Real Impact:</span>
-                    <span className={cn("font-bold", pain.color)}>
+                    <span className="text-xs sm:text-sm font-medium">Real Impact:</span>
+                    <span className={cn("font-bold text-xs sm:text-sm", pain.color)}>
                       {pain.impact}
                     </span>
                   </motion.div>

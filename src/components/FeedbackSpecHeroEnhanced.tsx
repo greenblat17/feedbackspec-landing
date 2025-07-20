@@ -125,7 +125,7 @@ function AppScreenshot() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4, duration: 0.8 }}
-      className="relative mx-auto max-w-4xl mb-6"
+      className="relative mx-auto max-w-4xl mb-6 px-4 sm:px-0"
     >
       {/* Browser Frame */}
       <div className="bg-card border rounded-xl shadow-2xl overflow-hidden">
@@ -144,12 +144,12 @@ function AppScreenshot() {
         </div>
 
         {/* App Interface */}
-        <div className="bg-background/50 min-h-[300px] p-4">
+        <div className="bg-background/50 min-h-[250px] sm:min-h-[300px] p-3 sm:p-4">
           {/* Header */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-3">
             <div>
-              <h3 className="text-lg font-semibold">Feedback Dashboard</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="text-base sm:text-lg font-semibold">Feedback Dashboard</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 {MOCK_FEEDBACK_ITEMS.length} items • 3 sources connected
               </p>
             </div>
@@ -157,20 +157,21 @@ function AppScreenshot() {
               size="sm"
               variant="outline"
               onClick={() => setShowSpec(!showSpec)}
+              className="text-xs sm:text-sm w-full sm:w-auto"
             >
               <Zap className="w-4 h-4 mr-2" />
               {showSpec ? "Hide Spec" : "Generate Spec"}
             </Button>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Feedback List */}
             <div className="lg:col-span-2 space-y-2">
               {MOCK_FEEDBACK_ITEMS.slice(0, 3).map((item, idx) => (
                 <motion.div
                   key={item.id}
                   className={cn(
-                    "border rounded-lg p-3 transition-all cursor-pointer",
+                    "border rounded-lg p-2 sm:p-3 transition-all cursor-pointer",
                     activeItem === idx
                       ? "border-primary bg-primary/5 shadow-md"
                       : "border-border bg-card/50 hover:border-primary/50"
@@ -178,12 +179,12 @@ function AppScreenshot() {
                   whileHover={{ scale: 1.01 }}
                   onClick={() => setActiveItem(idx)}
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-md bg-muted">
-                      <item.icon className="w-4 h-4" />
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <div className="p-1.5 sm:p-2 rounded-md bg-muted">
+                      <item.icon className="w-3 h-3 sm:w-4 sm:h-4" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-1">
                         <span className="text-xs font-medium text-muted-foreground">
                           {item.platform}
                         </span>
@@ -201,8 +202,8 @@ function AppScreenshot() {
                           {item.category}
                         </Badge>
                       </div>
-                      <p className="text-sm">{item.message}</p>
-                      <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                      <p className="text-xs sm:text-sm">{item.message}</p>
+                      <div className="flex items-center gap-2 sm:gap-4 mt-1 sm:mt-2 text-xs text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <Star className="w-3 h-3" />
                           {item.votes}
@@ -224,8 +225,8 @@ function AppScreenshot() {
               ))}
             </div>
 
-            {/* Sidebar */}
-            <div className="space-y-4">
+            {/* Sidebar - Hidden on mobile to save space */}
+            <div className="hidden lg:block space-y-4">
               {/* Sources */}
               <div className="border rounded-lg p-4 bg-card/50">
                 <h4 className="font-medium mb-3 text-sm">Connected Sources</h4>
@@ -271,6 +272,28 @@ function AppScreenshot() {
                     <span>Feature satisfaction</span>
                     <span className="text-green-500 font-medium">92%</span>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile AI Insights - Show condensed version on mobile */}
+            <div className="lg:hidden mt-4 border rounded-lg p-3 bg-card/50">
+              <h4 className="font-medium mb-2 text-xs flex items-center gap-2">
+                <Sparkles className="w-3 h-3 text-primary" />
+                AI Insights
+              </h4>
+              <div className="grid grid-cols-3 gap-2 text-xs">
+                <div className="text-center">
+                  <div className="text-primary font-medium">↑ 340%</div>
+                  <div className="text-muted-foreground">Dark mode</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-red-500 font-medium">↑ 12%</div>
+                  <div className="text-muted-foreground">Bug reports</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-green-500 font-medium">92%</div>
+                  <div className="text-muted-foreground">Satisfaction</div>
                 </div>
               </div>
             </div>
@@ -335,7 +358,7 @@ export function FeedbackSpecHeroEnhanced({
   onPrimaryCtaClick?: () => void;
 }) {
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-46">
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-24 sm:pt-32 lg:pt-46">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/10" />
 
@@ -386,7 +409,7 @@ export function FeedbackSpecHeroEnhanced({
       <div className="relative z-10 container px-4 mx-auto text-center">
         {/* Title */}
         <motion.h1
-          className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-display mb-4 max-w-4xl mx-auto"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-display mb-4 max-w-4xl mx-auto px-4 sm:px-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -398,7 +421,7 @@ export function FeedbackSpecHeroEnhanced({
 
         {/* Subtitle */}
         <motion.p
-          className="font-heading text-lg md:text-xl text-muted-foreground mb-3 tracking-heading"
+          className="font-heading text-base sm:text-lg md:text-xl text-muted-foreground mb-3 tracking-heading px-4 sm:px-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -408,7 +431,7 @@ export function FeedbackSpecHeroEnhanced({
 
         {/* Description */}
         <motion.p
-          className="font-body text-base text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed"
+          className="font-body text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4 sm:px-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -421,17 +444,17 @@ export function FeedbackSpecHeroEnhanced({
 
         {/* CTA */}
         <motion.div
-          className="flex justify-center"
+          className="flex justify-center px-4 sm:px-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
           <Button
             size="lg"
-            className="px-8 py-3 group"
+            className="px-6 sm:px-8 py-3 group w-full sm:w-auto min-h-[48px]"
             onClick={onPrimaryCtaClick}
           >
-            Start Free 14-Day Trial
+            <span className="text-sm sm:text-base">Start Free 14-Day Trial</span>
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </motion.div>

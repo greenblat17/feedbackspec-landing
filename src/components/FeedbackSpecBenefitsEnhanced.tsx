@@ -213,14 +213,14 @@ export default function FeedbackSpecBenefitsEnhanced() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display px-4 sm:px-0">
             From Feedback Chaos to
             <span className="block mt-2 bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">
               AI-Powered Shipping Machine
             </span>
           </h2>
 
-          <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="font-body text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed px-4 sm:px-0">
             The only platform that turns scattered user feedback into
             Cursor-optimized specs in under 10 minutes. Stop guessing what to
             build - let AI show you exactly which features will grow your MRR.
@@ -233,7 +233,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <div className="flex flex-wrap justify-center items-center gap-6 text-lg">
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-sm sm:text-base lg:text-lg px-4 sm:px-0">
               <div className="flex items-center gap-2">
                 <span className="font-bold text-primary">2,847</span>
                 <span className="text-muted-foreground">Happy Founders</span>
@@ -258,7 +258,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
         </motion.div>
 
         {/* Interactive benefit cards */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 mb-16 px-4 sm:px-0">
           {BENEFITS.map((benefit, idx) => (
             <motion.div
               key={benefit.id}
@@ -295,7 +295,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between mb-4">
                     <div
-                      className="p-3 rounded-xl bg-primary/20 text-primary"
+                      className="p-2 sm:p-3 rounded-xl bg-primary/20 text-primary"
                       style={{
                         transition: "transform 0.15s ease-out",
                         transform:
@@ -311,32 +311,32 @@ export default function FeedbackSpecBenefitsEnhanced() {
                     </Badge>
                   </div>
 
-                  <h3 className="text-2xl font-bold mb-2">{benefit.title}</h3>
-                  <p className="text-sm font-medium text-muted-foreground">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">{benefit.title}</h3>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground">
                     {benefit.tagline}
                   </p>
                 </CardHeader>
 
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-4">
                     {benefit.description}
                   </p>
 
                   {/* Before/After comparison */}
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    <div className="p-3 bg-muted rounded-lg">
+                  <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
+                    <div className="p-2 sm:p-3 bg-muted rounded-lg">
                       <p className="text-xs font-medium text-muted-foreground mb-1">
                         Before
                       </p>
-                      <p className="text-sm font-bold">
+                      <p className="text-xs sm:text-sm font-bold">
                         {benefit.metrics.before}
                       </p>
                     </div>
-                    <div className="p-3 bg-primary/10 rounded-lg">
+                    <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
                       <p className="text-xs font-medium text-primary mb-1">
                         After
                       </p>
-                      <p className="text-sm font-bold">
+                      <p className="text-xs sm:text-sm font-bold">
                         {benefit.metrics.after}
                       </p>
                     </div>
@@ -364,11 +364,11 @@ export default function FeedbackSpecBenefitsEnhanced() {
                         transition={{ duration: 0.3 }}
                         className="pt-4 border-t"
                       >
-                        <blockquote className="text-sm italic mb-2">
+                        <blockquote className="text-xs sm:text-sm italic mb-2">
                           "{benefit.testimonial.quote}"
                         </blockquote>
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold">
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold">
                             {benefit.testimonial.author
                               .split(" ")
                               .map((n) => n[0])
@@ -397,44 +397,44 @@ export default function FeedbackSpecBenefitsEnhanced() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto px-4 sm:px-0"
         >
-          <Card className="p-8 bg-gradient-to-r from-primary/5 to-blue-500/5 border-primary/20">
-            <h3 className="text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2">
-              <BarChart3 className="w-6 h-6 text-primary" />
+          <Card className="p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-primary/5 to-blue-500/5 border-primary/20">
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2">
+              <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               What Our Users Actually Achieve
             </h3>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-6">
+            <div className="grid md:grid-cols-3 gap-4 sm:gap-6 mb-6">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-background/80 rounded-lg"
+                className="text-center p-3 sm:p-4 bg-background/80 rounded-lg"
               >
-                <Clock className="w-8 h-8 text-blue-500 mx-auto mb-2" />
+                <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-blue-500 mx-auto mb-2" />
                 <MetricCounter value="8" suffix=" minutes" />
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                   Avg spec generation time
                 </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-background/80 rounded-lg"
+                className="text-center p-3 sm:p-4 bg-background/80 rounded-lg"
               >
-                <TrendingUp className="w-8 h-8 text-green-500 mx-auto mb-2" />
+                <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-green-500 mx-auto mb-2" />
                 <MetricCounter value="$2,100" suffix="/mo" />
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                   Average revenue increase
                 </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-background/80 rounded-lg"
+                className="text-center p-3 sm:p-4 bg-background/80 rounded-lg"
               >
-                <Rocket className="w-8 h-8 text-purple-500 mx-auto mb-2" />
+                <Rocket className="w-6 h-6 sm:w-8 sm:h-8 text-purple-500 mx-auto mb-2" />
                 <MetricCounter value="3x" suffix=" faster" />
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                   Feature shipping velocity
                 </p>
               </motion.div>
