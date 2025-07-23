@@ -161,32 +161,32 @@ function FounderJourney() {
   
   const stages = [
     { 
-      title: "Month 1: The Dream", 
-      mood: "😊", 
-      mrr: "$5,000",
-      feedback: "12 great ideas",
-      status: "Excited to build everything!"
+      title: "Monday: Customer Feedback", 
+      mood: "😤", 
+      time: "9:00 AM",
+      feedback: "\"Search is terrible\"",
+      status: "Vague complaint received"
     },
     { 
-      title: "Month 6: The Overwhelm", 
-      mood: "😰", 
-      mrr: "$8,000",
-      feedback: "127 unorganized requests",
-      status: "Can't keep track anymore..."
+      title: "Tuesday: Research Hell", 
+      mood: "😩", 
+      time: "45 min wasted",
+      feedback: "What do they mean?",
+      status: "Digging through context..."
     },
     { 
-      title: "Month 12: The Mistakes", 
-      mood: "😔", 
-      mrr: "$7,000",
-      feedback: "Built wrong features",
-      status: "Users are leaving..."
+      title: "Wednesday: Manual Specs", 
+      mood: "😓", 
+      time: "3 hours",
+      feedback: "Writing detailed specs",
+      status: "Still not comprehensive..."
     },
     { 
-      title: "Month 18: The Burnout", 
-      mood: "💀", 
-      mrr: "$3,000",
-      feedback: "Given up on feedback",
-      status: "Just surviving..."
+      title: "Thursday: AI Codes Fast", 
+      mood: "🤖", 
+      time: "10 min",
+      feedback: "Claude delivers code",
+      status: "But spec missed edge cases!"
     },
   ];
   
@@ -211,10 +211,10 @@ function FounderJourney() {
           <div className="text-6xl mb-4">{stages[activeStage]?.mood || "😊"}</div>
           <h3 className="text-2xl font-bold mb-2">{stages[activeStage]?.title || "Month 1: The Dream"}</h3>
           <div className="space-y-2 text-muted-foreground">
-            <p>MRR: <span className={cn(
+            <p>Time: <span className={cn(
               "font-bold",
               activeStage > 1 ? "text-muted-foreground" : "text-primary"
-            )}>{stages[activeStage]?.mrr || "$5,000"}</span></p>
+            )}>{stages[activeStage]?.time || "9:00 AM"}</span></p>
             <p>{stages[activeStage]?.feedback || "12 great ideas"}</p>
             <p className="text-lg italic">"{stages[activeStage]?.status || "Excited to build everything!"}"</p>
           </div>
@@ -231,14 +231,14 @@ export default function ProblemSectionEnhanced() {
   
   // Sample feedback messages
   const sampleFeedback = [
-    { message: "Can you add dark mode?", platform: "Twitter" },
-    { message: "Export feature would be amazing!", platform: "Discord" },
-    { message: "Bug: Login not working on mobile", platform: "Email" },
-    { message: "Need API access please", platform: "Reddit" },
-    { message: "Pricing is too high for startups", platform: "ProductHunt" },
-    { message: "Integration with Slack?", platform: "GitHub" },
-    { message: "Performance issues on large datasets", platform: "Intercom" },
-    { message: "Love the product but need SSO", platform: "Email" },
+    { message: "Search is terrible, can't find anything", platform: "Customer Email" },
+    { message: "Need bulk export functionality ASAP", platform: "Slack DM" },
+    { message: "Dashboard loads too slowly", platform: "Support Ticket" },
+    { message: "Can't integrate with our CRM", platform: "Sales Call" },
+    { message: "Missing real-time collaboration", platform: "User Interview" },
+    { message: "Mobile app keeps crashing", platform: "App Review" },
+    { message: "Need better error messages", platform: "GitHub Issue" },
+    { message: "Want keyboard shortcuts everywhere", platform: "Discord" },
   ];
   
   // Generate floating feedback messages
@@ -322,21 +322,21 @@ export default function ProblemSectionEnhanced() {
           </motion.div>
           
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-foreground">Your Feedback is</span>
+            <span className="text-foreground">Your AI Coding Speed is</span>
             <br />
             <GlitchText className="bg-gradient-to-r from-blue-600 via-blue-800 to-gray-900 bg-clip-text text-transparent">
-              Lost in the Abyss
+              Bottlenecked by Bad Specs
             </GlitchText>
           </h2>
           
           <p className="font-body text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Right now, while you read this, <span className="font-bold text-foreground">$10,000+ worth of user insights</span> are 
-            vanishing across 20+ platforms. Watch them disappear above.
+            You're an AI coding master. Cursor generates perfect code in minutes. But you're still spending 
+            <span className="font-bold text-foreground">2-3 hours manually crafting specifications</span> from vague customer feedback.
           </p>
           
           {/* Live revenue loss counter */}
           <Card className="inline-block p-6 bg-gradient-to-br from-blue-50 to-gray-50 border-blue-200">
-            <p className="text-sm text-muted-foreground mb-2">Value Vanishing Into the Void:</p>
+            <p className="text-sm text-muted-foreground mb-2">Cost of Manual Spec Writing:</p>
             <RevenueLossCounter />
             <p className="text-xs text-muted-foreground mt-2">Based on avg. indie hacker opportunity cost</p>
           </Card>
@@ -455,11 +455,11 @@ export default function ProblemSectionEnhanced() {
           className="mb-20"
         >
           <h3 className="text-3xl font-bold text-center mb-8">
-            The Inevitable Journey to Burnout
+            The AI Developer's Weekly Nightmare
           </h3>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Scroll to watch how every indie hacker's dream turns into a nightmare 
-            when feedback management spirals out of control
+            Sound familiar? You're not alone. Thousands of AI developers hit this wall every day.
+            The truth: Your coding speed is only as fast as your specification quality.
           </p>
           <FounderJourney />
         </motion.div>
@@ -500,21 +500,21 @@ export default function ProblemSectionEnhanced() {
               </motion.div>
               
               <h3 className="text-3xl sm:text-4xl font-bold mb-6">
-                Your Startup's <span className="text-primary">Life Support</span> is Failing
+                Garbage Specs = <span className="text-primary">Garbage AI Code</span>
               </h3>
               
               <div className="grid grid-cols-3 gap-6 mb-8">
                 <div>
-                  <div className="text-4xl font-bold text-primary">73%</div>
-                  <p className="text-sm text-muted-foreground">Quit within 18 months</p>
+                  <div className="text-4xl font-bold text-primary">$400</div>
+                  <p className="text-sm text-muted-foreground">Cost per spec</p>
                 </div>
                 <div>
-                  <div className="text-4xl font-bold text-primary">67%</div>
-                  <p className="text-sm text-muted-foreground">Build unwanted features</p>
+                  <div className="text-4xl font-bold text-primary">3 hrs</div>
+                  <p className="text-sm text-muted-foreground">Manual writing time</p>
                 </div>
                 <div>
-                  <div className="text-4xl font-bold text-primary">91%</div>
-                  <p className="text-sm text-muted-foreground">Miss critical feedback</p>
+                  <div className="text-4xl font-bold text-primary">5x</div>
+                  <p className="text-sm text-muted-foreground">Rework from bad specs</p>
                 </div>
               </div>
               
@@ -524,9 +524,9 @@ export default function ProblemSectionEnhanced() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                The cure exists. But every second you wait, 
+                It's not coding anymore - it's transforming vague feedback into AI-ready specifications. 
                 <br />
-                <span className="text-primary">another opportunity flatlines.</span>
+                <span className="text-primary">While you iterate on specs, competitors are shipping.</span>
               </motion.p>
               
               <motion.div
@@ -536,7 +536,7 @@ export default function ProblemSectionEnhanced() {
                 transition={{ duration: 2, repeat: Infinity }}
               >
                 <Sparkles className="w-5 h-5 text-primary animate-pulse" />
-                <span className="font-semibold">Escape the void</span>
+                <span className="font-semibold">Get AI-Ready Specs Now</span>
                 <ArrowRight className="w-5 h-5 text-primary" />
               </motion.div>
             </div>

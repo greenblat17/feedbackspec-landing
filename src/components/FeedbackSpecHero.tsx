@@ -94,10 +94,10 @@ interface FeedbackSpecHeroProps {
 const GRADIENT_COLORS = ["#3B82F6", "#8B5CF6", "#06B6D4", "#10B981"];
 
 export function FeedbackSpecHero({
-  title = "Convert Scattered Feedback into AI-Ready Specs",
-  subtitle = "For Indie Hackers Who Ship Fast",
-  description = "Stop losing valuable user insights in Slack threads, emails, and random notes. FeedbackSpec automatically transforms your scattered feedback into structured, AI-ready product specifications that help you build what users actually want.",
-  primaryCtaText = "Start Free Trial",
+  title = "Transform Customer Feedback into Perfect AI Code Specs in Seconds",
+  subtitle = "For elite developers who live in Cursor, Claude Code, and GitHub Copilot",
+  description = "The only platform that transforms vague customer feedback into production-ready AI coding specifications. Save 2-3 hours per feature. Get premium AI code quality. Dominate your market at AI development speed.",
+  primaryCtaText = "Start 14-Day Free Trial",
   primaryCtaHref = "/signup",
   secondaryCtaText = "See How It Works",
   secondaryCtaHref = "/demo",
@@ -142,7 +142,7 @@ export function FeedbackSpecHero({
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border/50 text-sm text-muted-foreground mb-6"
             >
               <Zap className="w-4 h-4 text-blue-500" />
-              AI-Powered Feedback Analysis
+              The AI Code Specification Engine
             </motion.div>
 
             {/* Subtitle */}
@@ -223,11 +223,11 @@ export function FeedbackSpecHero({
             >
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4" />
-                <span>500+ indie hackers</span>
+                <span>2,847+ elite developers</span>
               </div>
               <div className="flex items-center gap-2">
                 <Target className="w-4 h-4" />
-                <span>10x faster specs</span>
+                <span>$400-600 saved per spec</span>
               </div>
             </motion.div>
           </div>
@@ -252,7 +252,7 @@ export function FeedbackSpecHero({
                         <Zap className="w-5 h-5 text-white" />
                       </div>
                       <span className="font-semibold text-foreground">
-                        FeedbackSpec
+                        FeedbackScout
                       </span>
                     </div>
                     <div className="flex gap-2">
@@ -272,7 +272,7 @@ export function FeedbackSpecHero({
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        "Users want a dark mode toggle in the settings..."
+                        "The search is terrible, I can never find anything"
                       </p>
                     </div>
 
@@ -284,8 +284,7 @@ export function FeedbackSpecHero({
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        "Feature: Dark Mode Toggle - Priority: High - Effort: 2
-                        days..."
+                        "FEATURE: Advanced Search System - Architecture: Elasticsearch - Ready AI Prompts..."
                       </p>
                     </div>
 
@@ -297,7 +296,7 @@ export function FeedbackSpecHero({
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        "Technical requirements and user stories generated..."
+                        "Create React search component with real-time autocomplete... <200ms load time"
                       </p>
                     </div>
                   </div>

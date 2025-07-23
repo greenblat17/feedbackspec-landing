@@ -1,311 +1,446 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import { motion, Variants } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import {
   ArrowRight,
   CheckCircle,
-  CreditCard,
-  Zap,
+  Clock,
+  Rocket,
   Sparkles,
   Shield,
-  Clock,
   Users,
+  Zap,
+  Trophy,
+  Star,
+  Code2,
+  Terminal,
+  GitBranch,
+  Activity,
+  TrendingUp,
+  Lock,
+  Award,
+  Play,
 } from "lucide-react";
 import { cn } from "../lib/utils";
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
 
-// Button component
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default:
-          "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        glow: "bg-gradient-to-r from-primary via-primary to-primary/80 text-primary-foreground hover:shadow-xl hover:shadow-primary/30 hover:scale-105",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-12 rounded-xl px-8",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
+// Live activity feed data
+const ACTIVITY_FEED = [
+  { name: "Sarah Chen", action: "shipped 3 features", time: "2 min ago", mrr: "$12k" },
+  { name: "Alex Kumar", action: "generated 5 specs", time: "5 min ago", mrr: "$8k" },
+  { name: "Mike Johnson", action: "increased MRR by $2.1k", time: "12 min ago", mrr: "$24k" },
+  { name: "Lisa Wang", action: "shipped dark mode", time: "18 min ago", mrr: "$15k" },
+  { name: "David Park", action: "automated feedback flow", time: "23 min ago", mrr: "$31k" },
+  { name: "Emma Davis", action: "launched 2 features", time: "28 min ago", mrr: "$19k" },
+];
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-}
-
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Button.displayName = "Button";
-
-// Enhanced Badge component
-const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline:
-          "text-foreground border-border/50 bg-background/50 backdrop-blur-sm hover:border-primary/30",
-        glow: "border-primary/20 bg-gradient-to-r from-primary/10 to-primary/5 text-primary backdrop-blur-sm hover:border-primary/40",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
-
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
-
-function Badge({ className, variant, ...props }: BadgeProps) {
+// Floating spec component
+function FloatingSpec({ delay = 0 }: { delay?: number }) {
+  const specs = [
+    "// Feature: User Dashboard\n// Priority: HIGH\n// MRR Impact: +$2.3k",
+    "/* API Integration\n * Requested by 15 users\n * Est. time: 2 days */",
+    "// Export to CSV\n// Quick win feature\n// 30 min implementation",
+  ];
+  
+  const randomSpec = specs[Math.floor(Math.random() * specs.length)];
+  
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <motion.div
+      initial={{ opacity: 0, y: 100, x: Math.random() * 200 - 100 }}
+      animate={{
+        opacity: [0, 0.7, 0],
+        y: [-100, -300, -500],
+        x: Math.random() * 100 - 50,
+      }}
+      transition={{
+        duration: 15,
+        delay,
+        ease: "easeOut",
+        repeat: Infinity,
+      }}
+      className="absolute pointer-events-none"
+    >
+      <pre className="text-xs text-primary/30 font-mono whitespace-pre">
+        {randomSpec}
+      </pre>
+    </motion.div>
   );
 }
 
-// Enhanced Input component
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
-    return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-12 w-full rounded-xl border border-input bg-background/50 backdrop-blur-sm px-4 py-3 text-sm text-foreground shadow-sm transition-all duration-300 placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Input.displayName = "Input";
-
-// Glow component
-const Glow = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("absolute inset-0 -z-10", className)} {...props}>
-    <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-primary/20 via-primary/10 to-transparent blur-3xl" />
-    <div className="absolute left-1/3 top-1/4 h-64 w-64 rounded-full bg-gradient-to-r from-blue-500/15 to-purple-500/15 blur-2xl" />
-    <div className="absolute right-1/4 bottom-1/4 h-48 w-48 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-2xl" />
-  </div>
-));
-Glow.displayName = "Glow";
-
-// Animation variants
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-    filter: "blur(10px)",
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 10,
-      duration: 0.8,
-    },
-  },
-};
-
-// Main CTA Component
-interface CTAProps {
-  badge?: {
-    text: string;
-  };
-  title: string;
-  description?: string;
-  features?: string[];
-  primaryAction: {
-    text: string;
-    href: string;
-  };
-  secondaryAction?: {
-    text: string;
-    href: string;
-  };
-  emailCapture?: boolean;
-  className?: string;
+// Live activity ticker
+function ActivityTicker() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % ACTIVITY_FEED.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+  
+  return (
+    <div className="relative h-8 overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -20, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0 flex items-center justify-center gap-2 text-sm"
+        >
+          <Activity className="w-4 h-4 text-green-500" />
+          <span className="font-semibold">{ACTIVITY_FEED[currentIndex].name}</span>
+          <span className="text-muted-foreground">{ACTIVITY_FEED[currentIndex].action}</span>
+          <Badge variant="secondary" className="text-xs">
+            {ACTIVITY_FEED[currentIndex].mrr} MRR
+          </Badge>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
 }
 
-export function FeedbackSpecCTA({
-  badge = { text: "No Credit Card Required" },
-  title = "Stop wasting time on manual feedback management",
-  description = "Your users are giving you the roadmap to $100k+ MRR every day. Join 200+ indie hackers who've automated their feedback workflow and shipped 3x more features using FeedbackSpec + AI coding assistants.",
-  features = ["14-day free trial", "Setup takes 5 minutes", "No card required"],
-  primaryAction = {
-    text: "Get FeedbackSpec Free",
-    href: "#signup",
-  },
-  secondaryAction = {
-    text: "See How It Works",
-    href: "#demo",
-  },
-  emailCapture = false,
-  className,
-}: CTAProps) {
-  const [email, setEmail] = React.useState("");
+// Interactive launch button
+function LaunchButton({ children, ...props }: React.ComponentProps<typeof Button>) {
   const [isHovered, setIsHovered] = React.useState(false);
+  const [isClicked, setIsClicked] = React.useState(false);
+  
+  const handleClick = (e: React.MouseEvent) => {
+    setIsClicked(true);
+    setTimeout(() => setIsClicked(false), 2000);
+    props.onClick?.(e);
+  };
+  
+  return (
+    <div className="relative">
+      {/* Launch particles */}
+      <AnimatePresence>
+        {isClicked && (
+          <>
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ 
+                  opacity: 1, 
+                  scale: 0,
+                  x: 0,
+                  y: 0
+                }}
+                animate={{ 
+                  opacity: 0,
+                  scale: Math.random() * 2 + 1,
+                  x: (Math.random() - 0.5) * 200,
+                  y: Math.random() * -200 - 50,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ 
+                  duration: 1, 
+                  delay: i * 0.02,
+                  ease: "easeOut"
+                }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+              </motion.div>
+            ))}
+          </>
+        )}
+      </AnimatePresence>
+      
+      {/* Launch pad effect */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className="absolute inset-0 -z-10"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-500/20 blur-xl rounded-full" />
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0"
+            >
+              <div className="absolute top-0 left-1/2 w-2 h-8 bg-primary/50 rounded-full -translate-x-1/2" />
+              <div className="absolute bottom-0 left-1/2 w-2 h-8 bg-primary/50 rounded-full -translate-x-1/2" />
+              <div className="absolute left-0 top-1/2 w-8 h-2 bg-primary/50 rounded-full -translate-y-1/2" />
+              <div className="absolute right-0 top-1/2 w-8 h-2 bg-primary/50 rounded-full -translate-y-1/2" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      <Button
+        {...props}
+        onClick={handleClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className={cn(
+          "relative z-10 transition-all duration-300",
+          isHovered && "scale-105",
+          isClicked && "scale-95"
+        )}
+      >
+        <motion.div
+          animate={isClicked ? { y: -20, opacity: 0 } : { y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-2"
+        >
+          {children}
+          <motion.div
+            animate={isHovered ? { x: 5 } : { x: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {isClicked ? <Rocket className="w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
+          </motion.div>
+        </motion.div>
+      </Button>
+      
+      {/* Countdown */}
+      <AnimatePresence>
+        {isHovered && !isClicked && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-muted-foreground whitespace-nowrap"
+          >
+            <span className="font-mono">LAUNCH IN T-3...2...1...</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
+// Trust indicators
+function TrustIndicators() {
+  const indicators = [
+    { icon: Shield, text: "SOC 2 Compliant" },
+    { icon: Lock, text: "Bank-level Security" },
+    { icon: Award, text: "Product Hunt #1" },
+  ];
+  
+  return (
+    <div className="flex flex-wrap justify-center gap-6">
+      {indicators.map((item, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: idx * 0.1 }}
+          whileHover={{ scale: 1.05 }}
+          className="flex items-center gap-2 text-sm text-muted-foreground"
+        >
+          <item.icon className="w-4 h-4" />
+          <span>{item.text}</span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+// Main CTA Component
+export function FeedbackSpecCTA() {
+  const [spotsLeft, setSpotsLeft] = React.useState(47);
+  const [specsGenerated, setSpecsGenerated] = React.useState(1247);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Dynamic background movement
+  const backgroundX = useTransform(mouseX, [0, 1000], [-50, 50]);
+  const backgroundY = useTransform(mouseY, [0, 1000], [-50, 50]);
+  const smoothBackgroundX = useSpring(backgroundX, { stiffness: 50, damping: 20 });
+  const smoothBackgroundY = useSpring(backgroundY, { stiffness: 50, damping: 20 });
+  
+  // Handle mouse movement
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+  
+  // Simulate live updates
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setSpecsGenerated(prev => prev + Math.floor(Math.random() * 3));
+      if (Math.random() > 0.7) {
+        setSpotsLeft(prev => Math.max(prev - 1, 0));
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+  
   return (
     <section
-      className={cn(
-        "relative overflow-hidden py-24 sm:py-32 bg-gradient-to-br from-background via-background to-muted/10",
-        className
-      )}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="relative overflow-hidden py-32 bg-white"
+      onMouseMove={handleMouseMove}
     >
-      {/* Enhanced Glow Background */}
-      <Glow />
-
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-
-      <div className="relative z-10 mx-auto max-w-5xl px-6">
+      {/* Dynamic background */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          x: smoothBackgroundX,
+          y: smoothBackgroundY,
+        }}
+      >
+        {/* Floating specs */}
+        <div className="absolute inset-0">
+          {[...Array(5)].map((_, i) => (
+            <FloatingSpec key={i} delay={i * 3} />
+          ))}
+        </div>
+        
+        {/* Grid with gradient */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+        
+        {/* Radial gradient */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 via-blue-400/5 to-blue-600/5 rounded-full blur-3xl" />
+        </div>
+      </motion.div>
+      
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           className="text-center"
         >
-          {/* Enhanced Title */}
-          <motion.div variants={itemVariants}>
-            <h2 className="mb-8 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl font-heading">
-              <span className="bg-gradient-to-r from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent">
-                {title}
-              </span>
-            </h2>
+          {/* Live activity ticker */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8"
+          >
+            <ActivityTicker />
           </motion.div>
-
-          {/* Enhanced Description */}
-          <motion.div variants={itemVariants}>
-            <p className="mb-10 text-xl text-muted-foreground sm:text-xl leading-relaxed max-w-4xl mx-auto">
-              {description}
+          
+          {/* Urgency badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="mb-6 inline-block"
+          >
+            <Badge 
+              variant="secondary"
+              className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-orange-500/10 to-red-500/10 border-orange-500/20"
+            >
+              <Clock className="w-4 h-4 mr-2" />
+              Only {spotsLeft} spots left this week
+            </Badge>
+          </motion.div>
+          
+          {/* Main headline */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-6 text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight"
+          >
+            <span className="block">Ready to Join</span>
+            <span className="block bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 bg-clip-text text-transparent">
+              The Shipping Revolution?
+            </span>
+          </motion.h2>
+          
+          {/* Sub-headline with live stats */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mb-4 text-xl text-muted-foreground max-w-3xl mx-auto"
+          >
+            Join <span className="font-bold text-foreground">{specsGenerated.toLocaleString()}</span> specs generated this week.
+            Your competitors are already shipping 3x faster.
+          </motion.p>
+          
+          {/* Success metrics */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mb-12 flex flex-wrap justify-center gap-8"
+          >
+            {[
+              { icon: Rocket, value: "8 min", label: "to first spec" },
+              { icon: TrendingUp, value: "47%", label: "avg MRR increase" },
+              { icon: Users, value: "2,847", label: "founders shipping" },
+            ].map((stat, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-3"
+              >
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <stat.icon className="w-5 h-5 text-primary" />
+                </div>
+                <div className="text-left">
+                  <div className="text-2xl font-bold">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+          
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="mb-8 flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <LaunchButton size="lg" className="px-8 py-6 text-lg bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90">
+              Start Free Trial
+            </LaunchButton>
+            
+            <Button
+              size="lg"
+              variant="outline"
+              className="px-8 py-6 text-lg bg-white/50 backdrop-blur-sm"
+            >
+              <Play className="w-5 h-5 mr-2" />
+              Watch 2-Min Demo
+            </Button>
+          </motion.div>
+          
+          {/* Trust indicators */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="mb-8"
+          >
+            <TrustIndicators />
+          </motion.div>
+          
+          {/* Final urgency */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="text-sm text-muted-foreground"
+          >
+            <p className="mb-2">
+              🔥 <span className="font-semibold">Limited time:</span> Next 50 signups get lifetime priority support
+            </p>
+            <p className="flex items-center justify-center gap-2">
+              <CheckCircle className="w-4 h-4 text-green-500" />
+              14-day free trial • No credit card • 5-minute setup
             </p>
           </motion.div>
-
-          {/* Enhanced Features */}
-          <motion.div variants={itemVariants}>
-            <div className="mb-12 flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center bg-background/30 backdrop-blur-sm border border-border/30 rounded-full px-4 py-2 hover:border-primary/30 transition-colors duration-300"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <CheckCircle className="mr-2 h-4 w-4 text-primary" />
-                  {feature}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Enhanced Email Capture or Buttons */}
-          {emailCapture ? (
-            <motion.div variants={itemVariants}>
-              <div className="mx-auto mb-10 max-w-lg">
-                <div className="relative overflow-hidden rounded-2xl bg-background/40 backdrop-blur-md border border-border/50 p-2 shadow-2xl">
-                  <div className="flex gap-2">
-                    <Input
-                      type="email"
-                      placeholder="Enter your email address"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="flex-1 border-0 bg-transparent shadow-none focus-visible:ring-0"
-                    />
-                    <Button size="lg" variant="glow" className="px-8 shrink-0">
-                      {primaryAction.text}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 pointer-events-none" />
-                </div>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div variants={itemVariants}>
-              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center mb-10">
-                <Button
-                  size="lg"
-                  variant="glow"
-                  className="px-10 py-4 text-lg"
-                  asChild
-                >
-                  <a href={primaryAction.href}>
-                    {primaryAction.text}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </a>
-                </Button>
-                {secondaryAction && (
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="px-10 py-4 text-lg bg-background/50 backdrop-blur-sm"
-                    asChild
-                  >
-                    <a href={secondaryAction.href}>{secondaryAction.text}</a>
-                  </Button>
-                )}
-              </div>
-            </motion.div>
-          )}
         </motion.div>
       </div>
     </section>
