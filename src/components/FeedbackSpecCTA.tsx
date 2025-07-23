@@ -1,7 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+  useSpring,
+} from "framer-motion";
 import {
   ArrowRight,
   CheckCircle,
@@ -21,6 +27,7 @@ import {
   Lock,
   Award,
   Play,
+  X,
 } from "lucide-react";
 import { cn } from "../lib/utils";
 import { Button } from "./ui/button";
@@ -28,12 +35,42 @@ import { Badge } from "./ui/badge";
 
 // Live activity feed data
 const ACTIVITY_FEED = [
-  { name: "Alex Chen", action: "just hit $10k MRR", time: "2 min ago", mrr: "$10k" },
-  { name: "Sarah Rodriguez", action: "shipped 3 user-requested features", time: "5 min ago", mrr: "$8.5k" },
-  { name: "Marcus Thompson", action: "reduced churn by 32%", time: "12 min ago", mrr: "$15k" },
-  { name: "David Park", action: "launched v2.0 based on feedback", time: "18 min ago", mrr: "$22k" },
-  { name: "Lisa Chen", action: "found product-market fit", time: "23 min ago", mrr: "$31k" },
-  { name: "Mike Davis", action: "grew 47% this month", time: "28 min ago", mrr: "$18k" },
+  {
+    name: "Alex Chen",
+    action: "just hit $10k MRR",
+    time: "2 min ago",
+    mrr: "$10k",
+  },
+  {
+    name: "Sarah Rodriguez",
+    action: "shipped 3 user-requested features",
+    time: "5 min ago",
+    mrr: "$8.5k",
+  },
+  {
+    name: "Marcus Thompson",
+    action: "reduced churn by 32%",
+    time: "12 min ago",
+    mrr: "$15k",
+  },
+  {
+    name: "David Park",
+    action: "launched v2.0 based on feedback",
+    time: "18 min ago",
+    mrr: "$22k",
+  },
+  {
+    name: "Lisa Chen",
+    action: "found product-market fit",
+    time: "23 min ago",
+    mrr: "$31k",
+  },
+  {
+    name: "Mike Davis",
+    action: "grew 47% this month",
+    time: "28 min ago",
+    mrr: "$18k",
+  },
 ];
 
 // Floating spec component
@@ -43,9 +80,9 @@ function FloatingSpec({ delay = 0 }: { delay?: number }) {
     "/* User Dashboard Redesign\n * 156 users requested\n * Est. 32% churn reduction */",
     "// Mobile App MVP\n// 89% of users want this\n// $5k MRR opportunity",
   ];
-  
+
   const randomSpec = specs[Math.floor(Math.random() * specs.length)];
-  
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 100, x: Math.random() * 200 - 100 }}
@@ -72,14 +109,14 @@ function FloatingSpec({ delay = 0 }: { delay?: number }) {
 // Live activity ticker
 function ActivityTicker() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  
+
   React.useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % ACTIVITY_FEED.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-  
+
   return (
     <div className="relative h-8 overflow-hidden">
       <AnimatePresence mode="wait">
@@ -92,8 +129,12 @@ function ActivityTicker() {
           className="absolute inset-0 flex items-center justify-center gap-2 text-sm"
         >
           <Activity className="w-4 h-4 text-green-500" />
-          <span className="font-semibold">{ACTIVITY_FEED[currentIndex].name}</span>
-          <span className="text-muted-foreground">{ACTIVITY_FEED[currentIndex].action}</span>
+          <span className="font-semibold">
+            {ACTIVITY_FEED[currentIndex].name}
+          </span>
+          <span className="text-muted-foreground">
+            {ACTIVITY_FEED[currentIndex].action}
+          </span>
           <Badge variant="secondary" className="text-xs">
             {ACTIVITY_FEED[currentIndex].mrr} MRR
           </Badge>
@@ -104,16 +145,19 @@ function ActivityTicker() {
 }
 
 // Interactive launch button
-function LaunchButton({ children, ...props }: React.ComponentProps<typeof Button>) {
+function LaunchButton({
+  children,
+  ...props
+}: React.ComponentProps<typeof Button>) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [isClicked, setIsClicked] = React.useState(false);
-  
-  const handleClick = (e: React.MouseEvent) => {
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 2000);
     props.onClick?.(e);
   };
-  
+
   return (
     <div className="relative">
       {/* Launch particles */}
@@ -123,23 +167,23 @@ function LaunchButton({ children, ...props }: React.ComponentProps<typeof Button
             {[...Array(20)].map((_, i) => (
               <motion.div
                 key={i}
-                initial={{ 
-                  opacity: 1, 
+                initial={{
+                  opacity: 1,
                   scale: 0,
                   x: 0,
-                  y: 0
+                  y: 0,
                 }}
-                animate={{ 
+                animate={{
                   opacity: 0,
                   scale: Math.random() * 2 + 1,
                   x: (Math.random() - 0.5) * 200,
                   y: Math.random() * -200 - 50,
                 }}
                 exit={{ opacity: 0 }}
-                transition={{ 
-                  duration: 1, 
+                transition={{
+                  duration: 1,
                   delay: i * 0.02,
-                  ease: "easeOut"
+                  ease: "easeOut",
                 }}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
               >
@@ -149,7 +193,7 @@ function LaunchButton({ children, ...props }: React.ComponentProps<typeof Button
           </>
         )}
       </AnimatePresence>
-      
+
       {/* Launch pad effect */}
       <AnimatePresence>
         {isHovered && (
@@ -173,7 +217,7 @@ function LaunchButton({ children, ...props }: React.ComponentProps<typeof Button
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       <Button
         {...props}
         onClick={handleClick}
@@ -195,11 +239,15 @@ function LaunchButton({ children, ...props }: React.ComponentProps<typeof Button
             animate={isHovered ? { x: 5 } : { x: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {isClicked ? <Rocket className="w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
+            {isClicked ? (
+              <Rocket className="w-5 h-5" />
+            ) : (
+              <ArrowRight className="w-5 h-5" />
+            )}
           </motion.div>
         </motion.div>
       </Button>
-      
+
       {/* Countdown */}
       <AnimatePresence>
         {isHovered && !isClicked && (
@@ -224,7 +272,7 @@ function TrustIndicators() {
     { icon: Lock, text: "Bank-level Security" },
     { icon: Award, text: "Product Hunt #1" },
   ];
-  
+
   return (
     <div className="flex flex-wrap justify-center gap-6">
       {indicators.map((item, idx) => (
@@ -251,31 +299,37 @@ export function FeedbackSpecCTA() {
   const [specsGenerated, setSpecsGenerated] = React.useState(1247);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
+
   // Dynamic background movement
   const backgroundX = useTransform(mouseX, [0, 1000], [-50, 50]);
   const backgroundY = useTransform(mouseY, [0, 1000], [-50, 50]);
-  const smoothBackgroundX = useSpring(backgroundX, { stiffness: 50, damping: 20 });
-  const smoothBackgroundY = useSpring(backgroundY, { stiffness: 50, damping: 20 });
-  
+  const smoothBackgroundX = useSpring(backgroundX, {
+    stiffness: 50,
+    damping: 20,
+  });
+  const smoothBackgroundY = useSpring(backgroundY, {
+    stiffness: 50,
+    damping: 20,
+  });
+
   // Handle mouse movement
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - rect.left);
     mouseY.set(e.clientY - rect.top);
   };
-  
+
   // Simulate live updates
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setSpecsGenerated(prev => prev + Math.floor(Math.random() * 3));
+      setSpecsGenerated((prev) => prev + Math.floor(Math.random() * 3));
       if (Math.random() > 0.7) {
-        setSpotsLeft(prev => Math.max(prev - 1, 0));
+        setSpotsLeft((prev) => Math.max(prev - 1, 0));
       }
     }, 5000);
     return () => clearInterval(interval);
   }, []);
-  
+
   return (
     <section
       className="relative overflow-hidden py-32 bg-white"
@@ -295,16 +349,16 @@ export function FeedbackSpecCTA() {
             <FloatingSpec key={i} delay={i * 3} />
           ))}
         </div>
-        
+
         {/* Grid with gradient */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-        
+
         {/* Radial gradient */}
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 via-blue-400/5 to-blue-600/5 rounded-full blur-3xl" />
         </div>
       </motion.div>
-      
+
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0 }}
@@ -312,32 +366,6 @@ export function FeedbackSpecCTA() {
           viewport={{ once: true }}
           className="text-center"
         >
-          {/* Live activity ticker */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-8"
-          >
-            <ActivityTicker />
-          </motion.div>
-          
-          {/* Urgency badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="mb-6 inline-block"
-          >
-            <Badge 
-              variant="secondary"
-              className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-orange-500/10 to-red-500/10 border-orange-500/20"
-            >
-              <Clock className="w-4 h-4 mr-2" />
-              Only {spotsLeft} spots left this week
-            </Badge>
-          </motion.div>
-          
           {/* Main headline */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -345,53 +373,71 @@ export function FeedbackSpecCTA() {
             viewport={{ once: true }}
             className="mb-6 text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight"
           >
-            <span className="block">Ready to Escape</span>
+            <span className="block">Stop Building in the Dark.</span>
             <span className="block bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 bg-clip-text text-transparent">
-              Feedback Hell?
+              Start Shipping What Users Pay For.
             </span>
           </motion.h2>
-          
-          {/* Sub-headline with live stats */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mb-4 text-xl text-muted-foreground max-w-3xl mx-auto"
-          >
-            Join 500+ indie hackers who transformed their
-            <span className="font-bold text-foreground"> feedback chaos into revenue growth</span>.
-          </motion.p>
-          
-          {/* Success metrics */}
+
+          {/* The Choice is Simple */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="mb-12 flex flex-wrap justify-center gap-8"
+            className="mb-12"
           >
-            {[
-              { icon: Rocket, value: "15 hrs", label: "saved weekly" },
-              { icon: TrendingUp, value: "47%", label: "avg MRR growth" },
-              { icon: Users, value: "500+", label: "happy founders" },
-            ].map((stat, idx) => (
+            <h3 className="text-2xl font-bold mb-8">The Choice is Simple:</h3>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {/* Keep Struggling */}
               <motion.div
-                key={idx}
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-3"
+                whileHover={{ scale: 1.02 }}
+                className="p-8 rounded-xl bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-200"
               >
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <stat.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div className="text-left">
-                  <div className="text-2xl font-bold">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </div>
+                <h4 className="text-xl font-bold mb-4 text-red-900">
+                  Keep Struggling:
+                </h4>
+                <ul className="space-y-3 text-left">
+                  {[
+                    "Drown in scattered feedback",
+                    "Spend hours writing specs manually",
+                    "Build features nobody wants",
+                    "Watch competitors ship faster",
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <X className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
-            ))}
+
+              {/* Or Transform Today */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="p-8 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200"
+              >
+                <h4 className="text-xl font-bold mb-4 text-green-900">
+                  Or Transform Today:
+                </h4>
+                <ul className="space-y-3 text-left">
+                  {[
+                    "Centralize all feedback automatically",
+                    "Generate AI-ready specs in minutes",
+                    "Ship exactly what drives revenue",
+                    "Dominate your market with speed",
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
           </motion.div>
-          
+
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -400,46 +446,12 @@ export function FeedbackSpecCTA() {
             transition={{ delay: 0.3 }}
             className="mb-8 flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <LaunchButton size="lg" className="px-8 py-6 text-lg bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90">
+            <LaunchButton
+              size="lg"
+              className="px-8 py-6 text-lg bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90"
+            >
               Start Free Trial
             </LaunchButton>
-            
-            <Button
-              size="lg"
-              variant="outline"
-              className="px-8 py-6 text-lg bg-white/50 backdrop-blur-sm"
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Watch 2-Min Demo
-            </Button>
-          </motion.div>
-          
-          {/* Trust indicators */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="mb-8"
-          >
-            <TrustIndicators />
-          </motion.div>
-          
-          {/* Final urgency */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="text-sm text-muted-foreground"
-          >
-            <p className="mb-2">
-              🚀 <span className="font-semibold">Black Friday Special:</span> 40% off for the next 47 signups
-            </p>
-            <p className="flex items-center justify-center gap-2">
-              <CheckCircle className="w-4 h-4 text-green-500" />
-              14-day free trial • Setup in 2 minutes • Cancel anytime
-            </p>
           </motion.div>
         </motion.div>
       </div>

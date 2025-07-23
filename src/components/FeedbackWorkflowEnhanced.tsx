@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 import {
   Database,
   Zap,
@@ -35,6 +36,8 @@ import {
   Github,
   Star,
   Monitor,
+  Timer,
+  Terminal,
 } from "lucide-react";
 import {
   designSystem,
@@ -48,135 +51,69 @@ import { cn } from "@/lib/utils";
 const WORKFLOW_STEPS = [
   {
     id: "1",
-    step: "Connect",
-    title: "Unified Feedback Collection",
-    subtitle: "All sources, one dashboard",
+    step: "Step 1",
+    title: "Automatic Feedback Collection",
+    subtitle: "Connect everything",
     description:
-      "Connect Twitter, Discord, email, and 20+ platforms in minutes. No more platform switching.",
+      "Connect Twitter, email, Discord, GitHub, Slack. Smart categorization: Feature requests, bugs, praise. Sentiment analysis: Understand user emotions. Priority scoring: MRR-impact based ranking.",
     icon: <Database className="w-6 h-6" />,
     details: [
-      "OAuth integration with major platforms",
-      "Real-time sync across all channels",
-      "Automated duplicate detection",
-      "Smart categorization on import",
+      "Connect everything: Twitter, email, Discord, GitHub, Slack",
+      "Smart categorization: Feature requests, bugs, praise",
+      "Sentiment analysis: Understand user emotions",
+      "Priority scoring: MRR-impact based ranking",
     ],
     example: {
-      before: "Checking 8 platforms daily",
-      after: "Everything in one place",
-      time: "3 hrs saved/day",
+      before: "Scattered feedback",
+      after: "Centralized insights",
+      time: "15 hrs saved/week",
     },
     color: "primary",
     gradient: "from-primary/20 to-primary/10",
   },
   {
     id: "2",
-    step: "Analyze",
-    title: "AI-Powered Intelligence",
-    subtitle: "Patterns humans miss",
+    step: "Step 2",
+    title: "AI Feedback Processing",
+    subtitle: "Analyze and prioritize",
     description:
-      "Advanced NLP identifies themes, sentiment, and priority automatically across thousands of feedback items.",
+      "AI analyzes all feedback, identifies patterns, groups similar requests, and prioritizes by revenue impact. Transforms raw feedback into actionable insights.",
     icon: <Brain className="w-6 h-6" />,
     details: [
-      "Sentiment analysis and emotion detection",
-      "Topic clustering and theme extraction",
-      "Customer segment correlation",
-      "Impact prediction modeling",
+      "Pattern recognition across all feedback",
+      "Automatic grouping of similar requests",
+      "Revenue impact analysis",
+      "User sentiment understanding",
     ],
     example: {
-      before: "Manual categorization",
-      after: "Instant AI insights",
-      time: "5 hrs saved/week",
+      before: "287 unread messages",
+      after: "5 key priorities",
+      time: "Instant insights",
     },
     color: "primary",
     gradient: "from-primary/15 to-primary/5",
   },
   {
     id: "3",
-    step: "Prioritize",
-    title: "Smart Priority Scoring",
-    subtitle: "Focus on what matters",
+    step: "Step 3",
+    title: "Generate AI Specifications",
+    subtitle: "Ready for development",
     description:
-      "MRR-based prioritization shows which features will actually grow your business, not just make users happy.",
-    icon: <Target className="w-6 h-6" />,
+      "Transform processed feedback into complete specifications with technical architecture, Cursor prompts, acceptance criteria, and development estimates.",
+    icon: <FileText className="w-6 h-6" />,
     details: [
-      "Revenue impact calculation",
-      "Customer value weighting",
-      "Effort estimation integration",
-      "Competitive advantage scoring",
+      "Complete technical specifications",
+      "Ready-to-use Cursor/Claude prompts",
+      "Acceptance criteria defined",
+      "One-click export to dev tools",
     ],
     example: {
-      before: "Guessing priorities",
-      after: "Data-driven decisions",
-      time: "47% faster growth",
+      before: "3+ hours writing specs",
+      after: "8 minutes to complete spec",
+      time: "95% faster",
     },
     color: "primary",
     gradient: "from-primary/25 to-primary/5",
-  },
-  {
-    id: "4",
-    step: "Generate",
-    title: "AI Specification Creation",
-    subtitle: "Ready-to-code specs",
-    description:
-      "Transform insights into detailed technical specifications optimized for Cursor, Claude, and modern AI coding tools.",
-    icon: <FileText className="w-6 h-6" />,
-    details: [
-      "Technical requirements generation",
-      "API design suggestions",
-      "User story creation",
-      "Acceptance criteria definition",
-    ],
-    example: {
-      before: "Writing specs manually",
-      after: "AI-generated perfection",
-      time: "10x faster specs",
-    },
-    color: "primary",
-    gradient: "from-primary/30 to-primary/5",
-  },
-  {
-    id: "5",
-    step: "Ship",
-    title: "Development Integration",
-    subtitle: "Seamless workflow",
-    description:
-      "Export directly to your dev tools. GitHub, Linear, Notion, or custom integrations - we've got you covered.",
-    icon: <GitBranch className="w-6 h-6" />,
-    details: [
-      "One-click export to dev tools",
-      "Automated ticket creation",
-      "Progress tracking integration",
-      "Team notification setup",
-    ],
-    example: {
-      before: "Manual tool switching",
-      after: "Automated workflow",
-      time: "Zero context switching",
-    },
-    color: "primary",
-    gradient: "from-primary/35 to-primary/5",
-  },
-  {
-    id: "6",
-    step: "Optimize",
-    title: "Continuous Improvement",
-    subtitle: "Learn and adapt",
-    description:
-      "Track feature success, gather new feedback, and continuously improve your product-market fit.",
-    icon: <TrendingUp className="w-6 h-6" />,
-    details: [
-      "Feature performance tracking",
-      "User adoption monitoring",
-      "Feedback loop optimization",
-      "Success metric correlation",
-    ],
-    example: {
-      before: "Build and hope",
-      after: "Data-driven iteration",
-      time: "3x higher success rate",
-    },
-    color: "primary",
-    gradient: "from-primary/40 to-primary/5",
   },
 ];
 
@@ -211,7 +148,7 @@ const DEMO_FEEDBACK = [
 // Step Screenshots Components
 function StepScreenshot({ step }: { step: number }) {
   const stepData = WORKFLOW_STEPS[step];
-  
+
   return (
     <div className="relative bg-card border rounded-lg shadow-lg overflow-hidden mb-6">
       {/* Browser Header */}
@@ -231,11 +168,8 @@ function StepScreenshot({ step }: { step: number }) {
       {/* Step Content */}
       <div className="p-4 min-h-[200px]">
         {step === 0 && <ConnectScreenshot />}
-        {step === 1 && <AnalyzeScreenshot />}
-        {step === 2 && <PrioritizeScreenshot />}
-        {step === 3 && <GenerateScreenshot />}
-        {step === 4 && <ShipScreenshot />}
-        {step === 5 && <OptimizeScreenshot />}
+        {step === 1 && <AIFeedbackProcessingScreenshot />}
+        {step === 2 && <GenerateSpecificationsScreenshot />}
       </div>
     </div>
   );
@@ -251,55 +185,117 @@ function ConnectScreenshot() {
       </h4>
       <div className="grid grid-cols-2 gap-3">
         {[
-          { name: "Twitter", icon: Twitter, status: "Connected", color: "text-green-600" },
-          { name: "GitHub", icon: Github, status: "Connected", color: "text-green-600" },
-          { name: "Discord", icon: MessageSquare, status: "Connecting...", color: "text-yellow-600" },
-          { name: "Email", icon: Mail, status: "Available", color: "text-muted-foreground" },
+          {
+            name: "Twitter",
+            icon: Twitter,
+            status: "Connected",
+            color: "text-green-600",
+          },
+          {
+            name: "GitHub",
+            icon: Github,
+            status: "Connected",
+            color: "text-green-600",
+          },
+          {
+            name: "Discord",
+            icon: MessageSquare,
+            status: "Connecting...",
+            color: "text-yellow-600",
+          },
+          {
+            name: "Email",
+            icon: Mail,
+            status: "Available",
+            color: "text-muted-foreground",
+          },
         ].map((platform) => (
-          <div key={platform.name} className="flex items-center justify-between p-3 border rounded-lg">
+          <div
+            key={platform.name}
+            className="flex items-center justify-between p-3 border rounded-lg"
+          >
             <div className="flex items-center gap-2">
               <platform.icon className="w-4 h-4" />
               <span className="text-sm font-medium">{platform.name}</span>
             </div>
-            <span className={`text-xs ${platform.color}`}>{platform.status}</span>
+            <span className={`text-xs ${platform.color}`}>
+              {platform.status}
+            </span>
           </div>
         ))}
       </div>
       <div className="mt-4 p-3 bg-primary/10 rounded-lg">
-        <p className="text-xs text-primary">✨ 47 new feedback items synced in the last hour</p>
+        <p className="text-xs text-primary">
+          ✨ 47 new feedback items synced in the last hour
+        </p>
       </div>
     </div>
   );
 }
 
-// Analyze Step Screenshot
-function AnalyzeScreenshot() {
+// AI Feedback Processing Screenshot (Step 2)
+function AIFeedbackProcessingScreenshot() {
   return (
     <div>
       <h4 className="font-semibold mb-4 flex items-center gap-2">
         <Brain className="w-4 h-4 text-primary" />
-        AI Analysis Results
+        AI Feedback Processing
       </h4>
       <div className="space-y-3">
         <div className="border rounded-lg p-3">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium">Dark Mode Requests</span>
-            <Badge variant="secondary" className="text-xs">Theme: UI/UX</Badge>
+            <span className="text-sm font-medium">Search Issues</span>
+            <Badge variant="destructive" className="text-xs">
+              67% users affected
+            </Badge>
           </div>
-          <div className="text-xs text-muted-foreground mb-2">Sentiment: 89% Positive</div>
-          <div className="w-full bg-muted rounded-full h-2">
-            <div className="bg-primary h-2 rounded-full" style={{ width: "89%" }}></div>
+          <div className="text-xs text-muted-foreground mb-2">
+            47 similar complaints grouped
+          </div>
+          <div className="space-y-1">
+            <div className="text-xs italic">
+              "Search is terrible, takes forever"
+            </div>
+            <div className="text-xs italic">
+              "Can't find anything even when I know it exists"
+            </div>
+            <div className="text-xs italic">
+              "No fuzzy matching - one typo and nothing shows"
+            </div>
+          </div>
+          <div className="mt-2 flex items-center justify-between">
+            <span className="text-xs text-muted-foreground">
+              Revenue Impact:
+            </span>
+            <span className="text-xs font-bold text-green-600">+$3.2k MRR</span>
           </div>
         </div>
+
         <div className="border rounded-lg p-3">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium">Export Issues</span>
-            <Badge variant="destructive" className="text-xs">Bug: Critical</Badge>
+            <span className="text-sm font-medium">Export Feature Requests</span>
+            <Badge variant="secondary" className="text-xs">
+              31% users affected
+            </Badge>
           </div>
-          <div className="text-xs text-muted-foreground mb-2">Sentiment: 23% Negative</div>
-          <div className="w-full bg-muted rounded-full h-2">
-            <div className="bg-red-500 h-2 rounded-full" style={{ width: "23%" }}></div>
+          <div className="text-xs text-muted-foreground mb-2">
+            23 requests grouped
           </div>
+          <div className="mt-2 flex items-center justify-between">
+            <span className="text-xs text-muted-foreground">
+              Revenue Impact:
+            </span>
+            <span className="text-xs font-bold text-blue-600">+$1.8k MRR</span>
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-muted-foreground">
+            287 feedback items → 5 priorities
+          </span>
+          <Badge variant="default" className="text-xs">
+            Processed
+          </Badge>
         </div>
       </div>
     </div>
@@ -316,19 +312,46 @@ function PrioritizeScreenshot() {
       </h4>
       <div className="space-y-2">
         {[
-          { feature: "Dark Mode Implementation", score: 94, impact: "$2.3k MRR", effort: "Medium" },
-          { feature: "Export Bug Fix", score: 87, impact: "$1.8k MRR", effort: "Low" },
-          { feature: "API Rate Limits", score: 72, impact: "$1.2k MRR", effort: "High" },
-          { feature: "Dashboard Polish", score: 45, impact: "$0.5k MRR", effort: "Low" },
+          {
+            feature: "Dark Mode Implementation",
+            score: 94,
+            impact: "$2.3k MRR",
+            effort: "Medium",
+          },
+          {
+            feature: "Export Bug Fix",
+            score: 87,
+            impact: "$1.8k MRR",
+            effort: "Low",
+          },
+          {
+            feature: "API Rate Limits",
+            score: 72,
+            impact: "$1.2k MRR",
+            effort: "High",
+          },
+          {
+            feature: "Dashboard Polish",
+            score: 45,
+            impact: "$0.5k MRR",
+            effort: "Low",
+          },
         ].map((item, idx) => (
-          <div key={idx} className="flex items-center justify-between p-3 border rounded-lg">
+          <div
+            key={idx}
+            className="flex items-center justify-between p-3 border rounded-lg"
+          >
             <div className="flex-1">
               <div className="text-sm font-medium">{item.feature}</div>
-              <div className="text-xs text-muted-foreground">Impact: {item.impact} • Effort: {item.effort}</div>
+              <div className="text-xs text-muted-foreground">
+                Impact: {item.impact} • Effort: {item.effort}
+              </div>
             </div>
             <div className="text-right">
               <div className="text-lg font-bold text-primary">{item.score}</div>
-              <div className="text-xs text-muted-foreground">Priority Score</div>
+              <div className="text-xs text-muted-foreground">
+                Priority Score
+              </div>
             </div>
           </div>
         ))}
@@ -347,9 +370,13 @@ function GenerateScreenshot() {
       </h4>
       <div className="border rounded-lg p-4 bg-muted/30">
         <div className="text-xs font-mono space-y-2">
-          <div className="text-primary font-bold"># Dark Mode Implementation</div>
+          <div className="text-primary font-bold">
+            # Dark Mode Implementation
+          </div>
           <div className="text-muted-foreground">## User Story</div>
-          <div>As a user, I want to toggle between light and dark themes...</div>
+          <div>
+            As a user, I want to toggle between light and dark themes...
+          </div>
           <div className="text-muted-foreground">## Technical Requirements</div>
           <div>- CSS custom properties for theme colors</div>
           <div>- LocalStorage persistence</div>
@@ -361,51 +388,103 @@ function GenerateScreenshot() {
         </div>
       </div>
       <div className="mt-3 flex justify-between items-center">
-        <span className="text-xs text-muted-foreground">Generated in 2.3 seconds</span>
-        <Badge variant="default" className="text-xs">Ready for Cursor</Badge>
+        <span className="text-xs text-muted-foreground">
+          Generated in 2.3 seconds
+        </span>
+        <Badge variant="default" className="text-xs">
+          Ready for Cursor
+        </Badge>
       </div>
     </div>
   );
 }
 
-// Ship Step Screenshot
-function ShipScreenshot() {
+// Generate AI Specifications Screenshot (Step 3)
+function GenerateSpecificationsScreenshot() {
   return (
     <div>
       <h4 className="font-semibold mb-4 flex items-center gap-2">
-        <GitBranch className="w-4 h-4 text-primary" />
-        Export to Dev Tools
+        <FileText className="w-4 h-4 text-primary" />
+        Generate AI Specifications
       </h4>
       <div className="space-y-3">
-        <div className="border rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <Github className="w-4 h-4" />
-              <span className="text-sm font-medium">GitHub Issue #247</span>
-            </div>
-            <Badge variant="default" className="text-xs">Created</Badge>
+        {/* Input section */}
+        <div className="border rounded-lg p-2 bg-blue-50/50">
+          <div className="flex items-center gap-2 mb-1">
+            <MessageSquare className="w-3 h-3 text-blue-600" />
+            <span className="text-xs font-medium">Selected Priority</span>
           </div>
-          <p className="text-xs text-muted-foreground">Dark mode implementation with detailed spec</p>
+          <div className="text-xs">
+            "Search is terrible, takes forever" (67% users affected)
+          </div>
         </div>
-        <div className="border rounded-lg p-3">
+
+        {/* AI Generation Progress */}
+        <div className="border rounded-lg p-3 bg-gradient-to-r from-primary/5 to-blue-500/5">
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <Monitor className="w-4 h-4" />
-              <span className="text-sm font-medium">Linear Task</span>
-            </div>
-            <Badge variant="default" className="text-xs">Synced</Badge>
+            <span className="text-xs font-medium">
+              Generating Specification...
+            </span>
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            >
+              <Sparkles className="w-4 h-4 text-primary" />
+            </motion.div>
           </div>
-          <p className="text-xs text-muted-foreground">Assigned to frontend team with priority: High</p>
+
+          {/* Generated spec preview */}
+          <div className="bg-black/90 rounded p-3 text-green-400 font-mono text-xs space-y-2">
+            <div className="font-bold text-yellow-400">
+              CURSOR-READY PROMPT:
+            </div>
+            <div className="opacity-90 text-xs leading-relaxed">
+              <div className="mt-2">
+                "Build a complete search system for our product catalog. Create
+                a React component with real-time search that updates as users
+                type (debounce 300ms). Implement fuzzy matching to handle typos
+                - if user types 'iphon' show 'iPhone'. Backend: Set up
+                Elasticsearch with these mappings: product name (boost 3x),
+                description, tags (boost 2x). Add Redis caching for the 100 most
+                common searches. Frontend: Show autocomplete dropdown with
+                product images, names, and prices. Include keyboard navigation
+                (arrow keys + enter). Show loading spinner during search.
+                Display 'No results found' with suggestions when empty. Track
+                all searches in analytics. Performance requirement: Results must
+                load in under 200ms. Use our existing API at /api/search. Style
+                with Tailwind matching our design system. Handle errors
+                gracefully with user-friendly messages."
+              </div>
+              <div className="mt-3 text-blue-400">
+                <div>✓ Paste directly into Cursor</div>
+                <div>✓ Complete implementation in one prompt</div>
+                <div>✓ 67% of users will benefit immediately</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="border rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4" />
-              <span className="text-sm font-medium">Notion Doc</span>
-            </div>
-            <Badge variant="default" className="text-xs">Updated</Badge>
-          </div>
-          <p className="text-xs text-muted-foreground">Technical specification added to project docs</p>
+
+        {/* Export options */}
+        <div className="grid grid-cols-3 gap-2">
+          <button className="border rounded-lg p-2 hover:bg-muted/50 transition-colors">
+            <Code className="w-4 h-4 mx-auto mb-1" />
+            <div className="text-xs">Cursor</div>
+          </button>
+          <button className="border rounded-lg p-2 hover:bg-muted/50 transition-colors">
+            <Terminal className="w-4 h-4 mx-auto mb-1" />
+            <div className="text-xs">Claude</div>
+          </button>
+          <button className="border rounded-lg p-2 hover:bg-muted/50 transition-colors">
+            <Github className="w-4 h-4 mx-auto mb-1" />
+            <div className="text-xs">GitHub</div>
+          </button>
+        </div>
+
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-muted-foreground">
+            Generated in 8 minutes
+          </span>
+          <Badge className="text-xs bg-green-500">Ready to ship</Badge>
         </div>
       </div>
     </div>
@@ -424,7 +503,9 @@ function OptimizeScreenshot() {
         <div className="border rounded-lg p-3">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">Dark Mode</span>
-            <Badge variant="default" className="text-xs">Shipped 2 weeks ago</Badge>
+            <Badge variant="default" className="text-xs">
+              Shipped 2 weeks ago
+            </Badge>
           </div>
           <div className="grid grid-cols-3 gap-2 text-xs">
             <div>
@@ -488,13 +569,20 @@ export function FeedbackWorkflowEnhanced({
       if (progress < 100) {
         setProgress((prev) => prev + 5); // Much faster increment
       } else {
-        setCurrentStep((prev) => (prev + 1) % WORKFLOW_STEPS.length);
-        setProgress(0);
+        // Stop at the last step (step 2, which is index 2)
+        if (currentStep < WORKFLOW_STEPS.length - 1) {
+          setCurrentStep((prev) => prev + 1);
+          setProgress(0);
+        } else {
+          // At the last step, stop playing
+          setIsPlaying(false);
+          setProgress(100);
+        }
       }
     }, 200); // Much longer interval
 
     return () => clearInterval(timer);
-  }, [progress, isPlaying]);
+  }, [progress, isPlaying, currentStep]);
 
   const handleStepClick = (index: number) => {
     setCurrentStep(index);
@@ -529,53 +617,16 @@ export function FeedbackWorkflowEnhanced({
           className="text-center mb-12 sm:mb-16 px-4 sm:px-0"
         >
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 tracking-display">
-            From Chaos to
+            The Only Tool That
             <span className="block mt-2 bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">
-              Shipping Machine
+              Solves Both Problems
             </span>
           </h2>
 
           <p className="font-body text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-            Watch how FeedbackSpec transforms scattered feedback into
-            production-ready features in 6 automated steps.
+            Centralize scattered feedback AND transform it into AI-ready
+            development specifications.
           </p>
-
-          {/* Playback controls */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8">
-            <motion.button
-              onClick={togglePlayback}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm sm:text-base w-full sm:w-auto"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isPlaying ? (
-                <PauseCircle className="w-4 h-4" />
-              ) : (
-                <PlayCircle className="w-4 h-4" />
-              )}
-              {isPlaying ? "Pause Demo" : "Play Demo"}
-            </motion.button>
-
-            <motion.button
-              onClick={resetDemo}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors text-sm sm:text-base w-full sm:w-auto"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <RotateCcw className="w-4 h-4" />
-              Reset
-            </motion.button>
-
-            <motion.button
-              onClick={() => setShowDemo(!showDemo)}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm sm:text-base w-full sm:w-auto"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Eye className="w-4 h-4" />
-              {showDemo ? "Hide" : "Show"} Live Data
-            </motion.button>
-          </div>
         </motion.div>
 
         {/* Progress visualization */}
@@ -737,10 +788,11 @@ export function FeedbackWorkflowEnhanced({
               className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full"
               initial={{ width: 0 }}
               animate={{
-                width: `${
-                  (currentStep / (WORKFLOW_STEPS.length - 1)) * 100 +
-                  progress / (WORKFLOW_STEPS.length - 1)
-                }%`,
+                width: `${Math.min(
+                  ((currentStep + progress / 100) / WORKFLOW_STEPS.length) *
+                    100,
+                  100
+                )}%`,
               }}
               transition={{ duration: 0.3 }}
             />
@@ -784,78 +836,13 @@ export function FeedbackWorkflowEnhanced({
                 </CardHeader>
 
                 <CardContent>
-                  <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
-                    {/* Screenshot Preview */}
-                    <div className="order-2 lg:order-1">
-                      <h4 className="font-semibold mb-4 flex items-center gap-2 text-sm sm:text-base">
-                        <Monitor className="w-4 h-4 text-primary" />
-                        Live Preview
-                      </h4>
-                      <StepScreenshot step={currentStep} />
-                    </div>
-
-                    {/* Features and Impact */}
-                    <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
-                      {/* Features */}
-                      <div>
-                        <h4 className="font-semibold mb-4 flex items-center gap-2 text-sm sm:text-base">
-                          <Zap className="w-4 h-4 text-primary" />
-                          Key Features
-                        </h4>
-                        <div className="space-y-2 sm:space-y-3">
-                          {WORKFLOW_STEPS[currentStep].details.map(
-                            (detail, idx) => (
-                              <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
-                              >
-                                <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                                <span className="text-xs sm:text-sm">{detail}</span>
-                              </motion.div>
-                            )
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Before/After comparison */}
-                      <div>
-                        <h4 className="font-semibold mb-4 flex items-center gap-2 text-sm sm:text-base">
-                          <TrendingUp className="w-4 h-4 text-green-500" />
-                          Impact
-                        </h4>
-                        <div className="space-y-3 sm:space-y-4">
-                          <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                            <div className="p-3 sm:p-4 bg-destructive/10 rounded-lg border border-destructive/20">
-                              <p className="text-xs font-medium text-destructive mb-2">
-                                Before
-                              </p>
-                              <p className="text-xs sm:text-sm font-bold">
-                                {WORKFLOW_STEPS[currentStep].example.before}
-                              </p>
-                            </div>
-                            <div className="p-3 sm:p-4 bg-green-500/10 rounded-lg border border-green-500/20">
-                              <p className="text-xs font-medium text-green-600 mb-2">
-                                After
-                              </p>
-                              <p className="text-xs sm:text-sm font-bold">
-                                {WORKFLOW_STEPS[currentStep].example.after}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="p-3 sm:p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
-                            <p className="text-xs font-medium text-primary mb-1">
-                              Result
-                            </p>
-                            <p className="text-base sm:text-lg font-bold">
-                              {WORKFLOW_STEPS[currentStep].example.time}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  {/* Screenshot Preview - Centered */}
+                  <div className="max-w-3xl mx-auto">
+                    <h4 className="font-semibold mb-4 flex items-center gap-2 text-sm sm:text-base">
+                      <Monitor className="w-4 h-4 text-primary" />
+                      Live Preview
+                    </h4>
+                    <StepScreenshot step={currentStep} />
                   </div>
 
                   {/* Live demo data */}
@@ -920,38 +907,6 @@ export function FeedbackWorkflowEnhanced({
             </motion.div>
           </AnimatePresence>
         </div>
-
-        {/* Bottom stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              { icon: Clock, value: "2 min", label: "Setup time" },
-              { icon: Users, value: "2,847", label: "Happy users" },
-              { icon: Rocket, value: "3x", label: "Faster shipping" },
-              { icon: TrendingUp, value: "47%", label: "MRR increase" },
-            ].map((stat, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="text-center"
-              >
-                <stat.icon className="w-8 h-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
