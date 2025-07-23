@@ -286,7 +286,7 @@ function MetricsDashboard() {
             <metric.icon className="w-6 h-6" />
           </motion.div>
           <div className="text-3xl font-bold">
-            {metric.prefix}{metric.value}{metric.suffix}
+            {metric.value}{metric.suffix || ''}
           </div>
           <p className="text-sm text-muted-foreground">{metric.label}</p>
         </motion.div>

@@ -2,11 +2,11 @@
 
 ## Hero Section (FeedbackSpecHeroEnhanced)
 
-**Title:** Turn scattered feedback into Cursor-ready specs in 8 minutes flat
+**Title:** Turn Scattered Feedback Into Cursor-Ready Specs in Minutes
 
 **Subtitle:** The AI-Powered Feedback Engine for Founders Who Ship Daily
 
-**Description:** Stop wasting 10+ hours weekly on manual feedback management. FeedbackSpec's AI automatically transforms user feedback into production-ready specifications for Cursor, Claude Code, and GitHub Copilot.
+**Description:** FeedbackSpec automatically centralizes your scattered feedback AND transforms it into production-ready specifications for Cursor, Claude Code, and GitHub Copilot. The only tool that solves both problems founders face.
 
 **Primary CTA:** Try free for 14 days
 
@@ -46,12 +46,11 @@ As a user, I want to toggle dark mode...
 
 ## Problem Section (ProblemSectionEnhanced)
 
-**Title:** The Indie Hacker's Double Nightmare
+**Title:** The Founder's Double Nightmare
 
 **Subtitle:** You have two problems killing your growth: scattered feedback chaos AND slow feature development.
 
-**Revenue Counter:** Revenue Impact: $[Live Counter]
-*Indie hackers lose $47k annually to feedback chaos and slow development*
+**Live Counter:** Opportunities missed: [Live Counter] while you're organizing feedback
 
 ### Problem #1: Feedback Hell
 - **20+ sources**: Twitter, email, Discord, GitHub, Slack...
@@ -59,21 +58,29 @@ As a user, I want to toggle dark mode...
 - **No prioritization**: Building features nobody wants
 - **Time vampire**: 15+ hours weekly just organizing
 
+**Visualization:** Feedback Graveyard showing expired feedback messages from different platforms
+
 ### Problem #2: Slow Development  
 - **Manual specs**: 3+ hours writing specifications
 - **Generic prompts**: AI tools need perfect input
 - **Context switching**: From feedback to code requirements
 - **Missed opportunities**: Competitors shipping faster
 
+**Visualization:** Developer flow visualization showing time wasted (80% writing specs manually)
+
 ### The Killer Insight
 These problems are connected. Bad feedback organization = bad development priorities = wasted AI coding potential.
 
-### The Cost of Feedback Chaos
-- 47% Ideas lost forever
-- 20 hrs Weekly time waste
-- $57k Annual opportunity cost
+### Interactive: The Founder's Journey
+Timeline showing how feedback chaos destroys momentum over time
 
-**Message:** You're not building a product anymore. You're drowning in feedback. And your best ideas? They're dying in your inbox.
+### Real Founders, Real Pain
+Testimonials from founders experiencing these problems
+
+### The Real Cost of Feedback Chaos
+- Lost revenue opportunities
+- Burned out founders
+- Competitors winning with worse products
 
 ## Benefits Section (FeedbackSpecBenefitsEnhanced)
 
@@ -119,17 +126,28 @@ These problems are connected. Bad feedback organization = bad development priori
 
 ## Workflow Section (FeedbackWorkflowEnhanced)
 
-**Title:** From Scattered Feedback to AI-Ready Specs
+**Title:** The Only Tool That Solves Both Problems
 
-**Subtitle:** Watch how FeedbackSpec transforms scattered feedback into production-ready features in 6 automated steps.
+**Subtitle:** Centralize scattered feedback AND transform it into AI-ready development specifications.
 
-### 6-Step Process:
-1. **Connect** - Unified Feedback Collection - All sources, one dashboard
-2. **Analyze** - AI-Powered Intelligence - Patterns humans miss
-3. **Prioritize** - Smart Priority Scoring - Focus on what matters
-4. **Generate** - AI Specification Creation - Ready-to-code specs
-5. **Ship** - Development Integration - Seamless workflow
-6. **Optimize** - Continuous Improvement - Learn and adapt
+### 3-Step Process:
+1. **Step 1: Automatic Feedback Collection** - Connect everything
+   - Connect everything: Twitter, email, Discord, GitHub, Slack
+   - Smart categorization: Feature requests, bugs, praise
+   - Sentiment analysis: Understand user emotions
+   - Priority scoring: MRR-impact based ranking
+
+2. **Step 2: AI Feedback Processing** - Analyze and prioritize
+   - Pattern recognition across all feedback
+   - Automatic grouping of similar requests
+   - Revenue impact analysis
+   - User sentiment understanding
+
+3. **Step 3: Generate AI Specifications** - Ready for development
+   - Complete technical specifications
+   - Ready-to-use Cursor/Claude prompts
+   - Acceptance criteria defined
+   - One-click export to dev tools
 
 **Bottom Stats:**
 - Setup time: 2 min
@@ -174,7 +192,25 @@ These problems are connected. Bad feedback organization = bad development priori
 
 ## CTA Section (FeedbackSpecCTA)
 
-### Live Activity Feed
+**Main Headline:** Stop Building in the Dark. Start Shipping What Users Pay For.
+
+### The Choice is Simple:
+
+**Keep Struggling:**
+- Drown in scattered feedback
+- Spend hours writing specs manually
+- Build features nobody wants
+- Watch competitors ship faster
+
+**Or Transform Today:**
+- Centralize all feedback automatically
+- Generate AI-ready specs in minutes
+- Ship exactly what drives revenue
+- Dominate your market with speed
+
+**Primary CTA:** Start Free Trial
+
+### Live Activity Feed (Background Animation)
 - Alex Chen just hit $10k MRR
 - Sarah Rodriguez shipped 3 user-requested features
 - Marcus Thompson reduced churn by 32%
@@ -182,26 +218,10 @@ These problems are connected. Bad feedback organization = bad development priori
 - Lisa Chen found product-market fit
 - Mike Davis grew 47% this month
 
-**Urgency:** Only 47 spots left this week
-
-**Title:** Ready to Escape Feedback Hell?
-
-**Subtitle:** Join 500+ indie hackers who transformed their feedback chaos into revenue growth.
-
-### Success Metrics
-- 15 hrs saved weekly
-- 47% avg MRR growth
-- 500+ happy founders
-
-**Primary CTA:** Start Free Trial
-**Secondary CTA:** Watch 2-Min Demo
-
-**Trust Indicators:**
-- SOC 2 Compliant
-- Bank-level Security
-- Product Hunt #1
-
-**Final Urgency:** 🚀 Black Friday Special: 40% off for the next 47 signups
+### Floating Spec Examples (Background Animation)
+- "// FEATURE: Advanced Search\n// Priority: HIGH\n// Revenue Impact: +$2.4k MRR"
+- "/* User Dashboard Redesign\n * 156 users requested\n * Est. 32% churn reduction */"
+- "// Mobile App MVP\n// 89% of users want this\n// $5k MRR opportunity"
 
 ## Footer
 

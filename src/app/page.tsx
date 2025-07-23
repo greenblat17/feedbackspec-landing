@@ -75,23 +75,7 @@ export default function Home() {
       <FeedbackSpecPricingEnhanced onStartTrial={() => setIsFormOpen(true)} />
 
       {/* CTA Section */}
-      <FeedbackSpecCTA
-        title="Stop wasting time on manual feedback management"
-        description="Your users are giving you the roadmap to $100k+ MRR every day. Join 200+ indie hackers who've automated their feedback workflow and shipped 3x more features using FeedbackSpec + AI coding assistants."
-        primaryAction={{
-          text: "Get FeedbackSpec Free",
-          href: "#signup",
-        }}
-        secondaryAction={{
-          text: "See How It Works",
-          href: "#demo",
-        }}
-        features={[
-          "14-day free trial",
-          "No card required",
-          "Setup takes 5 minutes",
-        ]}
-      />
+      <FeedbackSpecCTA />
 
       {/* Footer */}
       <Footer
