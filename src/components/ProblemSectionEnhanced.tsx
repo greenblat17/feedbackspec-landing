@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import {
@@ -22,6 +22,10 @@ import {
   X,
   Brain,
   Target,
+  Skull,
+  Heart,
+  AlertCircle,
+  Sparkles,
 } from "lucide-react";
 import {
   designSystem,
@@ -31,360 +35,541 @@ import {
 } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
-// Animated counter component
-function AnimatedCounter({
-  value,
-  suffix = "",
-}: {
-  value: number;
-  suffix?: string;
+// Floating feedback message component
+function FeedbackParticle({ 
+  message, 
+  platform, 
+  delay = 0,
+  onDeath
+}: { 
+  message: string; 
+  platform: string;
+  delay?: number;
+  onDeath?: () => void;
 }) {
   const [mounted, setMounted] = useState(false);
-
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <span>
-        {value}
-        {suffix}
-      </span>
-    );
-  }
-
+    if (typeof window !== 'undefined') {
+      x.set(Math.random() * window.innerWidth);
+      y.set(Math.random() * window.innerHeight);
+      setMounted(true);
+    }
+  }, [x, y]);
+  
+  if (!mounted) return null;
+  
   return (
-    <motion.span
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={getSpring("smooth")}
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ 
+        opacity: [0, 1, 1, 0.3, 0],
+        scale: [0, 1, 1, 0.8, 0],
+        x: x.get() + (Math.random() - 0.5) * 300,
+        y: y.get() - 200,
+      }}
+      transition={{ 
+        duration: 8,
+        delay,
+        times: [0, 0.1, 0.5, 0.8, 1],
+        ease: "easeOut"
+      }}
+      onAnimationComplete={onDeath}
+      className="absolute pointer-events-none"
+      style={{ left: 0, top: 0 }}
     >
-      <motion.span
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-      >
-        {value}
-      </motion.span>
-      {suffix}
-    </motion.span>
+      <div className="relative">
+        <div className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-lg p-3 shadow-xl max-w-[200px]">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-xs text-muted-foreground">{platform}</span>
+            <Skull className="w-3 h-3 text-gray-600 opacity-0 animate-pulse" />
+          </div>
+          <p className="text-xs line-clamp-2">{message}</p>
+        </div>
+        <motion.div
+          className="absolute inset-0 bg-gray-900/10 rounded-lg"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.5, 0] }}
+          transition={{ duration: 2, delay: delay + 3 }}
+        />
+      </div>
+    </motion.div>
   );
 }
 
-// Floating platform icons
-const PLATFORM_ICONS = [
-  { Icon: Twitter, color: "#1DA1F2", position: { top: "10%", left: "5%" } },
-  { Icon: Github, color: "#333", position: { top: "20%", right: "8%" } },
-  { Icon: Slack, color: "#4A154B", position: { bottom: "30%", left: "10%" } },
-  {
-    Icon: MessageCircle,
-    color: "#5865F2",
-    position: { bottom: "20%", right: "5%" },
-  },
-  { Icon: Mail, color: "#EA4335", position: { top: "50%", left: "3%" } },
-  { Icon: Chrome, color: "#4285F4", position: { top: "40%", right: "12%" } },
-];
+// Revenue loss counter
+function RevenueLossCounter() {
+  const [loss, setLoss] = useState(0);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLoss(prev => prev + 2.31); // ~$200/day
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="text-4xl font-bold font-mono tabular-nums text-primary"
+      style={{ 
+        color: `rgba(59, 130, 246, ${Math.max(0.3, 1 - (loss / 10000))})`,
+        textShadow: `0 0 20px rgba(59, 130, 246, ${Math.max(0.3, 1 - (loss / 10000)) * 0.5})`
+      }}
+    >
+      ${loss.toFixed(2)}
+    </motion.div>
+  );
+}
 
+// Glitch text effect
+function GlitchText({ children, className }: { children: string; className?: string }) {
+  const [glitch, setGlitch] = useState(false);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlitch(true);
+      setTimeout(() => setGlitch(false), 200);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+  
+  return (
+    <span className={cn("relative inline-block", className)}>
+      <span className={glitch ? "opacity-80" : ""}>{children}</span>
+      {glitch && (
+        <>
+          <span className="absolute inset-0 text-primary/50 animate-glitch-1">{children}</span>
+          <span className="absolute inset-0 text-blue-400/50 animate-glitch-2">{children}</span>
+        </>
+      )}
+    </span>
+  );
+}
+
+// Interactive timeline component
+function FounderJourney() {
+  const [activeStage, setActiveStage] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  });
+  
+  const stages = [
+    { 
+      title: "Month 1: The Dream", 
+      mood: "😊", 
+      mrr: "$5,000",
+      feedback: "12 great ideas",
+      status: "Excited to build everything!"
+    },
+    { 
+      title: "Month 6: The Overwhelm", 
+      mood: "😰", 
+      mrr: "$8,000",
+      feedback: "127 unorganized requests",
+      status: "Can't keep track anymore..."
+    },
+    { 
+      title: "Month 12: The Mistakes", 
+      mood: "😔", 
+      mrr: "$7,000",
+      feedback: "Built wrong features",
+      status: "Users are leaving..."
+    },
+    { 
+      title: "Month 18: The Burnout", 
+      mood: "💀", 
+      mrr: "$3,000",
+      feedback: "Given up on feedback",
+      status: "Just surviving..."
+    },
+  ];
+  
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
+      const newStage = Math.min(Math.floor(latest * stages.length), stages.length - 1);
+      setActiveStage(Math.max(0, newStage));
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress, stages.length]);
+  
+  return (
+    <div ref={containerRef} className="relative h-[400px] flex items-center justify-center">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeStage}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          className="text-center"
+        >
+          <div className="text-6xl mb-4">{stages[activeStage]?.mood || "😊"}</div>
+          <h3 className="text-2xl font-bold mb-2">{stages[activeStage]?.title || "Month 1: The Dream"}</h3>
+          <div className="space-y-2 text-muted-foreground">
+            <p>MRR: <span className={cn(
+              "font-bold",
+              activeStage > 1 ? "text-muted-foreground" : "text-primary"
+            )}>{stages[activeStage]?.mrr || "$5,000"}</span></p>
+            <p>{stages[activeStage]?.feedback || "12 great ideas"}</p>
+            <p className="text-lg italic">"{stages[activeStage]?.status || "Excited to build everything!"}"</p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// Main component
 export default function ProblemSectionEnhanced() {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
-  // Removed scroll-based animations for performance
+  const [feedbackMessages, setFeedbackMessages] = useState<Array<{id: number; message: string; platform: string}>>([]);
+  const messageId = useRef(0);
+  
+  // Sample feedback messages
+  const sampleFeedback = [
+    { message: "Can you add dark mode?", platform: "Twitter" },
+    { message: "Export feature would be amazing!", platform: "Discord" },
+    { message: "Bug: Login not working on mobile", platform: "Email" },
+    { message: "Need API access please", platform: "Reddit" },
+    { message: "Pricing is too high for startups", platform: "ProductHunt" },
+    { message: "Integration with Slack?", platform: "GitHub" },
+    { message: "Performance issues on large datasets", platform: "Intercom" },
+    { message: "Love the product but need SSO", platform: "Email" },
+  ];
+  
+  // Generate floating feedback messages
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomFeedback = sampleFeedback[Math.floor(Math.random() * sampleFeedback.length)];
+      setFeedbackMessages(prev => [...prev, {
+        id: messageId.current++,
+        ...randomFeedback
+      }]);
+    }, 2000);
+    
+    return () => clearInterval(interval);
+  }, []);
+  
+  const handleParticleDeath = (id: number) => {
+    setFeedbackMessages(prev => prev.filter(msg => msg.id !== id));
+  };
 
   return (
-    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-background via-background to-muted/10">
-      {/* Static background for performance */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.1),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(59,130,246,0.05),transparent_50%)]" />
+    <section className="relative min-h-screen py-24 overflow-hidden bg-white">
+      {/* Animated background with void effect */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(59,130,246,0.05)_100%)]" />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(59,130,246,0.02) 70%)",
+            filter: "blur(40px)",
+          }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
       </div>
 
-      {/* Static platform icons for performance */}
-      <div className="absolute inset-0 pointer-events-none opacity-20">
-        {PLATFORM_ICONS.slice(0, 3).map((platform, idx) => (
-          <div key={idx} className="absolute" style={platform.position}>
-            <platform.Icon
-              className="w-8 h-8"
-              style={{ color: platform.color, opacity: 0.3 }}
-            />
-          </div>
+      {/* Floating feedback particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {feedbackMessages.map((msg) => (
+          <FeedbackParticle
+            key={msg.id}
+            message={msg.message}
+            platform={msg.platform}
+            delay={0}
+            onDeath={() => handleParticleDeath(msg.id)}
+          />
         ))}
       </div>
 
       <div className="container relative mx-auto px-6 max-w-7xl">
-        {/* Header with emotional hook */}
+        {/* Hero section with glitch effect */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16 px-4 sm:px-0"
-        >
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-display-lg font-bold mb-6 leading-tight tracking-display">
-            <span className="text-foreground">While You Code,</span>
-            <br />
-            <motion.span
-              className="text-primary"
-              animate={{ opacity: [1, 0.7, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              Your Best Ideas Are Dying
-            </motion.span>
-          </h2>
-
-          <p className="font-body text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-            Right now, <AnimatedCounter value={47} suffix="%" /> of your next
-            $10k MRR is buried in scattered feedback across Twitter, Discord,
-            email, Reddit, and 19 other platforms.
-          </p>
-        </motion.div>
-
-        {/* The Real Cost - Interactive Calculator */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 sm:mb-16 px-4 sm:px-0"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
-          <Card className="p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
-            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2">
-              <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-              Calculate Your Hidden Costs
-            </h3>
-
-            <div className="grid md:grid-cols-3 gap-4 sm:gap-6 mb-6">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            className="inline-block mb-6"
+          >
+            <div className="relative">
+              <Skull className="w-20 h-20 mx-auto text-gray-700" />
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-3 sm:p-4 bg-background/50 rounded-lg"
+                className="absolute inset-0"
+                animate={{ opacity: [0, 0.5, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
               >
-                <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
-                  <AnimatedCounter value={20} suffix=" hrs/week" />
-                </div>
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  Managing feedback
-                </p>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-3 sm:p-4 bg-background/50 rounded-lg"
-              >
-                <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
-                  $<AnimatedCounter value={4800} suffix="/mo" />
-                </div>
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  Opportunity cost
-                </p>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-3 sm:p-4 bg-background/50 rounded-lg"
-              >
-                <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
-                  <AnimatedCounter value={67} suffix="%" />
-                </div>
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  Features users don't want
-                </p>
+                <Skull className="w-20 h-20 mx-auto text-gray-500 blur-md" />
               </motion.div>
             </div>
-
-            <motion.div
-              className="text-center p-3 sm:p-4 bg-primary/10 rounded-lg"
-              whileHover={{ scale: 1.02 }}
-            >
-              <p className="text-base sm:text-lg font-semibold mb-2">
-                That's <span className="text-primary">$57,600/year</span> in
-                lost revenue
-              </p>
-              <p className="text-xs sm:text-sm text-muted-foreground">
-                Time you could spend shipping features that actually matter
-              </p>
-            </motion.div>
+          </motion.div>
+          
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <span className="text-foreground">Your Feedback is</span>
+            <br />
+            <GlitchText className="bg-gradient-to-r from-blue-600 via-blue-800 to-gray-900 bg-clip-text text-transparent">
+              Lost in the Abyss
+            </GlitchText>
+          </h2>
+          
+          <p className="font-body text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            Right now, while you read this, <span className="font-bold text-foreground">$10,000+ worth of user insights</span> are 
+            vanishing across 20+ platforms. Watch them disappear above.
+          </p>
+          
+          {/* Live revenue loss counter */}
+          <Card className="inline-block p-6 bg-gradient-to-br from-blue-50 to-gray-50 border-blue-200">
+            <p className="text-sm text-muted-foreground mb-2">Value Vanishing Into the Void:</p>
+            <RevenueLossCounter />
+            <p className="text-xs text-muted-foreground mt-2">Based on avg. indie hacker opportunity cost</p>
           </Card>
         </motion.div>
 
-        {/* Pain Points - Interactive Cards */}
-        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16 px-4 sm:px-0">
-          {[
-            {
-              icon: <Clock className="w-8 h-8" />,
-              title: "The Time Vampire",
-              story:
-                "Sarah checks 12 platforms daily. A game-changing feature request on Reddit goes unnoticed for 3 weeks. Competitor launches it first.",
-              impact: "Lost 200 customers",
-              color: "text-primary",
-              gradient: "from-primary/10 to-primary/5",
-            },
-            {
-              icon: <MessageSquare className="w-8 h-8" />,
-              title: "The Feedback Maze",
-              story:
-                "Alex has feedback in Twitter DMs, Discord, emails, and GitHub. Can't see patterns. Builds wrong features for 6 months.",
-              impact: "$50k development wasted",
-              color: "text-primary",
-              gradient: "from-primary/15 to-primary/5",
-            },
-            {
-              icon: <Target className="w-8 h-8" />,
-              title: "The Guessing Game",
-              story:
-                "Mike prioritizes based on loudest users, not highest value. Enterprise customers leave quietly. Realizes too late.",
-              impact: "80% MRR gone",
-              color: "text-primary",
-              gradient: "from-primary/20 to-primary/5",
-            },
-            {
-              icon: <Brain className="w-8 h-8" />,
-              title: "The Context Switch",
-              story:
-                "Emma jumps between 8 tools to gather feedback. Loses flow state. Takes 3x longer to ship anything.",
-              impact: "Burnout in 6 months",
-              color: "text-primary",
-              gradient: "from-primary/25 to-primary/5",
-            },
-          ].map((pain, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              onHoverStart={() => setActiveCard(idx)}
-              onHoverEnd={() => setActiveCard(null)}
-            >
-              <Card
-                className={cn(
-                  "h-full overflow-hidden transition-all duration-300 cursor-pointer",
-                  activeCard === idx
-                    ? "shadow-2xl scale-[1.02]"
-                    : "hover:shadow-lg",
-                  `bg-gradient-to-br ${pain.gradient}`
-                )}
-              >
-                <div className="p-4 sm:p-6">
-                  <div className="flex items-start gap-3 sm:gap-4 mb-4">
-                    <motion.div
-                      className={cn(
-                        "p-2 sm:p-3 rounded-xl bg-background/50",
-                        pain.color
-                      )}
-                      animate={
-                        activeCard === idx ? { rotate: [0, -10, 10, 0] } : {}
-                      }
-                      transition={{ duration: 0.5 }}
-                    >
-                      {React.cloneElement(pain.icon, {
-                        className: "w-6 h-6 sm:w-8 sm:h-8",
-                      })}
-                    </motion.div>
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold mb-2">
-                        {pain.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                        {pain.story}
-                      </p>
+        {/* The Feedback Graveyard - Visual Story */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <Card className="relative p-8 overflow-hidden bg-gradient-to-br from-white via-gray-50 to-blue-50 border-2 border-blue-200">
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0 bg-[url('/noise.png')] mix-blend-multiply" />
+            </div>
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl font-bold mb-8 text-center flex items-center justify-center gap-3">
+                <AlertCircle className="w-6 h-6 text-primary" />
+                The Feedback Graveyard
+                <AlertCircle className="w-6 h-6 text-primary" />
+              </h3>
+              
+              <div className="grid md:grid-cols-3 gap-6">
+                {/* Platform chaos visualization */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="relative group"
+                >
+                  <div className="relative h-48 rounded-lg bg-gradient-to-br from-blue-100 to-gray-100 p-4 overflow-hidden">
+                    <h4 className="font-bold mb-2">Platform Chaos</h4>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      {[Twitter, Slack, Mail, Github, MessageCircle].map((Icon, idx) => (
+                        <motion.div
+                          key={idx}
+                          className="absolute"
+                          animate={{
+                            x: Math.sin(idx * 1.2) * 50,
+                            y: Math.cos(idx * 1.2) * 50,
+                            rotate: 360,
+                          }}
+                          transition={{
+                            duration: 10 + idx,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
+                        >
+                          <Icon className="w-8 h-8 text-muted-foreground/50" />
+                        </motion.div>
+                      ))}
+                    </div>
+                    <p className="text-sm text-muted-foreground absolute bottom-4">
+                      20+ sources = 0 clarity
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Time vampire visualization */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="relative group"
+                >
+                  <div className="relative h-48 rounded-lg bg-gradient-to-br from-blue-100 to-gray-100 p-4 overflow-hidden">
+                    <h4 className="font-bold mb-2">Time Vampire</h4>
+                    <div className="flex flex-col items-center justify-center h-full">
+                      <motion.div
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                      >
+                        <Clock className="w-16 h-16 text-primary/50" />
+                      </motion.div>
+                      <p className="text-2xl font-bold mt-2">20 hrs/week</p>
+                      <p className="text-sm text-muted-foreground">Lost forever</p>
                     </div>
                   </div>
+                </motion.div>
 
-                  <motion.div
-                    className="mt-4 p-2 sm:p-3 bg-background/50 rounded-lg flex items-center justify-between"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: activeCard === idx ? 1 : 0.8, x: 0 }}
-                  >
-                    <span className="text-xs sm:text-sm font-medium">
-                      Real Impact:
-                    </span>
-                    <span
-                      className={cn("font-bold text-xs sm:text-sm", pain.color)}
-                    >
-                      {pain.impact}
-                    </span>
-                  </motion.div>
-                </div>
+                {/* Money drain visualization */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="relative group"
+                >
+                  <div className="relative h-48 rounded-lg bg-gradient-to-br from-blue-100 to-gray-100 p-4 overflow-hidden">
+                    <h4 className="font-bold mb-2">Revenue Drain</h4>
+                    <div className="flex flex-col items-center justify-center h-full">
+                      <motion.div
+                        className="relative"
+                        animate={{ y: [0, 10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <DollarSign className="w-16 h-16 text-primary/50" />
+                        <motion.div
+                          className="absolute inset-0"
+                          animate={{ opacity: [1, 0], y: [0, 20] }}
+                          transition={{ duration: 1, repeat: Infinity }}
+                        >
+                          <DollarSign className="w-16 h-16 text-primary/30" />
+                        </motion.div>
+                      </motion.div>
+                      <p className="text-2xl font-bold mt-2">$57.6k/year</p>
+                      <p className="text-sm text-muted-foreground">In missed opportunities</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </Card>
+        </motion.div>
 
-                {activeCard === idx && (
-                  <motion.div
-                    className="px-6 pb-6"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                  >
-                    <p className="text-xs text-muted-foreground italic">
-                      Based on real stories from indie hackers. Don't let this
-                      be you.
-                    </p>
-                  </motion.div>
-                )}
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+        {/* Interactive Founder Journey */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <h3 className="text-3xl font-bold text-center mb-8">
+            The Inevitable Journey to Burnout
+          </h3>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Scroll to watch how every indie hacker's dream turns into a nightmare 
+            when feedback management spirals out of control
+          </p>
+          <FounderJourney />
+        </motion.div>
 
-        {/* The Breaking Point */}
+        {/* The Breaking Point - Dramatic Finale */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <Card className="p-8 bg-gradient-to-r from-primary/5 to-primary/10 border-2 border-dashed border-primary/20">
-            <div className="max-w-3xl mx-auto">
+          <Card className="relative p-12 overflow-hidden bg-gradient-to-r from-blue-50 via-white to-blue-50 border-2 border-blue-300">
+            <div className="absolute inset-0">
               <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="inline-block mb-4"
+                className="absolute inset-0 bg-blue-50/50"
+                animate={{ opacity: [0.1, 0.3, 0.1] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+            </div>
+            
+            <div className="relative z-10 max-w-4xl mx-auto">
+              <motion.div
+                animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="inline-block mb-6"
               >
-                <X className="w-16 h-16 text-primary mx-auto" />
+                <div className="relative">
+                  <Heart className="w-24 h-24 mx-auto text-primary" />
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center"
+                    animate={{ opacity: [0, 1, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <X className="w-12 h-12 text-background" />
+                  </motion.div>
+                </div>
               </motion.div>
-
-              <h3 className="text-2xl font-bold mb-4">The Breaking Point</h3>
-
-              <p className="text-lg text-muted-foreground mb-6">
-                <AnimatedCounter value={73} suffix="%" /> of indie hackers quit
-                within 18 months because they're building the wrong things for
-                the wrong people.
-              </p>
-
-              <div className="flex flex-wrap justify-center gap-4 mb-6">
-                <Badge
-                  variant="default"
-                  className="text-sm bg-primary text-primary-foreground"
-                >
-                  <Clock className="w-4 h-4 mr-1" />
-                  20+ hours/week wasted
-                </Badge>
-                <Badge
-                  variant="default"
-                  className="text-sm bg-primary text-primary-foreground"
-                >
-                  <TrendingDown className="w-4 h-4 mr-1" />
-                  40% features unused
-                </Badge>
-                <Badge
-                  variant="default"
-                  className="text-sm bg-primary text-primary-foreground"
-                >
-                  <Users className="w-4 h-4 mr-1" />
-                  60% customers churning
-                </Badge>
+              
+              <h3 className="text-3xl sm:text-4xl font-bold mb-6">
+                Your Startup's <span className="text-primary">Life Support</span> is Failing
+              </h3>
+              
+              <div className="grid grid-cols-3 gap-6 mb-8">
+                <div>
+                  <div className="text-4xl font-bold text-primary">73%</div>
+                  <p className="text-sm text-muted-foreground">Quit within 18 months</p>
+                </div>
+                <div>
+                  <div className="text-4xl font-bold text-primary">67%</div>
+                  <p className="text-sm text-muted-foreground">Build unwanted features</p>
+                </div>
+                <div>
+                  <div className="text-4xl font-bold text-primary">91%</div>
+                  <p className="text-sm text-muted-foreground">Miss critical feedback</p>
+                </div>
               </div>
-
-              <motion.div
-                className="inline-flex items-center gap-2 text-lg font-semibold"
-                whileHover={{ x: 10 }}
+              
+              <motion.p
+                className="text-xl mb-8 font-semibold"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
               >
-                <span>But there's a better way</span>
+                The cure exists. But every second you wait, 
+                <br />
+                <span className="text-primary">another opportunity flatlines.</span>
+              </motion.p>
+              
+              <motion.div
+                className="inline-flex items-center gap-3 text-lg"
+                whileHover={{ x: 10 }}
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Sparkles className="w-5 h-5 text-primary animate-pulse" />
+                <span className="font-semibold">Escape the void</span>
                 <ArrowRight className="w-5 h-5 text-primary" />
               </motion.div>
             </div>
           </Card>
         </motion.div>
       </div>
+      
+      {/* Add custom styles for glitch effect */}
+      <style jsx>{`
+        @keyframes glitch-1 {
+          0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+          20% { clip-path: inset(0 100% 0 0); transform: translate(-2px, 2px); }
+          40% { clip-path: inset(0 0 100% 0); transform: translate(2px, -2px); }
+          60% { clip-path: inset(100% 0 0 0); transform: translate(-2px, -2px); }
+          80% { clip-path: inset(0 0 0 100%); transform: translate(2px, 2px); }
+        }
+        
+        @keyframes glitch-2 {
+          0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+          20% { clip-path: inset(100% 0 0 0); transform: translate(2px, -2px); }
+          40% { clip-path: inset(0 0 0 100%); transform: translate(-2px, 2px); }
+          60% { clip-path: inset(0 100% 0 0); transform: translate(2px, 2px); }
+          80% { clip-path: inset(0 0 100% 0); transform: translate(-2px, -2px); }
+        }
+        
+        .animate-glitch-1 {
+          animation: glitch-1 0.3s linear;
+        }
+        
+        .animate-glitch-2 {
+          animation: glitch-2 0.3s linear reverse;
+        }
+      `}</style>
     </section>
   );
 }
