@@ -32,6 +32,8 @@ import {
   Play,
   Pause,
   RotateCw,
+  X,
+  TrendingDown,
 } from "lucide-react";
 import {
   designSystem,
@@ -108,7 +110,7 @@ function SpecMachine() {
   return (
     <div className="relative w-full max-w-2xl mx-auto p-8">
       <h3 className="text-2xl font-bold text-center mb-8">
-        Experience FeedbackScout: The AI Code Specification Engine
+        See The Magic in Action
       </h3>
       
       <div className="relative">
@@ -186,31 +188,32 @@ function SpecMachine() {
             >
               <h4 className="font-semibold mb-4 flex items-center gap-2">
                 <Terminal className="w-5 h-5 text-green-600" />
-                AI-Ready Specification Generated
+                Product Specification Generated
               </h4>
               <pre className="bg-black text-green-400 p-4 rounded-md text-xs overflow-x-auto">
                 <code>{`FEATURE SPECIFICATION: Advanced Search System
 
-Technical Architecture:
-- Elasticsearch/PostgreSQL full-text search with real-time autocomplete
-- React search component with useDebounce hook
-- Node.js API with Redis caching layer
+Priority: HIGH (47% of users affected)
+Revenue Impact: +$2,400 MRR
 
-Ready AI Prompts for Cursor/Claude:
-"Create a React search component with:
- - Real-time autocomplete using useDebounce (300ms)
- - Elasticsearch query builder for fuzzy matching
- - Highlight matched terms in results
- - Handle edge cases: empty state, no results, errors"
+User Stories:
+- As a user, I want to find products quickly
+- Search should be forgiving of typos
+- Results should load instantly
+
+Technical Requirements:
+- Implement full-text search
+- Add autocomplete functionality
+- Optimize for <200ms response time
 
 Acceptance Criteria:
-- Search results load in <200ms
-- Autocomplete triggers after 2+ characters
-- Fuzzy matching with 80% threshold
-- Support for filters and sorting
+✓ Search works with partial matches
+✓ Handles typos gracefully
+✓ Shows relevant results first
+✓ Mobile-responsive design
 
-Complexity: 8 hours with AI assistance
-Business Impact: Reduce search abandonment by 40%`}</code>
+Estimated effort: 21 hours
+ROI: 3.2x in first month`}</code>
               </pre>
               <div className="mt-4 flex items-center justify-between">
                 <Badge variant="secondary" className="text-sm">
@@ -218,7 +221,7 @@ Business Impact: Reduce search abandonment by 40%`}</code>
                   Generated in 8 seconds
                 </Badge>
                 <Button size="sm" className="gap-2">
-                  Copy to Cursor <ArrowRight className="w-4 h-4" />
+                  Export to Jira <ArrowRight className="w-4 h-4" />
                 </Button>
               </div>
             </motion.div>
@@ -259,10 +262,10 @@ Business Impact: Reduce search abandonment by 40%`}</code>
 // Living Metrics Dashboard
 function MetricsDashboard() {
   const metrics = [
-    { label: "Features Shipped", value: useAnimatedCounter(47, 3000), icon: Rocket, color: "text-blue-600" },
-    { label: "Time Saved", value: useAnimatedCounter(312, 3000), suffix: " hrs", icon: Clock, color: "text-green-600" },
-    { label: "Revenue Added", value: useAnimatedCounter(24, 3000), prefix: "$", suffix: "k", icon: TrendingUp, color: "text-purple-600" },
-    { label: "Happy Users", value: useAnimatedCounter(892, 3000), icon: Heart, color: "text-pink-600" },
+    { label: "Features Shipped", value: useAnimatedCounter(156, 3000), icon: Rocket, color: "text-blue-600" },
+    { label: "Time Saved", value: useAnimatedCounter(892, 3000), suffix: " hrs", icon: Clock, color: "text-green-600" },
+    { label: "Revenue Growth", value: useAnimatedCounter(47, 3000), suffix: "%", icon: TrendingUp, color: "text-purple-600" },
+    { label: "Active Users", value: useAnimatedCounter(523, 3000), icon: Heart, color: "text-pink-600" },
   ];
   
   return (
@@ -294,124 +297,87 @@ function MetricsDashboard() {
 
 // Transformation Timeline Component
 function TransformationTimeline() {
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start center", "end center"],
-  });
-  
   const timelineStages = [
     {
-      month: "Before",
-      title: "Manual Spec Hell",
-      mrr: "3 hrs/spec",
-      pain: "$400-600 cost per feature",
-      icon: Clock,
-      color: "from-gray-500 to-gray-600",
+      period: "Before FeedbackSpec",
+      items: [
+        { icon: Clock, text: "15+ hours weekly organizing feedback", color: "text-red-600" },
+        { icon: Timer, text: "3+ hours writing each specification manually", color: "text-red-600" },
+        { icon: X, text: "Building features users don't want", color: "text-red-600" },
+        { icon: TrendingDown, text: "Competitors shipping faster", color: "text-red-600" },
+      ],
+      bgColor: "from-red-50 to-orange-50",
+      borderColor: "border-red-200",
     },
     {
-      month: "Day 1",
-      title: "FeedbackScout Activated",
-      mrr: "8 min/spec",
-      gain: "First AI spec generated instantly",
-      icon: Rocket,
-      color: "from-blue-500 to-blue-600",
-    },
-    {
-      month: "Week 1",
-      title: "3x Velocity Achieved",
-      mrr: "5 features/week",
-      gain: "AI code quality dramatically improved",
-      icon: Zap,
-      color: "from-blue-600 to-blue-700",
-    },
-    {
-      month: "Month 1",
-      title: "Market Domination",
-      mrr: "+47% MRR",
-      gain: "Shipping exactly what users pay for",
-      icon: TrendingUp,
-      color: "from-green-500 to-green-600",
+      period: "After FeedbackSpec",
+      items: [
+        { icon: Zap, text: "5 minutes to process all feedback", color: "text-green-600" },
+        { icon: Rocket, text: "8 minutes to generate AI-ready specs", color: "text-green-600" },
+        { icon: Target, text: "Building exactly what drives revenue", color: "text-green-600" },
+        { icon: TrendingUp, text: "3x faster feature shipping", color: "text-green-600" },
+      ],
+      bgColor: "from-green-50 to-blue-50",
+      borderColor: "border-green-200",
     },
   ];
   
   return (
-    <div ref={timelineRef} className="relative py-16">
+    <div className="relative py-16">
       <h3 className="text-3xl font-bold text-center mb-12">
-        Your AI Development Transformation
+        Your Transformation Timeline
       </h3>
       
-      {/* Progress Line */}
-      <div className="absolute left-1/2 top-24 bottom-0 w-1 bg-gray-200 -translate-x-1/2" />
-      <motion.div
-        className="absolute left-1/2 top-24 w-1 bg-primary -translate-x-1/2"
-        style={{
-          height: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]),
-        }}
-      />
-      
-      {/* Timeline Stages */}
-      <div className="relative space-y-24">
+      <div className="grid lg:grid-cols-2 gap-8">
         {timelineStages.map((stage, idx) => (
           <motion.div
             key={idx}
-            initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-            className={cn(
-              "relative grid md:grid-cols-2 gap-8 items-center",
-              idx % 2 === 0 ? "md:text-right" : "md:text-left"
-            )}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: idx * 0.2 }}
           >
-            {/* Content */}
-            <div className={cn(
-              "space-y-4",
-              idx % 2 === 0 ? "md:order-1" : "md:order-2"
+            <Card className={cn(
+              "h-full p-8 bg-gradient-to-br",
+              stage.bgColor,
+              stage.borderColor,
+              "border-2"
             )}>
-              <Badge variant="secondary" className="inline-block">
-                {stage.month}
-              </Badge>
-              <h4 className="text-2xl font-bold">{stage.title}</h4>
-              <div className={cn(
-                "text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent",
-                stage.color
-              )}>
-                {stage.mrr}
+              <h4 className="text-2xl font-bold mb-6">{stage.period}</h4>
+              <div className="space-y-4">
+                {stage.items.map((item, itemIdx) => (
+                  <motion.div
+                    key={itemIdx}
+                    initial={{ opacity: 0, x: idx === 0 ? -20 : 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * itemIdx }}
+                    className="flex items-start gap-3"
+                  >
+                    <div className={cn(
+                      "p-2 rounded-lg",
+                      idx === 0 ? "bg-red-100" : "bg-green-100"
+                    )}>
+                      <item.icon className={cn("w-5 h-5", item.color)} />
+                    </div>
+                    <p className="text-base leading-relaxed">{item.text}</p>
+                  </motion.div>
+                ))}
               </div>
-              <p className="text-muted-foreground">
-                {stage.pain || stage.gain}
-              </p>
-            </div>
-            
-            {/* Icon */}
-            <div className={cn(
-              "flex justify-center",
-              idx % 2 === 0 ? "md:order-2" : "md:order-1"
-            )}>
-              <motion.div
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                className={cn(
-                  "relative p-6 rounded-full bg-gradient-to-br text-white",
-                  stage.color
-                )}
-              >
-                <stage.icon className="w-12 h-12" />
-                <motion.div
-                  className="absolute inset-0 rounded-full"
-                  animate={{
-                    boxShadow: [
-                      "0 0 0 0 rgba(59,130,246,0)",
-                      "0 0 0 20px rgba(59,130,246,0.1)",
-                      "0 0 0 40px rgba(59,130,246,0)",
-                    ],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </motion.div>
-            </div>
+            </Card>
           </motion.div>
         ))}
+      </div>
+      
+      {/* Arrow Animation */}
+      <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <motion.div
+          animate={{ x: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-primary"
+        >
+          <ChevronRight className="w-12 h-12" />
+        </motion.div>
       </div>
     </div>
   );
@@ -419,59 +385,89 @@ function TransformationTimeline() {
 
 // Interactive ROI Calculator
 function ROICalculator() {
-  const [currentMRR, setCurrentMRR] = useState(10000);
-  const [feedbackHours, setFeedbackHours] = useState(20);
-  const [showProjection, setShowProjection] = useState(false);
+  const [feedbackSources, setFeedbackSources] = useState(10);
+  const [feedbackHours, setFeedbackHours] = useState(15);
+  const [featuresShipped, setFeaturesShipped] = useState(3);
+  const [currentMRR, setCurrentMRR] = useState(5000);
+  const [showResults, setShowResults] = useState(false);
   
-  // Calculate projections
-  const hoursSaved = feedbackHours * 0.9; // 90% time reduction
-  const projectedMRR = currentMRR * 1.47; // 47% average increase
-  const monthlyValue = hoursSaved * 100; // $100/hour opportunity cost
+  // Calculate with FeedbackSpec
+  const timeSavedMonthly = 47; // hours
+  const additionalFeatures = 8; // features
+  const projectedMRRGrowth = 4200; // dollars
+  const toolInvestment = 49; // dollars/month
+  const roi = Math.round((projectedMRRGrowth - toolInvestment) / toolInvestment * 100);
   
   return (
     <Card className="p-8 bg-gradient-to-br from-primary/5 to-blue-500/5 border-primary/20">
-      <h3 className="text-2xl font-bold mb-6 text-center">
-        Calculate Your AI Development ROI
+      <h3 className="text-2xl font-bold mb-8 text-center">
+        Interactive ROI Calculator
       </h3>
       
-      <div className="space-y-6">
-        {/* Input Fields */}
+      <div className="space-y-8">
+        {/* Your Current Situation */}
         <div>
-          <label className="text-sm font-medium mb-2 block">
-            Your Current MRR
-          </label>
-          <div className="flex items-center gap-4">
-            <span className="text-2xl font-bold">$</span>
-            <Slider
-              value={[currentMRR]}
-              onValueChange={([value]) => setCurrentMRR(value)}
-              min={1000}
-              max={100000}
-              step={1000}
-              className="flex-1"
-            />
-            <span className="text-2xl font-bold w-24 text-right">
-              {currentMRR.toLocaleString()}
-            </span>
-          </div>
-        </div>
-        
-        <div>
-          <label className="text-sm font-medium mb-2 block">
-            Hours/Week Managing Feedback
-          </label>
-          <div className="flex items-center gap-4">
-            <Slider
-              value={[feedbackHours]}
-              onValueChange={([value]) => setFeedbackHours(value)}
-              min={5}
-              max={40}
-              step={1}
-              className="flex-1"
-            />
-            <span className="text-2xl font-bold w-24 text-right">
-              {feedbackHours} hrs
-            </span>
+          <h4 className="text-lg font-semibold mb-6">Your Current Situation:</h4>
+          <div className="space-y-6">
+            <div>
+              <label className="text-sm font-medium mb-2 block flex items-center justify-between">
+                <span>Monthly feedback sources</span>
+                <span className="text-lg font-bold">{feedbackSources}</span>
+              </label>
+              <Slider
+                value={[feedbackSources]}
+                onValueChange={([value]) => setFeedbackSources(value)}
+                min={3}
+                max={20}
+                step={1}
+                className="w-full"
+              />
+            </div>
+            
+            <div>
+              <label className="text-sm font-medium mb-2 block flex items-center justify-between">
+                <span>Hours spent on feedback weekly</span>
+                <span className="text-lg font-bold">{feedbackHours} hrs</span>
+              </label>
+              <Slider
+                value={[feedbackHours]}
+                onValueChange={([value]) => setFeedbackHours(value)}
+                min={5}
+                max={25}
+                step={1}
+                className="w-full"
+              />
+            </div>
+            
+            <div>
+              <label className="text-sm font-medium mb-2 block flex items-center justify-between">
+                <span>Features shipped monthly</span>
+                <span className="text-lg font-bold">{featuresShipped}</span>
+              </label>
+              <Slider
+                value={[featuresShipped]}
+                onValueChange={([value]) => setFeaturesShipped(value)}
+                min={1}
+                max={10}
+                step={1}
+                className="w-full"
+              />
+            </div>
+            
+            <div>
+              <label className="text-sm font-medium mb-2 block flex items-center justify-between">
+                <span>Current MRR</span>
+                <span className="text-lg font-bold">${currentMRR.toLocaleString()}</span>
+              </label>
+              <Slider
+                value={[currentMRR]}
+                onValueChange={([value]) => setCurrentMRR(value)}
+                min={1000}
+                max={50000}
+                step={1000}
+                className="w-full"
+              />
+            </div>
           </div>
         </div>
         
@@ -479,36 +475,38 @@ function ROICalculator() {
         <motion.div className="text-center">
           <Button
             size="lg"
-            onClick={() => setShowProjection(true)}
+            onClick={() => setShowResults(true)}
             className="gap-2"
           >
             <BarChart3 className="w-5 h-5" />
-            Show My Projection
+            Calculate My ROI
           </Button>
         </motion.div>
         
         {/* Results */}
         <AnimatePresence>
-          {showProjection && (
+          {showResults && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="space-y-4 pt-6 border-t"
+              className="space-y-6 pt-6 border-t"
             >
-              <div className="grid md:grid-cols-3 gap-6">
+              <h4 className="text-lg font-semibold">With FeedbackSpec:</h4>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200 }}
-                  className="text-center p-4 bg-white rounded-lg"
+                  className="text-center p-4 bg-white rounded-lg border border-gray-200"
                 >
-                  <Clock className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                  <div className="text-3xl font-bold text-blue-600">
-                    {Math.round(hoursSaved)} hrs
+                  <Clock className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-blue-600">
+                    {timeSavedMonthly} hrs
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Saved Monthly
+                  <p className="text-xs text-muted-foreground">
+                    Time saved monthly
                   </p>
                 </motion.div>
                 
@@ -516,14 +514,14 @@ function ROICalculator() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
-                  className="text-center p-4 bg-white rounded-lg"
+                  className="text-center p-4 bg-white rounded-lg border border-gray-200"
                 >
-                  <TrendingUp className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                  <div className="text-3xl font-bold text-green-600">
-                    ${Math.round(projectedMRR).toLocaleString()}
+                  <Rocket className="w-6 h-6 text-green-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-green-600">
+                    +{additionalFeatures}
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Projected MRR
+                  <p className="text-xs text-muted-foreground">
+                    Additional features
                   </p>
                 </motion.div>
                 
@@ -531,14 +529,29 @@ function ROICalculator() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                  className="text-center p-4 bg-white rounded-lg"
+                  className="text-center p-4 bg-white rounded-lg border border-gray-200"
                 >
-                  <DollarSign className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-                  <div className="text-3xl font-bold text-purple-600">
-                    ${Math.round(monthlyValue).toLocaleString()}
+                  <TrendingUp className="w-6 h-6 text-purple-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-purple-600">
+                    +${projectedMRRGrowth.toLocaleString()}
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Monthly Value
+                  <p className="text-xs text-muted-foreground">
+                    Projected MRR growth
+                  </p>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 200, delay: 0.3 }}
+                  className="text-center p-4 bg-white rounded-lg border border-gray-200"
+                >
+                  <DollarSign className="w-6 h-6 text-red-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-red-600">
+                    ${toolInvestment}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Tool investment
                   </p>
                 </motion.div>
               </div>
@@ -546,12 +559,17 @@ function ROICalculator() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-center pt-4"
+                transition={{ delay: 0.4 }}
+                className="text-center p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border-2 border-green-200"
               >
-                <p className="text-lg font-semibold">
-                  FeedbackScout pays for itself in{" "}
-                  <span className="text-primary">2.3 days</span>
+                <p className="text-lg mb-2">
+                  Your ROI in the first month:
+                </p>
+                <p className="text-5xl font-bold text-primary">
+                  {roi.toLocaleString()}%
+                </p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  That's ${projectedMRRGrowth - toolInvestment} in net gain
                 </p>
               </motion.div>
             </motion.div>
@@ -582,43 +600,20 @@ export default function FeedbackSpecBenefitsEnhanced() {
         >
           <Badge variant="secondary" className="mb-4">
             <Sparkles className="w-4 h-4 mr-2" />
-            The AI Code Specification Engine
+            The Feedback-to-Revenue Engine
           </Badge>
           
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            Transform from "Feedback Organizer" to
+            Transform Chaos into
             <span className="block mt-2 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 bg-clip-text text-transparent">
-              AI Specification Generator
+              Crystal-Clear Specifications
             </span>
           </h2>
 
           <p className="font-body text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-            While competitors organize feedback, you generate the fuel that powers elite AI development velocity.
-            This isn't just a productivity tool - it's your secret weapon for AI-powered market dominance.
+            Stop drowning in feedback. Start shipping features that grow your revenue. 
+            FeedbackSpec uses AI to turn chaos into clear, prioritized product specifications.
           </p>
-        </motion.div>
-
-        {/* Living Metrics Dashboard */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-24"
-        >
-          <h3 className="text-2xl font-bold text-center mb-8">
-            Elite AI Developers Already Dominating
-          </h3>
-          <MetricsDashboard />
-        </motion.div>
-
-        {/* Interactive Spec Machine */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mb-24 bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border"
-        >
-          <SpecMachine />
         </motion.div>
 
         {/* Transformation Timeline */}
@@ -644,7 +639,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
           <div className="inline-flex items-center gap-2 text-lg text-muted-foreground mb-6">
             <Users className="w-5 h-5" />
             <span>
-              Join <span className="font-bold text-foreground">2,847 founders</span> shipping faster with AI
+              Join <span className="font-bold text-foreground">500+ founders</span> who escaped feedback chaos
             </span>
           </div>
           

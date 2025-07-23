@@ -28,20 +28,20 @@ import { Badge } from "./ui/badge";
 
 // Live activity feed data
 const ACTIVITY_FEED = [
-  { name: "Sarah Chen", action: "shipped 3 features", time: "2 min ago", mrr: "$12k" },
-  { name: "Alex Kumar", action: "generated 5 specs", time: "5 min ago", mrr: "$8k" },
-  { name: "Mike Johnson", action: "increased MRR by $2.1k", time: "12 min ago", mrr: "$24k" },
-  { name: "Lisa Wang", action: "shipped dark mode", time: "18 min ago", mrr: "$15k" },
-  { name: "David Park", action: "automated feedback flow", time: "23 min ago", mrr: "$31k" },
-  { name: "Emma Davis", action: "launched 2 features", time: "28 min ago", mrr: "$19k" },
+  { name: "Alex Chen", action: "just hit $10k MRR", time: "2 min ago", mrr: "$10k" },
+  { name: "Sarah Rodriguez", action: "shipped 3 user-requested features", time: "5 min ago", mrr: "$8.5k" },
+  { name: "Marcus Thompson", action: "reduced churn by 32%", time: "12 min ago", mrr: "$15k" },
+  { name: "David Park", action: "launched v2.0 based on feedback", time: "18 min ago", mrr: "$22k" },
+  { name: "Lisa Chen", action: "found product-market fit", time: "23 min ago", mrr: "$31k" },
+  { name: "Mike Davis", action: "grew 47% this month", time: "28 min ago", mrr: "$18k" },
 ];
 
 // Floating spec component
 function FloatingSpec({ delay = 0 }: { delay?: number }) {
   const specs = [
-    "// Feature: User Dashboard\n// Priority: HIGH\n// MRR Impact: +$2.3k",
-    "/* API Integration\n * Requested by 15 users\n * Est. time: 2 days */",
-    "// Export to CSV\n// Quick win feature\n// 30 min implementation",
+    "// FEATURE: Advanced Search\n// Priority: HIGH\n// Revenue Impact: +$2.4k MRR",
+    "/* User Dashboard Redesign\n * 156 users requested\n * Est. 32% churn reduction */",
+    "// Mobile App MVP\n// 89% of users want this\n// $5k MRR opportunity",
   ];
   
   const randomSpec = specs[Math.floor(Math.random() * specs.length)];
@@ -345,9 +345,9 @@ export function FeedbackSpecCTA() {
             viewport={{ once: true }}
             className="mb-6 text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight"
           >
-            <span className="block">Ready to Join</span>
+            <span className="block">Ready to Escape</span>
             <span className="block bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 bg-clip-text text-transparent">
-              The Shipping Revolution?
+              Feedback Hell?
             </span>
           </motion.h2>
           
@@ -359,8 +359,8 @@ export function FeedbackSpecCTA() {
             transition={{ delay: 0.1 }}
             className="mb-4 text-xl text-muted-foreground max-w-3xl mx-auto"
           >
-            Join <span className="font-bold text-foreground">{specsGenerated.toLocaleString()}</span> specs generated this week.
-            Your competitors are already shipping 3x faster.
+            Join 500+ indie hackers who transformed their
+            <span className="font-bold text-foreground"> feedback chaos into revenue growth</span>.
           </motion.p>
           
           {/* Success metrics */}
@@ -372,9 +372,9 @@ export function FeedbackSpecCTA() {
             className="mb-12 flex flex-wrap justify-center gap-8"
           >
             {[
-              { icon: Rocket, value: "8 min", label: "to first spec" },
-              { icon: TrendingUp, value: "47%", label: "avg MRR increase" },
-              { icon: Users, value: "2,847", label: "founders shipping" },
+              { icon: Rocket, value: "15 hrs", label: "saved weekly" },
+              { icon: TrendingUp, value: "47%", label: "avg MRR growth" },
+              { icon: Users, value: "500+", label: "happy founders" },
             ].map((stat, idx) => (
               <motion.div
                 key={idx}
@@ -434,11 +434,11 @@ export function FeedbackSpecCTA() {
             className="text-sm text-muted-foreground"
           >
             <p className="mb-2">
-              🔥 <span className="font-semibold">Limited time:</span> Next 50 signups get lifetime priority support
+              🚀 <span className="font-semibold">Black Friday Special:</span> 40% off for the next 47 signups
             </p>
             <p className="flex items-center justify-center gap-2">
               <CheckCircle className="w-4 h-4 text-green-500" />
-              14-day free trial • No credit card • 5-minute setup
+              14-day free trial • Setup in 2 minutes • Cancel anytime
             </p>
           </motion.div>
         </motion.div>
