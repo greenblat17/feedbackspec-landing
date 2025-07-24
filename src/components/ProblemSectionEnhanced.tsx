@@ -1,14 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  useSpring,
-  AnimatePresence,
-} from "framer-motion";
+import { motion, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
@@ -35,6 +28,7 @@ import {
   Sparkles,
   Timer,
   Code2,
+  FileText,
   Lightbulb,
   TrendingUp,
   ChevronRight,
@@ -108,7 +102,6 @@ function OpportunitiesMissedCounter() {
   );
 }
 
-
 // Feedback Flow Visualization
 function FeedbackFlow() {
   const platforms = [
@@ -120,7 +113,7 @@ function FeedbackFlow() {
   ];
 
   return (
-    <div className="relative h-32 mb-8">
+    <div className="relative h-40 mb-8">
       {/* Source platforms */}
       <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between">
         {platforms.map((platform, idx) => (
@@ -183,95 +176,96 @@ function FeedbackFlow() {
   );
 }
 
-// Interactive timeline component
-function FounderJourney() {
-  const [activeStage, setActiveStage] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  });
-
-  const stages = [
-    {
-      title: "Month 1: The Dream",
-      mood: "😊",
-      time: "$1k MRR",
-      feedback: "12 great ideas",
-      status: "Excited to build everything!",
-    },
-    {
-      title: "Month 3: The Chaos",
-      mood: "😰",
-      time: "$3k MRR",
-      feedback: "287 unread messages",
-      status: "Which feature was important?",
-    },
-    {
-      title: "Month 6: The Burnout",
-      mood: "😵",
-      time: "$5k MRR",
-      feedback: "Lost in Notion/Trello/Slack",
-      status: "Building features nobody uses",
-    },
-    {
-      title: "Month 9: The Breaking Point",
-      mood: "💀",
-      time: "$4k MRR",
-      feedback: "Competitors shipping faster",
-      status: "Churn increasing, motivation gone",
-    },
+// Development Cycle Visualization
+function DevelopmentCycle() {
+  const steps = [
+    { icon: MessageSquare, label: "Feedback" },
+    { icon: Brain, label: "Analyze" },
+    { icon: FileText, label: "Spec" },
+    { icon: Code2, label: "Code" },
   ];
 
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      const newStage = Math.min(
-        Math.floor(latest * stages.length),
-        stages.length - 1
-      );
-      setActiveStage(Math.max(0, newStage));
-    });
-    return () => unsubscribe();
-  }, [scrollYProgress, stages.length]);
-
   return (
-    <div
-      ref={containerRef}
-      className="relative h-[400px] flex items-center justify-center"
-    >
-      <AnimatePresence mode="wait">
+    <div className="relative h-48 mb-6 flex items-center justify-center">
+      <div className="relative w-72 h-48">
+        {steps.map((step, idx) => {
+          // Position items in a wider ellipse to prevent overlap
+          const angle = (idx * 2 * Math.PI) / steps.length - Math.PI / 2; // Start from top
+          const x = 45 + 35 * Math.cos(angle);
+          const y = 40 + 45 * Math.sin(angle);
+
+          return (
+            <motion.div
+              key={idx}
+              className="absolute flex flex-col items-center"
+              style={{
+                top: `${y}%`,
+                left: `${x}%`,
+                transform: "translate(-50%, -50%)",
+              }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: idx * 0.2 }}
+            >
+              <div className="bg-purple-100 p-2 rounded-full mb-1">
+                <step.icon className="w-4 h-4 text-purple-600" />
+              </div>
+              <p className="text-xs text-center text-muted-foreground">
+                {step.label}
+              </p>
+            </motion.div>
+          );
+        })}
+
+        {/* Center timer */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+          <div className="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center">
+            <Timer className="w-7 h-7 text-purple-600" />
+          </div>
+          <p className="text-xs text-center mt-2 text-muted-foreground whitespace-nowrap">
+            3-4 hrs/feature
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Wrong Priorities Visualization
+function WrongPriorities() {
+  return (
+    <div className="relative h-40 mb-6 flex items-center justify-center">
+      <div className="flex items-center gap-4">
         <motion.div
-          key={activeStage}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -50 }}
-          className="text-center"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 100 }}
+          className="relative"
         >
-          <div className="text-6xl mb-4">
-            {stages[activeStage]?.mood || "😊"}
+          <div className="w-24 h-24 rounded-full bg-yellow-200 flex items-center justify-center">
+            <span className="text-2xl font-bold text-yellow-800">73%</span>
           </div>
-          <h3 className="text-2xl font-bold mb-2">
-            {stages[activeStage]?.title || "Month 1: The Dream"}
-          </h3>
-          <div className="space-y-2 text-muted-foreground">
-            <p>
-              Time:{" "}
-              <span
-                className={cn(
-                  "font-bold",
-                  activeStage > 1 ? "text-muted-foreground" : "text-primary"
-                )}
-              >
-                {stages[activeStage]?.time || "9:00 AM"}
-              </span>
-            </p>
-            <p>{stages[activeStage]?.feedback || "12 great ideas"}</p>
-            <p className="text-lg italic">
-              "{stages[activeStage]?.status || "Excited to build everything!"}"
-            </p>
-          </div>
+          <p className="text-xs text-center mt-2 text-muted-foreground">
+            Loud voices
+          </p>
         </motion.div>
-      </AnimatePresence>
+
+        <Target className="w-8 h-8 text-gray-400" />
+
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+          className="relative"
+        >
+          <div className="w-16 h-16 rounded-full bg-green-200 flex items-center justify-center">
+            <span className="text-sm font-bold text-green-800">27%</span>
+          </div>
+          <p className="text-xs text-center mt-2 text-muted-foreground">
+            Real needs
+          </p>
+        </motion.div>
+      </div>
     </div>
   );
 }
@@ -368,9 +362,6 @@ export default function ProblemSectionEnhanced() {
             className="inline-block mb-6"
           >
             <div className="relative">
-              <div className="p-4 rounded-full bg-gradient-to-br from-red-100 to-purple-100">
-                <AlertTriangle className="w-16 h-16 text-accent-orange" />
-              </div>
               <motion.div
                 className="absolute -inset-2"
                 animate={{
@@ -387,21 +378,18 @@ export default function ProblemSectionEnhanced() {
           </motion.div>
 
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-foreground">The Founder's</span>
+            <span className="text-foreground">The Founders's</span>
             <br />
-            <span className="text-primary">
-              Double Nightmare
-            </span>
+            <span className="text-primary">Development Hell</span>
           </h2>
 
           <p className="font-body text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            You have two problems killing your growth:
+            You started building because you love creating solutions. But now
+            you're stuck in an endless cycle of{" "}
+            <span className="font-bold text-foreground">feedback chaos</span>{" "}
+            that's{" "}
             <span className="font-bold text-foreground">
-              scattered feedback chaos
-            </span>{" "}
-            AND{" "}
-            <span className="font-bold text-foreground">
-              slow feature development
+              killing your momentum
             </span>
             .
           </p>
@@ -421,48 +409,30 @@ export default function ProblemSectionEnhanced() {
           </motion.div>
         </motion.div>
 
-        {/* Interactive Founder Journey */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="my-20"
-        >
-          <h3 className="text-2xl font-bold text-center mb-2">
-            The Founder's Journey
-          </h3>
-          <p className="text-center text-muted-foreground mb-8">
-            Scroll to see how feedback chaos destroys momentum
-          </p>
-          <FounderJourney />
-        </motion.div>
-
-        {/* The Double Problem - Split Screen Visualization */}
+        {/* The Triple Problem - Three Cards Layout */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="mb-20"
         >
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Problem 1: Feedback Hell */}
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Problem 1: Feedback Chaos */}
             <motion.article
-              aria-label="Problem 1: Feedback Hell"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              aria-label="Problem 1: Feedback Chaos"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card className="relative h-full p-8 overflow-hidden bg-gradient-to-br from-red-50 via-white to-orange-50 border-2 border-red-200 transition-shadow duration-300 hover:shadow-xl">
-
+              <Card className="relative h-full p-6 overflow-hidden bg-gradient-to-br from-red-50 via-white to-orange-50 border-2 border-red-200 transition-shadow duration-300 hover:shadow-xl">
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                    <div className="p-3 rounded-full bg-gradient-to-br from-red-100 to-orange-100">
-                      <AlertTriangle className="w-8 h-8 text-accent-orange" />
+                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <div className="p-2 rounded-full bg-gradient-to-br from-red-100 to-orange-100">
+                      <MessageSquare className="w-6 h-6 text-accent-orange" />
                     </div>
-                    Problem #1: Feedback Hell
+                    Problem #1: Feedback Chaos
                   </h3>
 
                   <div className="space-y-4">
@@ -475,9 +445,9 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-lg">20+ sources</p>
-                        <p className="text-muted-foreground">
-                          Twitter, email, Discord, GitHub, Slack...
+                        <p className="font-semibold">Platform Scattered Hell</p>
+                        <p className="text-sm text-muted-foreground">
+                          20+ sources: Twitter, Discord, emails
                         </p>
                       </div>
                     </motion.div>
@@ -491,11 +461,9 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-lg">
-                          Zero organization
-                        </p>
-                        <p className="text-muted-foreground">
-                          Lost in threads and notifications
+                        <p className="font-semibold">Zero Organization</p>
+                        <p className="text-sm text-muted-foreground">
+                          No tagging, no search, no history
                         </p>
                       </div>
                     </motion.div>
@@ -509,273 +477,275 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-lg">
-                          No prioritization
-                        </p>
-                        <p className="text-muted-foreground">
-                          Building features nobody wants
-                        </p>
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      className="flex items-start gap-3"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.4 }}
-                    >
-                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
-                      <div>
-                        <p className="font-semibold text-lg">Time vampire</p>
-                        <p className="text-muted-foreground">
+                        <p className="font-semibold">Time Vampire</p>
+                        <p className="text-sm text-muted-foreground">
                           15+ hours weekly just organizing
                         </p>
                       </div>
                     </motion.div>
+
+                    <motion.div
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">Analysis Paralysis</p>
+                        <p className="text-sm text-muted-foreground">
+                          Too much noise, no clear signal
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">Lost Revenue</p>
+                        <p className="text-sm text-muted-foreground">
+                          Missing high-value feature requests
+                        </p>
+                      </div>
+                    </motion.div>
                   </div>
 
-                  {/* Feedback Flow Visualization */}
-                  <div className="mt-8">
-                    <h4 className="text-lg font-semibold mb-4">
-                      Where Your Feedback Goes:
-                    </h4>
+                  {/* Visual: Feedback Flow */}
+                  <div className="mt-12 pt-8 border-t border-gray-100">
                     <FeedbackFlow />
-                  </div>
-
-                  {/* Floating platform icons */}
-                  <div className="absolute top-4 right-4 opacity-20">
-                    {[Twitter, Mail, Github, Slack].map((Icon, idx) => (
-                      <motion.div
-                        key={idx}
-                        className="absolute"
-                        animate={{
-                          x: Math.sin(idx * 1.5) * 30,
-                          y: Math.cos(idx * 1.5) * 30,
-                        }}
-                        transition={{
-                          duration: 5 + idx,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                      >
-                        <Icon className="w-6 h-6 text-red-400" />
-                      </motion.div>
-                    ))}
                   </div>
                 </div>
               </Card>
             </motion.article>
 
-            {/* Problem 2: Slow Development */}
+            {/* Problem 2: Slow Development Cycle */}
             <motion.article
-              aria-label="Problem 2: Slow Development"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              aria-label="Problem 2: Slow Development Cycle"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card className="relative h-full p-8 overflow-hidden bg-gradient-to-br from-purple-50 via-white to-blue-50 border-2 border-purple-200 transition-shadow duration-300 hover:shadow-xl">
-
+              <Card className="relative h-full p-6 overflow-hidden bg-gradient-to-br from-purple-50 via-white to-blue-50 border-2 border-purple-200 transition-shadow duration-300 hover:shadow-xl">
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                    <div className="p-3 rounded-full bg-gradient-to-br from-purple-100 to-blue-100">
-                      <Timer className="w-8 h-8 text-primary" />
+                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <div className="p-2 rounded-full bg-gradient-to-br from-purple-100 to-blue-100">
+                      <Timer className="w-6 h-6 text-primary" />
                     </div>
-                    Problem #2: Slow Development
+                    Problem #2: Slow Development Cycle
                   </h3>
 
                   <div className="space-y-4">
                     <motion.div
                       className="flex items-start gap-3"
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 }}
                     >
                       <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-lg">Manual specs</p>
-                        <p className="text-muted-foreground">
-                          3+ hours writing specifications
+                        <p className="font-semibold">
+                          Manual Specification Writing
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          Hours turning feedback into specs
                         </p>
                       </div>
                     </motion.div>
 
                     <motion.div
                       className="flex items-start gap-3"
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.2 }}
                     >
                       <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-lg">Generic prompts</p>
-                        <p className="text-muted-foreground">
-                          AI tools need perfect input
+                        <p className="font-semibold">Generic AI Prompts</p>
+                        <p className="text-sm text-muted-foreground">
+                          Missing critical context & details
                         </p>
                       </div>
                     </motion.div>
 
                     <motion.div
                       className="flex items-start gap-3"
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.3 }}
                     >
                       <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-lg">
-                          Context switching
-                        </p>
-                        <p className="text-muted-foreground">
-                          From feedback to code requirements
+                        <p className="font-semibold">Context Switching Hell</p>
+                        <p className="text-sm text-muted-foreground">
+                          From feedback to code to debug
                         </p>
                       </div>
                     </motion.div>
 
                     <motion.div
                       className="flex items-start gap-3"
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.4 }}
                     >
                       <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-lg">
-                          Missed opportunities
+                        <p className="font-semibold">Reinventing the Wheel</p>
+                        <p className="text-sm text-muted-foreground">
+                          No spec templates or patterns
                         </p>
-                        <p className="text-muted-foreground">
-                          Competitors shipping faster
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">Competitor Advantage</p>
+                        <p className="text-sm text-muted-foreground">
+                          They ship while you plan
                         </p>
                       </div>
                     </motion.div>
                   </div>
 
-                  {/* Developer Flow Visualization */}
-                  <div className="mt-8">
-                    <h4 className="text-lg font-semibold mb-4">
-                      How You Spend Your Time:
-                    </h4>
-                    <div className="relative h-32">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{
-                            duration: 20,
-                            repeat: Infinity,
-                            ease: "linear",
-                          }}
-                          className="opacity-20"
-                        >
-                          <Code2 className="w-24 h-24 text-purple-400" />
-                        </motion.div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center">
-                            <div className="text-3xl font-bold text-purple-600">
-                              80%
-                            </div>
-                            <p className="text-sm text-muted-foreground">
-                              Writing specs manually
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+                  {/* Visual: Development Cycle */}
+                  <div className="mt-12 pt-6 border-t border-gray-100">
+                    <DevelopmentCycle />
+                  </div>
+                </div>
+              </Card>
+            </motion.article>
+
+            {/* Problem 3: Building the Wrong Things */}
+            <motion.article
+              aria-label="Problem 3: Building the Wrong Things"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              whileHover={{ scale: 1.02, y: -4 }}
+            >
+              <Card className="relative h-full p-6 overflow-hidden bg-gradient-to-br from-yellow-50 via-white to-green-50 border-2 border-yellow-200 transition-shadow duration-300 hover:shadow-xl">
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <div className="p-2 rounded-full bg-gradient-to-br from-yellow-100 to-green-100">
+                      <Target className="w-6 h-6 text-yellow-600" />
                     </div>
+                    Problem #3: Building the Wrong Things
+                  </h3>
+
+                  <div className="space-y-4">
+                    <motion.div
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 }}
+                    >
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">Loudest Voice Bias</p>
+                        <p className="text-sm text-muted-foreground">
+                          Building for complainers, not payers
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">No Revenue Connection</p>
+                        <p className="text-sm text-muted-foreground">
+                          Can't link features to revenue
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">User Disappointment</p>
+                        <p className="text-sm text-muted-foreground">
+                          Features nobody actually uses
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">Churn Spiral</p>
+                        <p className="text-sm text-muted-foreground">
+                          Losing customers to competitors
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">Founder Burnout</p>
+                        <p className="text-sm text-muted-foreground">
+                          Working hard on wrong things
+                        </p>
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Visual: Wrong Priorities */}
+                  <div className="mt-12 pt-8 border-t border-gray-100">
+                    <WrongPriorities />
                   </div>
                 </div>
               </Card>
             </motion.article>
           </div>
-
-          {/* The Connection - Killer Insight */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-12"
-            whileHover={{ scale: 1.02, y: -4 }}
-          >
-            <Card className="p-8 bg-gradient-to-r from-orange-50 via-white to-orange-50/30 border-2 border-accent-orange transition-shadow duration-300 hover:shadow-xl">
-              <div className="text-center">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: "spring", stiffness: 200 }}
-                  className="inline-block mb-4"
-                >
-                  <div className="p-4 rounded-full bg-gradient-to-br from-accent-orange/20 to-accent-coral/20">
-                    <Lightbulb className="w-12 h-12 text-accent-orange" />
-                  </div>
-                </motion.div>
-
-                <h4 className="text-2xl font-bold mb-4">The Killer Insight</h4>
-                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                  These problems are connected.
-                  <span className="font-semibold text-foreground">
-                    {" "}
-                    Bad feedback organization
-                  </span>{" "}
-                  =
-                  <span className="font-semibold text-foreground">
-                    {" "}
-                    bad development priorities
-                  </span>{" "}
-                  =
-                  <span className="font-semibold text-foreground">
-                    {" "}
-                    wasted AI coding potential
-                  </span>
-                  .
-                </p>
-              </div>
-            </Card>
-          </motion.div>
         </motion.div>
 
         {/* Founder Testimonials */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="my-20"
-        >
-          <h3 className="text-2xl font-bold text-center mb-8">
-            Real Founders, Real Pain
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {FOUNDER_TESTIMONIALS.map((testimonial, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                whileHover={{ scale: 1.02, y: -4 }}
-              >
-                <Card className="p-6 h-full bg-gradient-to-br from-white to-gray-50 border-gray-200 transition-shadow duration-300 hover:shadow-xl">
-                  <Quote className="w-8 h-8 text-accent-orange/30 mb-4" />
-                  <p className="text-muted-foreground mb-4 italic">
-                    "{testimonial.quote}"
-                  </p>
-                  <div className="mt-auto">
-                    <p className="font-semibold">{testimonial.author}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {testimonial.role} • {testimonial.mrr}
-                    </p>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* The Breaking Point - Dramatic Finale */}
         <motion.div
@@ -817,7 +787,8 @@ export default function ProblemSectionEnhanced() {
               </motion.div>
 
               <h3 className="text-3xl sm:text-4xl font-bold mb-6">
-                The Real Cost of <span className="text-primary">Feedback Chaos</span>
+                The Real Cost of{" "}
+                <span className="text-primary">Feedback Chaos</span>
               </h3>
 
               <div className="grid grid-cols-3 gap-6 mb-8">
