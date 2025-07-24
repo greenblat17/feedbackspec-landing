@@ -15,6 +15,7 @@ import { ComparisonTable } from "../components/ComparisonTable";
 import { InteractiveTransformation } from "../components/InteractiveTransformation";
 import { CareerTimeline } from "../components/CareerTimeline";
 import { BackToTop } from "../components/BackToTop";
+import { UserJourneySection } from "../components/UserJourneySection";
 
 export default function Home() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -74,43 +75,48 @@ export default function Home() {
         <ProblemSectionEnhanced />
       </section>
 
+      {/* User Journey Section */}
+      <section id="journey" className="bg-background">
+        <UserJourneySection />
+      </section>
+
       {/* Benefits Section */}
-      <section id="features" className="bg-background">
+      <section id="features" className="bg-gray-50/50 dark:bg-gray-950/50">
         <FeedbackSpecBenefitsEnhanced />
       </section>
 
       {/* Interactive Transformation */}
-      <section id="transformation" className="bg-gray-50/50 dark:bg-gray-950/50">
+      <section id="transformation" className="bg-background">
         <InteractiveTransformation />
       </section>
 
       {/* Career Timeline */}
-      <section id="timeline" className="bg-background">
+      <section id="timeline" className="bg-gray-50/50 dark:bg-gray-950/50">
         <CareerTimeline />
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="bg-gray-50/50 dark:bg-gray-950/50">
+      <section id="how-it-works" className="bg-background">
         <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
       </section>
 
       {/* Comparison Table */}
-      <section id="comparison" className="bg-background">
+      <section id="comparison" className="bg-gray-50/50 dark:bg-gray-950/50">
         <ComparisonTable />
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="bg-gray-50/50 dark:bg-gray-950/50">
+      <section id="testimonials" className="bg-background">
         <WallOfLove />
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="bg-background">
+      <section id="pricing" className="bg-gray-50/50 dark:bg-gray-950/50">
         <FeedbackSpecPricingEnhanced onStartTrial={() => setIsFormOpen(true)} />
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gray-50/50 dark:bg-gray-950/50">
+      <section className="bg-background">
         <FeedbackSpecCTA />
       </section>
 
