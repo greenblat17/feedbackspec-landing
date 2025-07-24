@@ -63,7 +63,7 @@ const timelineData = [
 
 export function CareerTimeline() {
   return (
-    <div className="relative">
+    <div className="relative overflow-visible z-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -80,13 +80,13 @@ export function CareerTimeline() {
 
       <div className="relative max-w-6xl mx-auto">
         {/* Desktop Timeline */}
-        <div className="hidden md:block">
+        <div className="hidden md:block relative z-10">
           {/* Timeline Line */}
           <div className="absolute left-0 right-0 top-1/2 h-1 bg-gradient-to-r from-blue-200 via-purple-200 to-primary/20 transform -translate-y-1/2" />
 
           {/* Timeline Progress */}
           <motion.div
-            className="absolute left-0 top-1/2 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-primary transform -translate-y-1/2"
+            className="absolute left-0 top-1/2 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-primary transform -translate-y-1/2 z-0"
             initial={{ width: "0%" }}
             whileInView={{ width: "100%" }}
             viewport={{ once: true }}
@@ -94,7 +94,7 @@ export function CareerTimeline() {
           />
 
           {/* Timeline Items */}
-          <div className="relative grid grid-cols-5 gap-4 pt-8 pb-8">
+          <div className="relative grid grid-cols-5 gap-4 pt-32 pb-32 z-20">
             {timelineData.map((item, index) => (
               <motion.div
                 key={index}
@@ -102,7 +102,7 @@ export function CareerTimeline() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className={`relative ${index % 2 === 0 ? "top-0" : "top-32"}`}
+                className={`relative ${index % 2 === 0 ? "-top-24" : "top-24"}`}
               >
                 {/* Connection Line */}
                 <div
@@ -128,21 +128,21 @@ export function CareerTimeline() {
 
                 {/* Content Card */}
                 <Card
-                  className={`p-6 ${item.bgColor} border-2 hover:shadow-xl transition-all duration-300`}
+                  className={`p-4 ${item.bgColor} border-2 hover:shadow-xl transition-all duration-300 relative z-30`}
                 >
                   <div
-                    className={`inline-flex items-center justify-center w-12 h-12 rounded-full ${item.bgColor} mb-4`}
+                    className={`inline-flex items-center justify-center w-10 h-10 rounded-full ${item.bgColor} mb-3`}
                   >
-                    <item.icon className={`w-6 h-6 ${item.color}`} />
+                    <item.icon className={`w-5 h-5 ${item.color}`} />
                   </div>
 
-                  <Badge variant="outline" className="mb-3">
+                  <Badge variant="outline" className="mb-2 text-xs">
                     {item.time}
                   </Badge>
 
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                  <h3 className="text-base font-semibold mb-2 leading-tight">{item.title}</h3>
 
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     {item.description}
                   </p>
                 </Card>

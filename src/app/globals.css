@@ -96,6 +96,33 @@
   border-color: hsl(var(--border));
 }
 
+/* Performance optimizations */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-pulse {
+    animation-duration: 3s;
+  }
+  
+  .animate-ping {
+    animation-duration: 2s;
+  }
+}
+
+/* Disable animations for performance on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* GPU optimization for transforms */
+.will-change-transform {
+  will-change: transform;
+}
+
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));

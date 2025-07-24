@@ -81,12 +81,13 @@ function FeedbackGraveyard() {
 function OpportunitiesMissedCounter() {
   const [missed, setMissed] = useState(127);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMissed((prev) => prev + 1);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // Disabled auto-increment for performance
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setMissed((prev) => prev + 1);
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <motion.div
@@ -313,8 +314,8 @@ export default function ProblemSectionEnhanced() {
   }, []);
 
   return (
-    <section
-      className="relative min-h-screen py-24 overflow-hidden bg-white"
+    <div
+      className="relative min-h-screen py-24 overflow-hidden"
       aria-label="The problems faced by founders"
     >
       {/* Animated background with void effect */}
@@ -905,6 +906,6 @@ export default function ProblemSectionEnhanced() {
           </Card>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -75,21 +75,32 @@ const ACTIVITY_FEED = [
 
 // Floating spec component
 function FloatingSpec({ delay = 0 }: { delay?: number }) {
+  const [mounted, setMounted] = React.useState(false);
+  const [specIndex] = React.useState(() => delay % 3);
+  const [initialX] = React.useState(() => (delay * 67) % 200 - 100);
+  const [animateX] = React.useState(() => (delay * 43) % 100 - 50);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const specs = [
     "// FEATURE: Advanced Search\n// Priority: HIGH\n// Revenue Impact: +$2.4k MRR",
     "/* User Dashboard Redesign\n * 156 users requested\n * Est. 32% churn reduction */",
     "// Mobile App MVP\n// 89% of users want this\n// $5k MRR opportunity",
   ];
 
-  const randomSpec = specs[Math.floor(Math.random() * specs.length)];
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 100, x: Math.random() * 200 - 100 }}
+      initial={{ opacity: 0, y: 100, x: initialX }}
       animate={{
         opacity: [0, 0.7, 0],
         y: [-100, -300, -500],
-        x: Math.random() * 100 - 50,
+        x: animateX,
       }}
       transition={{
         duration: 15,
@@ -100,7 +111,7 @@ function FloatingSpec({ delay = 0 }: { delay?: number }) {
       className="absolute pointer-events-none"
     >
       <pre className="text-xs text-primary/30 font-mono whitespace-pre">
-        {randomSpec}
+        {specs[specIndex]}
       </pre>
     </motion.div>
   );
@@ -175,9 +186,9 @@ function LaunchButton({
                 }}
                 animate={{
                   opacity: 0,
-                  scale: Math.random() * 2 + 1,
-                  x: (Math.random() - 0.5) * 200,
-                  y: Math.random() * -200 - 50,
+                  scale: (i % 3) + 1,
+                  x: ((i * 37) % 200) - 100,
+                  y: -((i * 23) % 200) - 50,
                 }}
                 exit={{ opacity: 0 }}
                 transition={{
@@ -321,9 +332,11 @@ export function FeedbackSpecCTA() {
 
   // Simulate live updates
   React.useEffect(() => {
+    const counter = { value: 0 };
     const interval = setInterval(() => {
-      setSpecsGenerated((prev) => prev + Math.floor(Math.random() * 3));
-      if (Math.random() > 0.7) {
+      counter.value += 1;
+      setSpecsGenerated((prev) => prev + ((counter.value % 3) + 1));
+      if (counter.value % 3 === 0) {
         setSpotsLeft((prev) => Math.max(prev - 1, 0));
       }
     }, 5000);

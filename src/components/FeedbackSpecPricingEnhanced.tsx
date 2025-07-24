@@ -189,7 +189,7 @@ export default function FeedbackSpecPricingEnhanced({
   const [showComparison, setShowComparison] = useState(false);
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <div className="relative py-24 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-full blur-3xl" />
@@ -393,59 +393,6 @@ export default function FeedbackSpecPricingEnhanced({
         </div>
 
         {/* ROI Calculator Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto mb-16"
-        >
-          <div className="bg-blue-50 dark:bg-blue-950/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-900">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-bold mb-4">See Your ROI</h3>
-                <p className="text-muted-foreground mb-6">
-                  Most founders save 20+ hours per week and increase their
-                  shipping speed by 3x with FeedbackSpec.
-                </p>
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
-                    <Clock className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Time Saved</p>
-                    <p className="text-sm text-muted-foreground">
-                      20 hours/week on average
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
-                    <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Revenue Growth</p>
-                    <p className="text-sm text-muted-foreground">
-                      +47% MRR in 3 months
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
-                    <Users className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Feature Adoption</p>
-                    <p className="text-sm text-muted-foreground">
-                      80%+ user satisfaction
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
 
         {/* Feature Comparison Table */}
         <AnimatePresence>
@@ -539,6 +486,6 @@ export default function FeedbackSpecPricingEnhanced({
           )}
         </AnimatePresence>
       </div>
-    </section>
+    </div>
   );
 }

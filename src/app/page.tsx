@@ -53,29 +53,41 @@ export default function Home() {
       <FeedbackSpecHeader onStartTrial={() => setIsFormOpen(true)} />
 
       {/* Hero Section */}
-      <FeedbackSpecHeroEnhanced
-        title="Turn Scattered Feedback Into Cursor-Ready Specs in Minutes"
-        subtitle="The AI-Powered Feedback Engine for Founders Who Ship Daily"
-        description="FeedbackSpec automatically centralizes your scattered feedback AND transforms it into production-ready specifications for Cursor, Claude Code, and GitHub Copilot. The only tool that solves both problems founders face."
-        primaryCtaText="Try free for 14 days"
-        secondaryCtaText="No card required • Instant setup"
-        onPrimaryCtaClick={() => setIsFormOpen(true)}
-      />
+      <section className="bg-background">
+        <FeedbackSpecHeroEnhanced
+          title="Turn Scattered Feedback Into Cursor-Ready Specs in Minutes"
+          subtitle="The AI-Powered Feedback Engine for Founders Who Ship Daily"
+          description="FeedbackSpec automatically centralizes your scattered feedback AND transforms it into production-ready specifications for Cursor, Claude Code, and GitHub Copilot. The only tool that solves both problems founders face."
+          primaryCtaText="Try free for 14 days"
+          secondaryCtaText="No card required • Instant setup"
+          onPrimaryCtaClick={() => setIsFormOpen(true)}
+        />
+      </section>
 
       {/* Problem Section */}
-      <ProblemSectionEnhanced />
+      <section className="bg-gray-50/50 dark:bg-gray-950/50">
+        <ProblemSectionEnhanced />
+      </section>
 
       {/* Benefits Section */}
-      <FeedbackSpecBenefitsEnhanced />
+      <section className="bg-background">
+        <FeedbackSpecBenefitsEnhanced />
+      </section>
 
       {/* How It Works Section */}
-      <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
+      <section className="bg-gray-50/50 dark:bg-gray-950/50">
+        <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
+      </section>
 
       {/* Pricing Section */}
-      <FeedbackSpecPricingEnhanced onStartTrial={() => setIsFormOpen(true)} />
+      <section className="bg-background">
+        <FeedbackSpecPricingEnhanced onStartTrial={() => setIsFormOpen(true)} />
+      </section>
 
       {/* CTA Section */}
-      <FeedbackSpecCTA />
+      <section className="bg-gray-50/50 dark:bg-gray-950/50">
+        <FeedbackSpecCTA />
+      </section>
 
       {/* Footer */}
       <Footer

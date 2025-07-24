@@ -274,7 +274,7 @@ export function WallOfLove() {
                 transition={{
                   y: {
                     duration:
-                      columnIndex === 0 ? 30 : columnIndex === 1 ? 35 : 40,
+                      columnIndex === 0 ? 60 : columnIndex === 1 ? 70 : 80,
                     repeat: Infinity,
                     ease: "linear",
                   },

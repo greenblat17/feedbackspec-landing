@@ -113,12 +113,13 @@ function AppScreenshot() {
   const [activeItem, setActiveItem] = useState(0);
   const [showSpec, setShowSpec] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveItem((prev) => (prev + 1) % MOCK_FEEDBACK_ITEMS.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  // Disabled auto-rotation for performance
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setActiveItem((prev) => (prev + 1) % MOCK_FEEDBACK_ITEMS.length);
+  //   }, 3000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <motion.div
@@ -424,13 +425,14 @@ function RotatingText() {
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % words.length);
-    }, 2500);
+  // Disabled auto-rotation for performance
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentIndex((prev) => (prev + 1) % words.length);
+  //   }, 2500);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const CurrentIcon = words[currentIndex].icon;
 

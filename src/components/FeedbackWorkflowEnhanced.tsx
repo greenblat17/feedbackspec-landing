@@ -425,12 +425,7 @@ function GenerateSpecificationsScreenshot() {
             <span className="text-xs font-medium">
               Generating Specification...
             </span>
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            >
-              <Sparkles className="w-4 h-4 text-primary" />
-            </motion.div>
+            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
           </div>
 
           {/* Generated spec preview */}
@@ -567,7 +562,7 @@ export function FeedbackWorkflowEnhanced({
 
     const timer = setInterval(() => {
       if (progress < 100) {
-        setProgress((prev) => prev + 5); // Much faster increment
+        setProgress((prev) => prev + 20); // Larger increment for slower interval
       } else {
         // Stop at the last step (step 2, which is index 2)
         if (currentStep < WORKFLOW_STEPS.length - 1) {
@@ -579,7 +574,7 @@ export function FeedbackWorkflowEnhanced({
           setProgress(100);
         }
       }
-    }, 200); // Much longer interval
+    }, 1000); // Much slower interval for better performance
 
     return () => clearInterval(timer);
   }, [progress, isPlaying, currentStep]);
@@ -672,12 +667,7 @@ export function FeedbackWorkflowEnhanced({
 
                     {/* Active step pulse */}
                     {idx === currentStep && (
-                      <motion.div
-                        className="absolute inset-0 rounded-full border-4 border-primary"
-                        initial={{ scale: 1, opacity: 1 }}
-                        animate={{ scale: 1.5, opacity: 0 }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      />
+                      <div className="absolute inset-0 rounded-full border-4 border-primary animate-ping" />
                     )}
 
                     {/* Progress ring for current step */}
@@ -812,15 +802,11 @@ export function FeedbackWorkflowEnhanced({
               <Card className="overflow-hidden bg-gradient-to-br from-card to-card/50 border-2 border-primary/20">
                 <CardHeader className="text-center pb-4 sm:pb-6">
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4">
-                    <motion.div
-                      className="p-3 sm:p-4 rounded-2xl bg-primary/20 text-primary"
-                      animate={{ rotate: [0, -10, 10, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
+                    <div className="p-3 sm:p-4 rounded-2xl bg-primary/20 text-primary">
                       {React.cloneElement(WORKFLOW_STEPS[currentStep].icon, {
                         className: "w-6 h-6 sm:w-8 sm:h-8",
                       })}
-                    </motion.div>
+                    </div>
                     <div className="text-center sm:text-left">
                       <h3 className="text-2xl sm:text-3xl font-bold">
                         {WORKFLOW_STEPS[currentStep].title}

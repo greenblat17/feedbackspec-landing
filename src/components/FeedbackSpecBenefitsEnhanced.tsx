@@ -96,7 +96,7 @@ import { ComparisonTable } from "./ComparisonTable";
 // Main Component
 export default function FeedbackSpecBenefitsEnhanced() {
   return (
-    <section className="relative py-16 sm:py-24 lg:py-32 bg-white overflow-hidden">
+    <div className="relative py-16 sm:py-24 lg:py-32 overflow-x-hidden">
       {/* Enhanced animated background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-bl from-primary/5 to-transparent rounded-full blur-3xl" />
@@ -357,7 +357,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
         </div>
 
         {/* Career Timeline */}
-        <div className="mb-20 lg:mb-24">
+        <div className="mb-20 lg:mb-24 overflow-visible">
           <CareerTimeline />
         </div>
 
@@ -391,6 +391,6 @@ export default function FeedbackSpecBenefitsEnhanced() {
           <WallOfLove />
         </div>
       </div>
-    </section>
+    </div>
   );
 }
