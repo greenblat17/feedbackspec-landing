@@ -85,29 +85,9 @@ export default function Home() {
         <FeedbackSpecBenefitsEnhanced />
       </section>
 
-      {/* Interactive Transformation */}
-      <section id="transformation" className="bg-background">
-        <InteractiveTransformation />
-      </section>
-
-      {/* Career Timeline */}
-      <section id="timeline" className="bg-gray-50/50 dark:bg-gray-950/50">
-        <CareerTimeline />
-      </section>
-
       {/* How It Works Section */}
       <section id="how-it-works" className="bg-background">
         <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
-      </section>
-
-      {/* Comparison Table */}
-      <section id="comparison" className="bg-gray-50/50 dark:bg-gray-950/50">
-        <ComparisonTable />
-      </section>
-
-      {/* Testimonials */}
-      <section id="testimonials" className="bg-background">
-        <WallOfLove />
       </section>
 
       {/* Pricing Section */}
@@ -135,7 +115,7 @@ export default function Home() {
           // Handle form completion (e.g., redirect to dashboard)
         }}
       />
-      
+
       {/* Back to Top Button */}
       <BackToTop />
     </div>
