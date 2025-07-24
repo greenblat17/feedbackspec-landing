@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   motion,
   AnimatePresence,
@@ -549,35 +549,62 @@ export function FeedbackWorkflowEnhanced({
   className?: string;
 }) {
   const [currentStep, setCurrentStep] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [showDemo, setShowDemo] = useState(false);
-  // Disabled scroll-based animations for performance
-  // const { scrollYProgress } = useScroll();
-  // const scale = useTransform(scrollYProgress, [0.4, 0.6], [0.95, 1]);
-
-  // Disabled auto-progress for performance
+  const [hasStarted, setHasStarted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  // Start animation when section comes into view
   useEffect(() => {
-    if (!isPlaying) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasStarted) {
+            setHasStarted(true);
+            setIsPlaying(true);
+            setCurrentStep(0);
+            setProgress(0);
+          }
+        });
+      },
+      { threshold: 0.3 } // Start when 30% of section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [hasStarted]);
+
+  // Auto-progress animation
+  useEffect(() => {
+    if (!isPlaying || !hasStarted) return;
 
     const timer = setInterval(() => {
       if (progress < 100) {
         setProgress((prev) => prev + 20); // Larger increment for slower interval
       } else {
-        // Stop at the last step (step 2, which is index 2)
         if (currentStep < WORKFLOW_STEPS.length - 1) {
           setCurrentStep((prev) => prev + 1);
           setProgress(0);
         } else {
-          // At the last step, stop playing
-          setIsPlaying(false);
-          setProgress(100);
+          // At the last step, wait 2 seconds then restart
+          setTimeout(() => {
+            setCurrentStep(0);
+            setProgress(0);
+          }, 2000);
         }
       }
     }, 1000); // Much slower interval for better performance
 
     return () => clearInterval(timer);
-  }, [progress, isPlaying, currentStep]);
+  }, [progress, isPlaying, currentStep, hasStarted]);
 
   const handleStepClick = (index: number) => {
     setCurrentStep(index);
@@ -594,10 +621,12 @@ export function FeedbackWorkflowEnhanced({
     setCurrentStep(0);
     setProgress(0);
     setIsPlaying(true);
+    setHasStarted(true);
   };
 
   return (
     <section
+      ref={sectionRef}
       className={cn(
         "py-24 bg-gradient-to-b from-muted/5 to-background overflow-hidden",
         className

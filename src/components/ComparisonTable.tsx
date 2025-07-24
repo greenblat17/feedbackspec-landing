@@ -147,12 +147,12 @@ export function ComparisonTable() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-12"
+        className="text-center mb-8 sm:mb-12 px-4"
       >
-        <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
           Why FeedbackSpec Beats Everything Else
         </h2>
-        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
           The only tool that solves both feedback chaos AND slow development
         </p>
       </motion.div>
@@ -163,21 +163,21 @@ export function ComparisonTable() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="w-full bg-white rounded-xl border border-gray-200 overflow-hidden"
+          className="w-full bg-white rounded-lg sm:rounded-xl border border-gray-200 overflow-hidden"
         >
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200">
-              <th className="text-left p-4 font-semibold">Feature</th>
-              <th className="text-center p-4 font-semibold text-gray-600">
+              <th className="text-left p-3 sm:p-4 text-sm sm:text-base font-semibold">Feature</th>
+              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-gray-600">
                 Traditional Feedback Tools
               </th>
-              <th className="text-center p-4 font-semibold text-gray-600">
+              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-gray-600">
                 Generic Project Management
               </th>
-              <th className="text-center p-4 font-semibold text-gray-600">
+              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-gray-600">
                 Manual Process
               </th>
-              <th className="text-center p-4 font-semibold bg-primary/5">
+              <th className="text-center p-3 sm:p-4 text-sm sm:text-base font-semibold bg-primary/5">
                 <div className="flex items-center justify-center">
                   <FeedbackSpecLogo size="lg" showText={true} />
                 </div>
@@ -197,37 +197,37 @@ export function ComparisonTable() {
                   index % 2 === 0 ? "bg-white" : "bg-gray-50/50"
                 )}
               >
-                <td className="p-4 font-medium">{row.feature}</td>
-                <td className="p-4 text-center">
+                <td className="p-3 sm:p-4 text-sm sm:text-base font-medium">{row.feature}</td>
+                <td className="p-3 sm:p-4 text-center">
                   <div className="flex items-center justify-center gap-2">
                     <StatusIcon status={row.traditional.status} />
-                    <span className="text-sm text-gray-600">
+                    <span className="text-xs sm:text-sm text-gray-600">
                       {row.traditional.text}
                     </span>
                   </div>
                 </td>
-                <td className="p-4 text-center">
+                <td className="p-3 sm:p-4 text-center">
                   <div className="flex items-center justify-center gap-2">
                     <StatusIcon status={row.projectMgmt.status} />
-                    <span className="text-sm text-gray-600">
+                    <span className="text-xs sm:text-sm text-gray-600">
                       {row.projectMgmt.text}
                     </span>
                   </div>
                 </td>
-                <td className="p-4 text-center">
+                <td className="p-3 sm:p-4 text-center">
                   <div className="flex items-center justify-center gap-2">
                     <StatusIcon status={row.manual.status} />
-                    <span className="text-sm text-gray-600">
+                    <span className="text-xs sm:text-sm text-gray-600">
                       {row.manual.text}
                     </span>
                   </div>
                 </td>
-                <td className="p-4 text-center bg-primary/5">
+                <td className="p-3 sm:p-4 text-center bg-primary/5">
                   <div className="flex items-center justify-center gap-2">
                     <StatusIcon status={row.feedbackSpec.status} />
                     <span
                       className={cn(
-                        "text-sm font-medium",
+                        "text-xs sm:text-sm font-medium",
                         row.feedbackSpec.highlight
                           ? "text-primary"
                           : "text-gray-700"
@@ -252,44 +252,44 @@ export function ComparisonTable() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.05 }}
-            className="bg-white rounded-lg border border-gray-200 p-4"
+            className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4"
           >
-            <h3 className="font-semibold mb-3">{row.feature}</h3>
+            <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base">{row.feature}</h3>
             <div className="space-y-2">
               <div className="flex items-start gap-2">
                 <StatusIcon status={row.traditional.status} />
                 <div className="flex-1">
-                  <p className="text-xs font-medium text-gray-500">
+                  <p className="text-[10px] sm:text-xs font-medium text-gray-500">
                     Traditional Tools
                   </p>
-                  <p className="text-sm">{row.traditional.text}</p>
+                  <p className="text-xs sm:text-sm">{row.traditional.text}</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <StatusIcon status={row.projectMgmt.status} />
                 <div className="flex-1">
-                  <p className="text-xs font-medium text-gray-500">
+                  <p className="text-[10px] sm:text-xs font-medium text-gray-500">
                     Project Management
                   </p>
-                  <p className="text-sm">{row.projectMgmt.text}</p>
+                  <p className="text-xs sm:text-sm">{row.projectMgmt.text}</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <StatusIcon status={row.manual.status} />
                 <div className="flex-1">
-                  <p className="text-xs font-medium text-gray-500">
+                  <p className="text-[10px] sm:text-xs font-medium text-gray-500">
                     Manual Process
                   </p>
-                  <p className="text-sm">{row.manual.text}</p>
+                  <p className="text-xs sm:text-sm">{row.manual.text}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-2 p-2 bg-primary/5 rounded-lg">
+              <div className="flex items-start gap-2 p-2 sm:p-3 bg-primary/5 rounded-lg">
                 <StatusIcon status={row.feedbackSpec.status} />
                 <div className="flex-1">
                   <div className="mb-1">
                     <FeedbackSpecLogo size="lg" showText={true} />
                   </div>
-                  <p className="text-sm font-medium text-primary">
+                  <p className="text-xs sm:text-sm font-medium text-primary">
                     {row.feedbackSpec.text}
                   </p>
                 </div>

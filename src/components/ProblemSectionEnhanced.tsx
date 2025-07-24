@@ -315,7 +315,7 @@ export default function ProblemSectionEnhanced() {
 
   return (
     <div
-      className="relative min-h-screen py-24 overflow-hidden"
+      className="relative min-h-screen py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden"
       aria-label="The problems faced by founders"
     >
       {/* Animated background with void effect */}
@@ -347,7 +347,7 @@ export default function ProblemSectionEnhanced() {
       {/* Feedback Graveyard Background */}
       <FeedbackGraveyard />
 
-      <div className="container relative mx-auto px-6 max-w-7xl">
+      <div className="container relative mx-auto px-4 sm:px-6 max-w-7xl">
         {/* Hero section with glitch effect */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -378,13 +378,13 @@ export default function ProblemSectionEnhanced() {
             </div>
           </motion.div>
 
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
             <span className="text-foreground">The Founders's</span>
             <br />
             <span className="text-primary">Development Hell</span>
           </h2>
 
-          <p className="font-body text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+          <p className="font-body text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-6 sm:mb-8">
             You started building because you love creating solutions. But now
             you're stuck in an endless cycle of{" "}
             <span className="font-bold text-foreground">feedback chaos</span>{" "}
@@ -417,7 +417,7 @@ export default function ProblemSectionEnhanced() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {/* Problem 1: Feedback Chaos */}
             <motion.article
               aria-label="Problem 1: Feedback Chaos"
@@ -427,11 +427,11 @@ export default function ProblemSectionEnhanced() {
               transition={{ duration: 0.8 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card className="relative h-full p-6 overflow-hidden bg-gradient-to-br from-red-50 via-white to-orange-50 border-2 border-red-200 transition-shadow duration-300 hover:shadow-xl">
+              <Card className="relative h-full p-4 sm:p-5 lg:p-6 overflow-hidden bg-gradient-to-br from-red-50 via-white to-orange-50 border-2 border-red-200 transition-shadow duration-300 hover:shadow-xl">
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
                     <div className="p-2 rounded-full bg-gradient-to-br from-red-100 to-orange-100">
-                      <MessageSquare className="w-6 h-6 text-accent-orange" />
+                      <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 text-accent-orange" />
                     </div>
                     Problem #1: Feedback Chaos
                   </h3>
@@ -446,8 +446,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Platform Scattered Hell</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Platform Scattered Hell</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           20+ sources: Twitter, Discord, emails
                         </p>
                       </div>
@@ -462,8 +462,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Zero Organization</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Zero Organization</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           No tagging, no search, no history
                         </p>
                       </div>
@@ -478,8 +478,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Time Vampire</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Time Vampire</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           15+ hours weekly just organizing
                         </p>
                       </div>
@@ -494,8 +494,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Analysis Paralysis</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Analysis Paralysis</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           Too much noise, no clear signal
                         </p>
                       </div>
@@ -510,8 +510,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Lost Revenue</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Lost Revenue</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           Missing high-value feature requests
                         </p>
                       </div>
@@ -535,11 +535,11 @@ export default function ProblemSectionEnhanced() {
               transition={{ duration: 0.8, delay: 0.1 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card className="relative h-full p-6 overflow-hidden bg-gradient-to-br from-purple-50 via-white to-blue-50 border-2 border-purple-200 transition-shadow duration-300 hover:shadow-xl">
+              <Card className="relative h-full p-4 sm:p-5 lg:p-6 overflow-hidden bg-gradient-to-br from-purple-50 via-white to-blue-50 border-2 border-purple-200 transition-shadow duration-300 hover:shadow-xl">
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
                     <div className="p-2 rounded-full bg-gradient-to-br from-purple-100 to-blue-100">
-                      <Timer className="w-6 h-6 text-primary" />
+                      <Timer className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                     </div>
                     Problem #2: Slow Development Cycle
                   </h3>
@@ -554,10 +554,10 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">
+                        <p className="font-semibold text-sm sm:text-base">
                           Manual Specification Writing
                         </p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           Hours turning feedback into specs
                         </p>
                       </div>
@@ -572,8 +572,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Generic AI Prompts</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Generic AI Prompts</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           Missing critical context & details
                         </p>
                       </div>
@@ -588,8 +588,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Context Switching Hell</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Context Switching Hell</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           From feedback to code to debug
                         </p>
                       </div>
@@ -604,8 +604,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Reinventing the Wheel</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Reinventing the Wheel</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           No spec templates or patterns
                         </p>
                       </div>
@@ -620,8 +620,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Competitor Advantage</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Competitor Advantage</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           They ship while you plan
                         </p>
                       </div>
@@ -645,11 +645,11 @@ export default function ProblemSectionEnhanced() {
               transition={{ duration: 0.8, delay: 0.2 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card className="relative h-full p-6 overflow-hidden bg-gradient-to-br from-yellow-50 via-white to-green-50 border-2 border-yellow-200 transition-shadow duration-300 hover:shadow-xl">
+              <Card className="relative h-full p-4 sm:p-5 lg:p-6 overflow-hidden bg-gradient-to-br from-yellow-50 via-white to-green-50 border-2 border-yellow-200 transition-shadow duration-300 hover:shadow-xl">
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
                     <div className="p-2 rounded-full bg-gradient-to-br from-yellow-100 to-green-100">
-                      <Target className="w-6 h-6 text-yellow-600" />
+                      <Target className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600" />
                     </div>
                     Problem #3: Building the Wrong Things
                   </h3>
@@ -664,8 +664,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Loudest Voice Bias</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Loudest Voice Bias</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           Building for complainers, not payers
                         </p>
                       </div>
@@ -680,8 +680,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">No Revenue Connection</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">No Revenue Connection</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           Can't link features to revenue
                         </p>
                       </div>
@@ -696,8 +696,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">User Disappointment</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">User Disappointment</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           Features nobody actually uses
                         </p>
                       </div>
@@ -712,8 +712,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Churn Spiral</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Churn Spiral</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           Losing customers to competitors
                         </p>
                       </div>
@@ -728,8 +728,8 @@ export default function ProblemSectionEnhanced() {
                     >
                       <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold">Founder Burnout</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm sm:text-base">Founder Burnout</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           Working hard on wrong things
                         </p>
                       </div>

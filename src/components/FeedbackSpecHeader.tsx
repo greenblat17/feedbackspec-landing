@@ -33,12 +33,26 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
     children,
     setPosition,
     href = "#",
+    onClick,
   }: {
     children: React.ReactNode;
     setPosition: any;
     href?: string;
+    onClick?: () => void;
   }) => {
     const ref = useRef<HTMLLIElement>(null);
+    
+    const handleClick = (e: React.MouseEvent) => {
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      onClick?.();
+    };
+    
     return (
       <li
         ref={ref}
@@ -53,7 +67,7 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
         }}
         className="relative z-10 block cursor-pointer px-4 py-2 text-sm font-medium text-foreground mix-blend-difference transition-colors hover:text-primary font-ui tracking-ui"
       >
-        <a href={href}>{children}</a>
+        <a href={href} onClick={handleClick}>{children}</a>
       </li>
     );
   };
@@ -73,14 +87,14 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-2 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm"
           : "bg-transparent"
       } ${className}`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 pt-2">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div
             className="flex-shrink-0"
@@ -103,11 +117,14 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               <Tab setPosition={setPosition} href="#features">
                 Features
               </Tab>
+              <Tab setPosition={setPosition} href="#how-it-works">
+                How it Works
+              </Tab>
               <Tab setPosition={setPosition} href="#pricing">
                 Pricing
               </Tab>
-              <Tab setPosition={setPosition} href="#about">
-                About
+              <Tab setPosition={setPosition} href="#testimonials">
+                Testimonials
               </Tab>
               <Cursor position={position} />
             </ul>
@@ -115,13 +132,21 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
 
           {/* CTA Button & Mobile Menu */}
           <div className="flex items-center gap-4">
-            <Button
-              className="hidden sm:inline-flex bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6"
-              size="sm"
-              onClick={onStartTrial}
-            >
-              Start Free Trial
-            </Button>
+            <div className="hidden sm:flex items-center gap-3">
+              <a
+                href="/login"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                Login
+              </a>
+              <Button
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6"
+                size="sm"
+                onClick={onStartTrial}
+              >
+                Start Free Trial
+              </Button>
+            </div>
 
             {/* Mobile Menu Button */}
             <motion.button
@@ -153,25 +178,55 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
             <a
               href="#features"
               className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMobileMenuOpen(false);
+                document.querySelector('#features')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Features
             </a>
             <a
+              href="#how-it-works"
+              className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMobileMenuOpen(false);
+                document.querySelector('#how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              How it Works
+            </a>
+            <a
               href="#pricing"
               className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMobileMenuOpen(false);
+                document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Pricing
             </a>
             <a
-              href="#about"
+              href="#testimonials"
               className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMobileMenuOpen(false);
+                document.querySelector('#testimonials')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
-              About
+              Testimonials
             </a>
-            <div className="pt-2">
+            <div className="pt-2 space-y-2">
+              <a
+                href="/login"
+                className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors text-center"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Login
+              </a>
               <Button
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
                 size="sm"

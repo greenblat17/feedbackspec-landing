@@ -10,6 +10,11 @@ import FeedbackSpecPricingEnhanced from "../components/FeedbackSpecPricingEnhanc
 import { FeedbackSpecCTA } from "../components/FeedbackSpecCTA";
 import Footer from "../components/Footer";
 import { FeedbackFormModal } from "../components/FeedbackFormModal";
+import { WallOfLove } from "../components/WallOfLove";
+import { ComparisonTable } from "../components/ComparisonTable";
+import { InteractiveTransformation } from "../components/InteractiveTransformation";
+import { CareerTimeline } from "../components/CareerTimeline";
+import { BackToTop } from "../components/BackToTop";
 
 export default function Home() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -53,7 +58,7 @@ export default function Home() {
       <FeedbackSpecHeader onStartTrial={() => setIsFormOpen(true)} />
 
       {/* Hero Section */}
-      <section className="bg-background">
+      <section id="hero" className="bg-background">
         <FeedbackSpecHeroEnhanced
           title="Turn Scattered Feedback Into Cursor-Ready Specs in Minutes"
           subtitle="The AI-Powered Feedback Engine for Founders Who Ship Daily"
@@ -65,22 +70,42 @@ export default function Home() {
       </section>
 
       {/* Problem Section */}
-      <section className="bg-gray-50/50 dark:bg-gray-950/50">
+      <section id="problem" className="bg-gray-50/50 dark:bg-gray-950/50">
         <ProblemSectionEnhanced />
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-background">
+      <section id="features" className="bg-background">
         <FeedbackSpecBenefitsEnhanced />
       </section>
 
+      {/* Interactive Transformation */}
+      <section id="transformation" className="bg-gray-50/50 dark:bg-gray-950/50">
+        <InteractiveTransformation />
+      </section>
+
+      {/* Career Timeline */}
+      <section id="timeline" className="bg-background">
+        <CareerTimeline />
+      </section>
+
       {/* How It Works Section */}
-      <section className="bg-gray-50/50 dark:bg-gray-950/50">
+      <section id="how-it-works" className="bg-gray-50/50 dark:bg-gray-950/50">
         <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
       </section>
 
+      {/* Comparison Table */}
+      <section id="comparison" className="bg-background">
+        <ComparisonTable />
+      </section>
+
+      {/* Testimonials */}
+      <section id="testimonials" className="bg-gray-50/50 dark:bg-gray-950/50">
+        <WallOfLove />
+      </section>
+
       {/* Pricing Section */}
-      <section className="bg-background">
+      <section id="pricing" className="bg-background">
         <FeedbackSpecPricingEnhanced onStartTrial={() => setIsFormOpen(true)} />
       </section>
 
@@ -104,6 +129,9 @@ export default function Home() {
           // Handle form completion (e.g., redirect to dashboard)
         }}
       />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 }

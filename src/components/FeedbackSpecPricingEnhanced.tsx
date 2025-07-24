@@ -189,7 +189,7 @@ export default function FeedbackSpecPricingEnhanced({
   const [showComparison, setShowComparison] = useState(false);
 
   return (
-    <div className="relative py-24 overflow-hidden">
+    <div className="relative py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-full blur-3xl" />
@@ -202,24 +202,24 @@ export default function FeedbackSpecPricingEnhanced({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 lg:mb-16 px-4"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
             Start shipping faster today
           </h2>
 
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Join 200+ founders who transformed their development process
           </p>
         </motion.div>
 
         {/* Billing toggle */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8 sm:mb-12 px-4">
           <div className="inline-flex items-center p-1.5 bg-muted/50 rounded-full border border-border/50">
             <button
               onClick={() => setBillingPeriod("monthly")}
               className={cn(
-                "px-6 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                "px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200",
                 billingPeriod === "monthly"
                   ? "bg-background shadow-sm"
                   : "hover:text-foreground"
@@ -245,7 +245,7 @@ export default function FeedbackSpecPricingEnhanced({
         </div>
 
         {/* Pricing tiers */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16 px-4 sm:px-0">
           {pricingTiers.map((tier, index) => {
             const price =
               billingPeriod === "yearly" ? tier.yearlyPrice : tier.monthlyPrice;
@@ -285,7 +285,7 @@ export default function FeedbackSpecPricingEnhanced({
                     isHovered && "transform -translate-y-2 shadow-xl"
                   )}
                 >
-                  <div className="p-8">
+                  <div className="p-4 sm:p-6 lg:p-8">
                     {/* Icon and name */}
                     <div className="flex items-center gap-3 mb-4">
                       <div
@@ -314,18 +314,18 @@ export default function FeedbackSpecPricingEnhanced({
                         />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold">{tier.name}</h3>
+                        <h3 className="text-lg sm:text-xl font-bold">{tier.name}</h3>
                       </div>
                     </div>
 
-                    <p className="text-sm text-muted-foreground mb-6">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
                       {tier.description}
                     </p>
 
                     {/* Price */}
-                    <div className="mb-8">
+                    <div className="mb-4 sm:mb-6 lg:mb-8">
                       <div className="flex items-baseline gap-1">
-                        <span className="text-4xl font-bold">${price}</span>
+                        <span className="text-2xl sm:text-3xl lg:text-4xl font-bold">${price}</span>
                         <span className="text-muted-foreground">/month</span>
                       </div>
                       {billingPeriod === "yearly" && (
@@ -367,7 +367,7 @@ export default function FeedbackSpecPricingEnhanced({
                           >
                             <Check
                               className={cn(
-                                "w-4 h-4 mt-0.5 flex-shrink-0",
+                                "w-3.5 h-3.5 sm:w-4 sm:h-4 mt-0.5 flex-shrink-0",
                                 feature.highlight
                                   ? "text-primary"
                                   : "text-muted-foreground"
@@ -375,7 +375,7 @@ export default function FeedbackSpecPricingEnhanced({
                             />
                             <span
                               className={cn(
-                                "text-sm",
+                                "text-xs sm:text-sm",
                                 feature.highlight && "font-medium"
                               )}
                             >

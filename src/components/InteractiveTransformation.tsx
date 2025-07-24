@@ -310,37 +310,61 @@ const CleanDragSlider: React.FC = () => {
   const [isDragging, setIsDragging] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = React.useCallback(
-    (e: React.MouseEvent) => {
+  const handleMove = React.useCallback(
+    (clientX: number) => {
       if (!isDragging || !containerRef.current) return;
 
       const rect = containerRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
+      const x = clientX - rect.left;
       const percentage = Math.min(Math.max((x / rect.width) * 100, 0), 100);
       setSliderPosition(percentage);
     },
     [isDragging]
   );
 
-  const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
+  const handleMouseMove = React.useCallback(
+    (e: React.MouseEvent) => {
+      handleMove(e.clientX);
+    },
+    [handleMove]
+  );
+
+  const handleTouchMove = React.useCallback(
+    (e: React.TouchEvent) => {
+      if (e.touches.length > 0) {
+        handleMove(e.touches[0].clientX);
+      }
+    },
+    [handleMove]
+  );
+
+  const handleStart = React.useCallback((e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     setIsDragging(true);
   }, []);
-  const handleMouseUp = React.useCallback(() => setIsDragging(false), []);
+  
+  const handleEnd = React.useCallback(() => setIsDragging(false), []);
 
   React.useEffect(() => {
     if (isDragging) {
-      document.addEventListener("mouseup", handleMouseUp);
-      return () => document.removeEventListener("mouseup", handleMouseUp);
+      const handleDocumentEnd = () => setIsDragging(false);
+      document.addEventListener("mouseup", handleDocumentEnd);
+      document.addEventListener("touchend", handleDocumentEnd);
+      return () => {
+        document.removeEventListener("mouseup", handleDocumentEnd);
+        document.removeEventListener("touchend", handleDocumentEnd);
+      };
     }
-  }, [isDragging, handleMouseUp]);
+  }, [isDragging]);
 
   return (
     <div
       ref={containerRef}
       className="relative w-full h-[600px] overflow-hidden rounded-3xl border border-gray-200/30 dark:border-gray-700/30 cursor-ew-resize shadow-xl select-none"
       onMouseMove={handleMouseMove}
-      onMouseDown={handleMouseDown}
+      onTouchMove={handleTouchMove}
+      onMouseDown={handleStart}
+      onTouchStart={handleStart}
       onDragStart={(e) => e.preventDefault()}
     >
       {/* Red Background for Before Section */}

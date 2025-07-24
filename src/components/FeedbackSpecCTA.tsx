@@ -372,7 +372,7 @@ export function FeedbackSpecCTA() {
         </div>
       </motion.div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -384,7 +384,7 @@ export function FeedbackSpecCTA() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-6 text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight"
+            className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight"
           >
             <span className="block">Stop Building in the Dark.</span>
             <span className="block bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 bg-clip-text text-transparent">
@@ -400,15 +400,15 @@ export function FeedbackSpecCTA() {
             transition={{ delay: 0.2 }}
             className="mb-12"
           >
-            <h3 className="text-2xl font-bold mb-8">The Choice is Simple:</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 lg:mb-8">The Choice is Simple:</h3>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto">
               {/* Keep Struggling */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="p-8 rounded-xl bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-200"
+                className="p-4 sm:p-6 lg:p-8 rounded-xl bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-200"
               >
-                <h4 className="text-xl font-bold mb-4 text-red-900">
+                <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-red-900">
                   Keep Struggling:
                 </h4>
                 <ul className="space-y-3 text-left">
@@ -419,8 +419,8 @@ export function FeedbackSpecCTA() {
                     "Watch competitors ship faster",
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <X className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{item}</span>
+                      <X className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm sm:text-base text-gray-700">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -429,9 +429,9 @@ export function FeedbackSpecCTA() {
               {/* Or Transform Today */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="p-8 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200"
+                className="p-4 sm:p-6 lg:p-8 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200"
               >
-                <h4 className="text-xl font-bold mb-4 text-green-900">
+                <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-green-900">
                   Or Transform Today:
                 </h4>
                 <ul className="space-y-3 text-left">
@@ -442,8 +442,8 @@ export function FeedbackSpecCTA() {
                     "Dominate your market with speed",
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{item}</span>
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm sm:text-base text-gray-700">{item}</span>
                     </li>
                   ))}
                 </ul>

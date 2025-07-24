@@ -232,13 +232,13 @@ export function WallOfLove() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-12"
+        className="text-center mb-8 sm:mb-12 px-4"
       >
-        <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
           Loved by Founders Worldwide
         </h2>
 
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
+        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
           Real feedback from real founders who transformed their development
           process
         </p>
@@ -292,7 +292,7 @@ export function WallOfLove() {
                     >
                       <Card
                         className={cn(
-                          "p-6 transition-all duration-300 hover:shadow-xl",
+                          "p-4 sm:p-6 transition-all duration-300 hover:shadow-xl",
                           testimonial.featured &&
                             "border-primary/50 bg-gradient-to-br from-primary/5 to-transparent"
                         )}
@@ -308,7 +308,7 @@ export function WallOfLove() {
                         </div>
 
                         {/* Quote */}
-                        <blockquote className="text-sm sm:text-base mb-4 leading-relaxed">
+                        <blockquote className="text-xs sm:text-sm md:text-base mb-3 sm:mb-4 leading-relaxed">
                           "{testimonial.quote}"
                         </blockquote>
 
@@ -317,7 +317,7 @@ export function WallOfLove() {
                           <div className="flex items-center gap-3">
                             <div
                               className={cn(
-                                "w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm",
+                                "w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-semibold text-xs sm:text-sm",
                                 testimonial.featured
                                   ? "bg-primary text-primary-foreground"
                                   : "bg-primary/10 text-primary"
@@ -326,13 +326,13 @@ export function WallOfLove() {
                               {testimonial.avatar}
                             </div>
                             <div>
-                              <p className="font-semibold text-sm">
+                              <p className="font-semibold text-xs sm:text-sm">
                                 {testimonial.author}
                               </p>
-                              <p className="text-xs text-muted-foreground">
+                              <p className="text-[10px] sm:text-xs text-muted-foreground">
                                 {testimonial.role}, {testimonial.company}
                               </p>
-                              <p className="text-xs font-medium text-green-600">
+                              <p className="text-[10px] sm:text-xs font-medium text-green-600">
                                 {testimonial.mrr}
                               </p>
                             </div>

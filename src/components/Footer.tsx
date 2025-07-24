@@ -40,23 +40,34 @@ const Footer: React.FC<FooterProps> = ({
     {
       title: "Product",
       links: [
-        { label: "Features", href: "/features" },
-        { label: "Pricing", href: "/pricing" },
+        { label: "Features", href: "#features" },
+        { label: "How it Works", href: "#how-it-works" },
+        { label: "Pricing", href: "#pricing" },
         { label: "Integrations", href: "/integrations" },
-        { label: "API", href: "/api" },
+        { label: "API Docs", href: "/api" },
         { label: "Changelog", href: "/changelog" },
-        { label: "Roadmap", href: "/roadmap" },
+      ],
+    },
+    {
+      title: "Use Cases",
+      links: [
+        { label: "For SaaS Founders", href: "/use-cases/saas" },
+        { label: "For Indie Hackers", href: "/use-cases/indie-hackers" },
+        { label: "For Solo Developers", href: "/use-cases/solo-devs" },
+        { label: "For Agencies", href: "/use-cases/agencies" },
+        { label: "Success Stories", href: "#testimonials" },
+        { label: "Case Studies", href: "/case-studies" },
       ],
     },
     {
       title: "Company",
       links: [
         { label: "About Us", href: "/about" },
-        { label: "Careers", href: "/careers" },
         { label: "Blog", href: "/blog" },
+        { label: "Careers", href: "/careers" },
         { label: "Press Kit", href: "/press" },
-        { label: "Partners", href: "/partners" },
         { label: "Contact", href: "/contact" },
+        { label: "Partners", href: "/partners" },
       ],
     },
     {
@@ -64,21 +75,10 @@ const Footer: React.FC<FooterProps> = ({
       links: [
         { label: "Help Center", href: "/help" },
         { label: "Documentation", href: "/docs" },
-        { label: "Community", href: "/community" },
-        { label: "Status", href: "/status" },
-        { label: "Security", href: "/security" },
+        { label: "Community Forum", href: "/community" },
+        { label: "System Status", href: "https://status.feedbackspec.com" },
         { label: "Privacy Policy", href: "/privacy" },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { label: "Templates", href: "/templates" },
-        { label: "Case Studies", href: "/case-studies" },
-        { label: "Webinars", href: "/webinars" },
-        { label: "Downloads", href: "/downloads" },
         { label: "Terms of Service", href: "/terms" },
-        { label: "Cookie Policy", href: "/cookies" },
       ],
     },
   ],
@@ -129,6 +129,43 @@ const Footer: React.FC<FooterProps> = ({
                 <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                   {description}
                 </p>
+                
+                {/* Quick Links */}
+                <div className="mb-6">
+                  <p className="text-sm font-semibold mb-3">Quick Links</p>
+                  <div className="flex flex-wrap gap-2">
+                    <a
+                      href="#features"
+                      className="text-xs px-3 py-1.5 bg-muted hover:bg-muted/80 rounded-full transition-colors"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.querySelector('#features')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      Features
+                    </a>
+                    <a
+                      href="#pricing"
+                      className="text-xs px-3 py-1.5 bg-muted hover:bg-muted/80 rounded-full transition-colors"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      Pricing
+                    </a>
+                    <a
+                      href="#testimonials"
+                      className="text-xs px-3 py-1.5 bg-muted hover:bg-muted/80 rounded-full transition-colors"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.querySelector('#testimonials')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      Reviews
+                    </a>
+                  </div>
+                </div>
               </div>
 
               {/* Contact Information */}
@@ -188,6 +225,15 @@ const Footer: React.FC<FooterProps> = ({
                           <a
                             href={link.href}
                             className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                            onClick={(e) => {
+                              if (link.href.startsWith('#')) {
+                                e.preventDefault();
+                                const element = document.querySelector(link.href);
+                                if (element) {
+                                  element.scrollIntoView({ behavior: 'smooth' });
+                                }
+                              }
+                            }}
                           >
                             {link.label}
                           </a>
@@ -239,25 +285,27 @@ const Footer: React.FC<FooterProps> = ({
                 href="/privacy"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                Privacy Policy
+                Privacy
               </a>
               <a
                 href="/terms"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                Terms of Service
+                Terms
               </a>
               <a
-                href="/cookies"
+                href="/security"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                Cookie Policy
+                Security
               </a>
               <a
-                href="/sitemap"
+                href="https://status.feedbackspec.com"
                 className="text-muted-foreground hover:text-foreground transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Sitemap
+                Status
               </a>
             </div>
           </div>

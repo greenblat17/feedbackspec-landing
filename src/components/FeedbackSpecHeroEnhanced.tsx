@@ -532,7 +532,7 @@ export function FeedbackSpecHeroEnhanced({
   onPrimaryCtaClick?: () => void;
 }) {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-24 sm:pt-32 lg:pt-46">
+    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-24 md:pt-32">
       {/* Optimized Static Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-primary/12" />
       
@@ -572,7 +572,7 @@ export function FeedbackSpecHeroEnhanced({
           {/* Static ambient glow effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary/15 via-primary/20 to-primary/15 blur-2xl opacity-25" />
           
-          <h1 className="relative font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] text-center">
+          <h1 className="relative font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight leading-[1.1] text-center">
             {/* Layered text effect for depth */}
             <span className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 bg-clip-text text-transparent blur-sm scale-105">
               {title.includes("Cursor-Ready") ? (
@@ -658,7 +658,7 @@ export function FeedbackSpecHeroEnhanced({
 
         {/* Integration Logos - similar to FeedbackScout */}
         <motion.div
-          className="flex flex-wrap justify-center items-center gap-4 mb-8 max-w-4xl mx-auto px-4"
+          className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8 max-w-4xl mx-auto px-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -666,7 +666,7 @@ export function FeedbackSpecHeroEnhanced({
           {INTEGRATION_LOGOS.map((integration, index) => (
             <div
               key={integration.name}
-              className="flex items-center gap-2 px-4 py-2 bg-card/50 border rounded-full text-sm text-muted-foreground hover:bg-card/80 transition-colors"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-card/50 border rounded-full text-xs sm:text-sm text-muted-foreground hover:bg-card/80 transition-colors"
             >
               <integration.icon />
               <span>{integration.name}</span>
@@ -676,20 +676,20 @@ export function FeedbackSpecHeroEnhanced({
 
         {/* CTA Button - our style and text */}
         <motion.div
-          className="flex justify-center mb-12 px-4 sm:px-0"
+          className="flex justify-center mb-8 sm:mb-12 px-4 sm:px-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
           <Button
             size="lg"
-            className="px-6 sm:px-8 py-3 group w-full sm:w-auto min-h-[48px]"
+            className="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 group w-full sm:w-auto max-w-xs sm:max-w-none min-h-[44px] sm:min-h-[48px]"
             onClick={onPrimaryCtaClick}
           >
             <span className="text-sm sm:text-base">
               Start Free 14-Day Trial
             </span>
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </motion.div>
 
