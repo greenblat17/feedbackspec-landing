@@ -27,6 +27,7 @@ import {
   Star,
   ChevronRight,
   X,
+  Clock,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -75,9 +76,9 @@ const pricingTiers: PricingTier[] = [
     monthlyPrice: 149,
     yearlyPrice: 119,
     icon: Rocket,
-    color: "primary",
+    color: "blue",
     bgGradient:
-      "from-primary/10 via-primary/5 to-white dark:from-primary/20 dark:via-primary/10 dark:to-background",
+      "from-blue/5 to-background dark:from-blue/10 dark:to-background",
     cta: "Scale your product",
     popular: true,
     features: [
@@ -176,56 +177,6 @@ const featureComparison = [
   },
 ];
 
-// Simple ROI Calculator
-function MiniROICalculator() {
-  const [hours, setHours] = useState(20);
-  const savings = hours * 80 * 0.9; // $80/hour * 90% time saved
-  const roi = Math.round(((savings - 149) / 149) * 100);
-
-  return (
-    <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-2xl p-6 border border-green-200 dark:border-green-800">
-      <div className="flex items-center gap-2 mb-4">
-        <Calculator className="w-5 h-5 text-green-600 dark:text-green-400" />
-        <h4 className="font-semibold">Quick ROI Calculator</h4>
-      </div>
-
-      <div className="space-y-4">
-        <div>
-          <div className="flex justify-between text-sm mb-2">
-            <span>Hours on feedback/week</span>
-            <span className="font-semibold">{hours}h</span>
-          </div>
-          <Slider
-            value={[hours]}
-            onValueChange={([value]) => setHours(value)}
-            min={5}
-            max={40}
-            step={1}
-            className="w-full"
-          />
-        </div>
-
-        <div className="pt-4 border-t border-green-200 dark:border-green-800">
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">
-              Monthly savings
-            </span>
-            <span className="text-xl font-bold text-green-600 dark:text-green-400">
-              ${savings.toLocaleString()}
-            </span>
-          </div>
-          <div className="flex justify-between items-center mt-2">
-            <span className="text-sm text-muted-foreground">ROI</span>
-            <span className="text-lg font-semibold text-green-600 dark:text-green-400">
-              {roi}%
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function FeedbackSpecPricingEnhanced({
   onStartTrial,
 }: {
@@ -253,11 +204,6 @@ export default function FeedbackSpecPricingEnhanced({
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <Badge variant="secondary" className="mb-4">
-            <Sparkles className="w-4 h-4 mr-2" />
-            Simple, Transparent Pricing
-          </Badge>
-
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Start shipping faster today
           </h2>
@@ -314,12 +260,17 @@ export default function FeedbackSpecPricingEnhanced({
                 transition={{ delay: index * 0.1 }}
                 onHoverStart={() => setHoveredTier(tier.id)}
                 onHoverEnd={() => setHoveredTier(null)}
-                className="relative"
+                className={cn("relative", tier.popular && "z-10")}
               >
+                {/* Subtle background for Pro tier */}
                 {tier.popular && (
-                  <div className="absolute -top-5 left-0 right-0 flex justify-center">
-                    <Badge className="bg-primary text-primary-foreground shadow-lg">
-                      <Star className="w-3 h-3 mr-1" />
+                  <div className="absolute -inset-3 bg-blue-50 dark:bg-blue-950/20 rounded-2xl -z-10" />
+                )}
+
+                {tier.popular && (
+                  <div className="absolute -top-4 left-0 right-0 flex justify-center z-10">
+                    <Badge className="bg-blue-600 text-white hover:bg-blue-700">
+                      <Star className="w-3 h-3 mr-1 fill-current" />
                       Most Popular
                     </Badge>
                   </div>
@@ -328,27 +279,13 @@ export default function FeedbackSpecPricingEnhanced({
                 <Card
                   className={cn(
                     "relative h-full transition-all duration-300",
-                    tier.popular && "border-primary shadow-lg",
+                    tier.popular
+                      ? "bg-blue-50/50 dark:bg-blue-950/10 shadow-lg border-blue-200 dark:border-blue-900"
+                      : "bg-white dark:bg-gray-950",
                     isHovered && "transform -translate-y-2 shadow-xl"
                   )}
-                  style={{
-                    background: `linear-gradient(to bottom right, ${
-                      tier.bgGradient.includes("from-")
-                        ? "var(--gradient-from)"
-                        : "transparent"
-                    }, ${
-                      tier.bgGradient.includes("to-")
-                        ? "var(--gradient-to)"
-                        : "transparent"
-                    })`,
-                  }}
                 >
-                  <div
-                    className={cn(
-                      "p-8",
-                      `bg-gradient-to-br ${tier.bgGradient}`
-                    )}
-                  >
+                  <div className="p-8">
                     {/* Icon and name */}
                     <div className="flex items-center gap-3 mb-4">
                       <div
@@ -402,7 +339,9 @@ export default function FeedbackSpecPricingEnhanced({
                     <Button
                       className={cn(
                         "w-full group",
-                        tier.popular && "bg-primary hover:bg-primary/90"
+                        tier.popular
+                          ? "bg-blue-600 hover:bg-blue-700 text-white"
+                          : "variant-outline"
                       )}
                       size="lg"
                       onClick={onStartTrial}
@@ -452,6 +391,61 @@ export default function FeedbackSpecPricingEnhanced({
             );
           })}
         </div>
+
+        {/* ROI Calculator Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto mb-16"
+        >
+          <div className="bg-blue-50 dark:bg-blue-950/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-900">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-2xl font-bold mb-4">See Your ROI</h3>
+                <p className="text-muted-foreground mb-6">
+                  Most founders save 20+ hours per week and increase their
+                  shipping speed by 3x with FeedbackSpec.
+                </p>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
+                    <Clock className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">Time Saved</p>
+                    <p className="text-sm text-muted-foreground">
+                      20 hours/week on average
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">Revenue Growth</p>
+                    <p className="text-sm text-muted-foreground">
+                      +47% MRR in 3 months
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">Feature Adoption</p>
+                    <p className="text-sm text-muted-foreground">
+                      80%+ user satisfaction
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Feature Comparison Table */}
         <AnimatePresence>
