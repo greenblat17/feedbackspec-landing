@@ -26,6 +26,7 @@ import {
   Crown,
   Star,
   ChevronRight,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -262,7 +263,7 @@ export default function FeedbackSpecPricingEnhanced({
           </h2>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Join 2,847+ founders who transformed their development process
+            Join 200+ founders who transformed their development process
           </p>
         </motion.div>
 
