@@ -65,7 +65,7 @@ export default function Home() {
         }
       `}</style>
       {/* Header */}
-      <FeedbackSpecHeader onStartTrial={() => setIsFormOpen(true)} />
+      <FeedbackSpecHeader />
 
       {/* Hero Section */}
       <section id="hero" className="bg-background">

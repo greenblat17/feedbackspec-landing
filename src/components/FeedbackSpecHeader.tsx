@@ -8,12 +8,10 @@ import { FeedbackSpecLogo } from "./ui/FeedbackSpecLogo";
 
 interface FeedbackSpecHeaderProps {
   className?: string;
-  onStartTrial?: () => void;
 }
 
 const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
   className = "",
-  onStartTrial,
 }) => {
   const [position, setPosition] = useState({
     left: 0,
@@ -120,9 +118,6 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               <Tab setPosition={setPosition} href="#how-it-works">
                 How it Works
               </Tab>
-              <Tab setPosition={setPosition} href="/blog">
-                Blog
-              </Tab>
               <Tab setPosition={setPosition} href="#pricing">
                 Pricing
               </Tab>
@@ -133,18 +128,20 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
           {/* CTA Button & Mobile Menu */}
           <div className="flex items-center gap-4">
             <div className="hidden sm:flex items-center gap-3">
-              <a
-                href="/login"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => window.location.href = '/blog'}
+                className="font-semibold"
               >
-                Login
-              </a>
+                Blog
+              </Button>
               <Button
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6"
                 size="sm"
-                onClick={onStartTrial}
+                onClick={() => window.location.href = '/login'}
               >
-                Start Free Trial
+                Login
               </Button>
             </div>
 
@@ -198,15 +195,6 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               How it Works
             </a>
             <a
-              href="/blog"
-              className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              Blog
-            </a>
-            <a
               href="#pricing"
               className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
               onClick={(e) => {
@@ -218,22 +206,26 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               Pricing
             </a>
             <div className="pt-2 space-y-2">
-              <a
-                href="/login"
-                className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors text-center"
-                onClick={() => setIsMobileMenuOpen(false)}
+              <Button
+                variant="outline"
+                className="w-full font-semibold"
+                size="sm"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.location.href = '/blog';
+                }}
               >
-                Login
-              </a>
+                Blog
+              </Button>
               <Button
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
                 size="sm"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  onStartTrial?.();
+                  window.location.href = '/login';
                 }}
               >
-                Start Free Trial
+                Login
               </Button>
             </div>
           </div>
