@@ -97,7 +97,7 @@ export function InteractiveTransformation() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">
             Your Journey From Chaos to Clarity
           </h2>
 
@@ -139,21 +139,21 @@ function BeforeContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center border border-white/20"
+              className="bg-card/50 backdrop-blur-sm rounded-lg p-3 text-center border border-border/50"
             >
-              <metric.icon className="w-5 h-5 mx-auto mb-1 text-white/80" />
-              <p className="text-[10px] font-medium mb-1 opacity-80">
+              <metric.icon className="w-5 h-5 mx-auto mb-1 text-foreground/80" />
+              <p className="text-[10px] font-medium mb-1 text-muted-foreground">
                 {metric.label}
               </p>
-              <p className="text-base font-bold">{metric.before}</p>
+              <p className="text-base font-bold text-foreground">{metric.before}</p>
             </motion.div>
           ))}
         </div>
 
         {/* Problems */}
         <div className="max-w-lg mx-auto w-full">
-          <h4 className="text-base font-semibold mb-3 flex items-center justify-center gap-2">
-            <AlertCircle className="w-4 h-4" />
+          <h4 className="text-base font-semibold mb-3 flex items-center justify-center gap-2 text-foreground">
+            <AlertCircle className="w-4 h-4 text-red-400" />
             Your Daily Reality
           </h4>
           <ul className="space-y-2">
@@ -165,8 +165,8 @@ function BeforeContent() {
                 transition={{ delay: 0.5 + idx * 0.1 }}
                 className="flex items-start gap-2 text-xs"
               >
-                <X className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span className="opacity-90 leading-relaxed">{feature}</span>
+                <X className="w-4 h-4 mt-0.5 flex-shrink-0 text-red-400" />
+                <span className="text-muted-foreground leading-relaxed">{feature}</span>
               </motion.li>
             ))}
           </ul>
@@ -199,21 +199,21 @@ function AfterContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center border border-white/20"
+              className="bg-card/50 backdrop-blur-sm rounded-lg p-3 text-center border border-border/50"
             >
-              <metric.icon className="w-5 h-5 mx-auto mb-1 text-white/80" />
-              <p className="text-[10px] font-medium mb-1 opacity-80">
+              <metric.icon className="w-5 h-5 mx-auto mb-1 text-foreground/80" />
+              <p className="text-[10px] font-medium mb-1 text-muted-foreground">
                 {metric.label}
               </p>
-              <p className="text-base font-bold">{metric.after}</p>
+              <p className="text-base font-bold text-foreground">{metric.after}</p>
             </motion.div>
           ))}
         </div>
 
         {/* Benefits */}
         <div className="max-w-lg mx-auto w-full">
-          <h4 className="text-base font-semibold mb-3 flex items-center justify-center gap-2">
-            <CheckCircle2 className="w-4 h-4" />
+          <h4 className="text-base font-semibold mb-3 flex items-center justify-center gap-2 text-foreground">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
             Your New Reality
           </h4>
           <ul className="space-y-2">
@@ -225,8 +225,8 @@ function AfterContent() {
                 transition={{ delay: 0.5 + idx * 0.1 }}
                 className="flex items-start gap-2 text-xs"
               >
-                <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span className="opacity-90 leading-relaxed">{feature}</span>
+                <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0 text-emerald-400" />
+                <span className="text-muted-foreground leading-relaxed">{feature}</span>
               </motion.li>
             ))}
           </ul>
@@ -369,15 +369,15 @@ const CleanDragSlider: React.FC = () => {
       onTouchStart={handleStart}
       onDragStart={(e) => e.preventDefault()}
     >
-      {/* Before Section - Highly saturated red gradient */}
+      {/* Before Section - More vibrant red gradient */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-red-300 via-red-400 to-red-300 dark:from-red-900/70 dark:via-red-800/60 dark:to-red-900/70"
+        className="absolute inset-0 bg-gradient-to-br from-red-900/60 via-rose-800/50 to-red-900/60"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       />
 
-      {/* After Section - Highly saturated green gradient */}
+      {/* After Section - More vibrant green gradient */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-green-300 via-green-400 to-green-300 dark:from-green-900/70 dark:via-green-800/60 dark:to-green-900/70"
+        className="absolute inset-0 bg-gradient-to-br from-emerald-900/60 via-green-800/50 to-emerald-900/60"
         style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
       />
 
@@ -388,8 +388,8 @@ const CleanDragSlider: React.FC = () => {
       >
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-red-200 dark:bg-red-900/50 flex items-center justify-center border-2 border-red-300 dark:border-red-700">
-            <X className="w-7 h-7 text-red-700 dark:text-red-400" />
+          <div className="w-14 h-14 rounded-2xl bg-red-500/30 flex items-center justify-center border-2 border-red-400/50">
+            <X className="w-7 h-7 text-red-300" />
           </div>
           <div>
             <h4 className="text-2xl font-bold text-foreground">
@@ -410,8 +410,8 @@ const CleanDragSlider: React.FC = () => {
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-4 flex-1">
-                  <div className="w-12 h-12 rounded-xl bg-red-200 dark:bg-red-900/50 flex items-center justify-center flex-shrink-0">
-                    <span className="text-red-700 dark:text-red-400">
+                  <div className="w-12 h-12 rounded-xl bg-red-500/30 flex items-center justify-center flex-shrink-0">
+                    <span className="text-red-300">
                       {item.icon}
                     </span>
                   </div>
@@ -425,7 +425,7 @@ const CleanDragSlider: React.FC = () => {
                   </div>
                 </div>
                 <div className="ml-4 flex-shrink-0">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-200 dark:bg-red-900/50 text-red-800 dark:text-red-300 border border-red-300 dark:border-red-700">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-500/30 text-red-300 border border-red-400/50">
                     {item.metric}
                   </span>
                 </div>
@@ -442,8 +442,8 @@ const CleanDragSlider: React.FC = () => {
       >
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-green-200 dark:bg-green-900/50 flex items-center justify-center border-2 border-green-300 dark:border-green-700">
-            <Check className="w-7 h-7 text-green-700 dark:text-green-400" />
+          <div className="w-14 h-14 rounded-2xl bg-emerald-500/30 flex items-center justify-center border-2 border-emerald-400/50">
+            <Check className="w-7 h-7 text-emerald-300" />
           </div>
           <div>
             <h4 className="text-2xl font-bold text-foreground">
@@ -464,8 +464,8 @@ const CleanDragSlider: React.FC = () => {
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-4 flex-1">
-                  <div className="w-12 h-12 rounded-xl bg-green-200 dark:bg-green-900/50 flex items-center justify-center flex-shrink-0">
-                    <span className="text-green-700 dark:text-green-400">
+                  <div className="w-12 h-12 rounded-xl bg-emerald-500/30 flex items-center justify-center flex-shrink-0">
+                    <span className="text-emerald-300">
                       {item.icon}
                     </span>
                   </div>
@@ -479,7 +479,7 @@ const CleanDragSlider: React.FC = () => {
                   </div>
                 </div>
                 <div className="ml-4 flex-shrink-0">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-200 dark:bg-green-900/50 text-green-800 dark:text-green-300 border border-green-300 dark:border-green-700">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/30 text-emerald-300 border border-emerald-400/50">
                     {item.metric}
                   </span>
                 </div>
