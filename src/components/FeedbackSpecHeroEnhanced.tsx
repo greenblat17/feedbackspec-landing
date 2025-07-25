@@ -692,7 +692,7 @@ export function FeedbackSpecHeroEnhanced({
   onPrimaryCtaClick?: () => void;
 }) {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-24 md:pt-32">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Optimized Static Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-primary/12" />
 
@@ -719,7 +719,7 @@ export function FeedbackSpecHeroEnhanced({
       <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_1px_1px,rgba(59,130,246,0.15)_1px,transparent_0)] bg-[size:20px_20px]" />
 
       {/* Main Content */}
-      <div className="relative z-10 container px-4 mx-auto text-center">
+      <div className="relative z-10 container px-4 mx-auto text-center pt-32 md:pt-40 lg:pt-48">
         {/* Top Badge - using our content */}
         <motion.div
           className="flex justify-center mb-6"
