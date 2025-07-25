@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lobehub/icons": "^2.17.0",
     "@radix-ui/react-navigation-menu": "^1.2.13",
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slider": "^1.3.5",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-switch": "^1.2.5",
+    "antd": "^5.26.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.6",

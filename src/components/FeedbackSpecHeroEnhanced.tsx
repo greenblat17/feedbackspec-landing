@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Claude, Cursor, Cline } from "@lobehub/icons";
 import {
   Sparkles,
   Users,
@@ -389,129 +390,165 @@ const INTEGRATION_LOGOS = [
 
 // Tool icons
 const CursorIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">
-    <path fill="currentColor" d="M5.5 2L20 6.5L12 9L9 17L5.5 2Z"/>
-    <path fill="currentColor" d="M12 9L20 6.5L14 14L12 9Z" opacity="0.6"/>
-  </svg>
+  <span className="relative inline-block top-4 sm:top-3 md:top-2">
+    <Cursor.Combine
+      size={60}
+      color={"color"}
+      className="w-auto h-15 sm:h-17 md:h-20"
+    />
+  </span>
 );
 
 const ClaudeIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">
-    <circle cx="12" cy="12" r="10" fill="currentColor"/>
-    <path d="M8 12h8M12 8v8" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-  </svg>
+  <span className="relative inline-block top-4 sm:top-3 md:top-2">
+    <Claude.Combine
+      size={65}
+      type={"color"}
+      className="w-auto h-18 sm:h-20 md:h-24"
+    />
+  </span>
 );
 
 const ClineIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">
-    <rect x="3" y="3" width="18" height="18" rx="3" fill="currentColor"/>
-    <path d="M7 12l3 3 7-7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const CodexIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">
-    <path fill="currentColor" d="M8 6L2 12L8 18L9.5 16.5L5 12L9.5 7.5L8 6ZM16 6L14.5 7.5L19 12L14.5 16.5L16 18L22 12L16 6Z"/>
-  </svg>
+  <span className="relative inline-block top-4 sm:top-3 md:top-2">
+    <Cline.Combine
+      size={72}
+      type={"color"}
+      className="w-auto h-18 sm:h-20 md:h-24"
+    />
+  </span>
 );
 
 // Rotating text component for AI tools
 function RotatingText() {
   const words = [
-    { text: "Cursor", color: "from-blue-500 to-blue-600", icon: CursorIcon },
-    { text: "Claude", color: "from-orange-500 to-orange-600", icon: ClaudeIcon },
-    { text: "Cline", color: "from-purple-500 to-purple-600", icon: ClineIcon },
-    { text: "Codex", color: "from-green-500 to-green-600", icon: CodexIcon },
+    {
+      name: "Cursor",
+      showText: false,
+      textIcon: null,
+      text: "Cursor",
+      color: "from-blue-500 to-blue-600",
+      icon: CursorIcon,
+    },
+    {
+      name: "Claude",
+      showText: false,
+      textIcon: null,
+      text: "Claude",
+      color: "from-orange-500 to-orange-600",
+      icon: ClaudeIcon,
+    },
+    {
+      name: "Cline",
+      showText: false,
+      textIcon: null,
+      text: "Cline",
+      color: "from-purple-500 to-purple-600",
+      icon: ClineIcon,
+    },
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Disabled auto-rotation for performance
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentIndex((prev) => (prev + 1) % words.length);
-  //   }, 2500);
+  // Enable auto-rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % words.length);
+    }, 2500);
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   const CurrentIcon = words[currentIndex].icon;
+  const CurrentTextIcon = words[currentIndex].textIcon;
 
   return (
-    <span className="relative inline-flex items-center gap-2 sm:gap-3">
+    <span className="relative inline-flex items-center gap-2">
       <AnimatePresence mode="wait">
         <motion.div
           key={`icon-${currentIndex}`}
           initial={{
             opacity: 0,
-            rotateY: -90,
-            scale: 0.6,
+            y: 20,
+            scale: 0.8,
           }}
           animate={{
             opacity: 1,
-            rotateY: 0,
+            y: 0,
             scale: 1,
           }}
           exit={{
             opacity: 0,
-            rotateY: 90,
-            scale: 0.6,
+            y: -20,
+            scale: 0.8,
           }}
           transition={{
-            duration: 0.6,
+            duration: 0.5,
             ease: [0.25, 0.46, 0.45, 0.94],
-            type: "spring",
-            stiffness: 100,
-            damping: 15,
           }}
-          className={`bg-gradient-to-r ${words[currentIndex].color} text-transparent bg-clip-text`}
+          className="w-32 sm:w-40 md:w-48 h-18 sm:h-20 md:h-24 flex items-center justify-center"
         >
           <CurrentIcon />
         </motion.div>
       </AnimatePresence>
-      
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={currentIndex}
-          initial={{
-            opacity: 0,
-            rotateX: -90,
-            scale: 0.8,
-            filter: "blur(4px)",
-          }}
-          animate={{
-            opacity: 1,
-            rotateX: 0,
-            scale: 1,
-            filter: "blur(0px)",
-          }}
-          exit={{
-            opacity: 0,
-            rotateX: 90,
-            scale: 0.8,
-            filter: "blur(4px)",
-          }}
-          transition={{
-            duration: 0.6,
-            ease: [0.25, 0.46, 0.45, 0.94],
-            type: "spring",
-            stiffness: 100,
-            damping: 15,
-          }}
-          className={`inline-block bg-gradient-to-r ${words[currentIndex].color} bg-clip-text text-transparent font-extrabold relative`}
-          style={{ transformOrigin: "center center" }}
-        >
-          {words[currentIndex].text}
 
-          {/* Glowing background effect */}
+      {words[currentIndex].textIcon ? (
+        <AnimatePresence mode="wait">
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 0.3, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
-            transition={{ duration: 0.4 }}
-            className={`absolute inset-0 bg-gradient-to-r ${words[currentIndex].color} rounded-lg blur-lg -z-10`}
-          />
-        </motion.span>
-      </AnimatePresence>
+            key={`text-${currentIndex}`}
+            initial={{
+              opacity: 0,
+              y: 20,
+              scale: 0.9,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: -20,
+              scale: 0.9,
+            }}
+            transition={{
+              duration: 0.5,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
+          >
+            <CurrentTextIcon />
+          </motion.div>
+        </AnimatePresence>
+      ) : (
+        words[currentIndex].showText && (
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentIndex}
+              initial={{
+                opacity: 0,
+                y: 20,
+                scale: 0.9,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                y: -20,
+                scale: 0.9,
+              }}
+              transition={{
+                duration: 0.5,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+              className={`inline-block bg-gradient-to-r ${words[currentIndex].color} bg-clip-text text-transparent font-extrabold`}
+            >
+              {words[currentIndex].text}
+            </motion.span>
+          </AnimatePresence>
+        )
+      )}
     </span>
   );
 }
@@ -535,14 +572,24 @@ export function FeedbackSpecHeroEnhanced({
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-24 md:pt-32">
       {/* Optimized Static Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-primary/12" />
-      
+
       {/* Static Code Elements - No Animation */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
-        <div className="absolute top-[15%] left-[10%] font-mono text-lg text-primary/30 select-none">{"{"}</div>
-        <div className="absolute top-[25%] right-[15%] font-mono text-lg text-primary/30 select-none">{"}"}</div>
-        <div className="absolute top-[35%] left-[5%] font-mono text-lg text-primary/30 select-none">&lt;/&gt;</div>
-        <div className="absolute bottom-[30%] left-[12%] font-mono text-lg text-primary/30 select-none">=&gt;</div>
-        <div className="absolute bottom-[20%] right-[20%] font-mono text-lg text-primary/30 select-none">()</div>
+        <div className="absolute top-[15%] left-[10%] font-mono text-lg text-primary/30 select-none">
+          {"{"}
+        </div>
+        <div className="absolute top-[25%] right-[15%] font-mono text-lg text-primary/30 select-none">
+          {"}"}
+        </div>
+        <div className="absolute top-[35%] left-[5%] font-mono text-lg text-primary/30 select-none">
+          &lt;/&gt;
+        </div>
+        <div className="absolute bottom-[30%] left-[12%] font-mono text-lg text-primary/30 select-none">
+          =&gt;
+        </div>
+        <div className="absolute bottom-[20%] right-[20%] font-mono text-lg text-primary/30 select-none">
+          ()
+        </div>
       </div>
 
       {/* Simple Dot Pattern */}
@@ -567,11 +614,15 @@ export function FeedbackSpecHeroEnhanced({
           className="relative mb-6 max-w-5xl mx-auto px-4 sm:px-0"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{
+            delay: 0.2,
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
         >
           {/* Static ambient glow effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary/15 via-primary/20 to-primary/15 blur-2xl opacity-25" />
-          
+
           <h1 className="relative font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight leading-[1.1] text-center">
             {/* Layered text effect for depth */}
             <span className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 bg-clip-text text-transparent blur-sm scale-105">
@@ -579,7 +630,9 @@ export function FeedbackSpecHeroEnhanced({
                 <>
                   {title.split("Cursor-Ready")[0]}
                   <span className="inline-flex items-baseline gap-2">
-                    <span className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">⚡</span>
+                    <span className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">
+                      ⚡
+                    </span>
                     Cursor
                   </span>
                   -Ready
@@ -589,7 +642,7 @@ export function FeedbackSpecHeroEnhanced({
                 title
               )}
             </span>
-            
+
             {/* Main text with enhanced gradients */}
             <span className="relative">
               {title.includes("Cursor-Ready") ? (
@@ -597,12 +650,13 @@ export function FeedbackSpecHeroEnhanced({
                   <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">
                     {title.split("Cursor-Ready")[0]}
                   </span>
-                  <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent font-extrabold inline-flex items-baseline gap-2">
-                    <CursorIcon />
-                    Cursor-Ready
+                  <RotatingText />
+                  <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent ml-12">
+                    -Ready Specs
                   </span>
-                  <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">
-                    {title.split("Cursor-Ready")[1]}
+                  <br />
+                  <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent font-extrabold">
+                    in Minutes
                   </span>
                 </>
               ) : (
@@ -627,8 +681,8 @@ export function FeedbackSpecHeroEnhanced({
                   key={i}
                   className="absolute w-1 h-1 bg-primary/20 rounded-full"
                   style={{
-                    top: `${25 + (i * 15)}%`,
-                    left: `${15 + (i * 20)}%`,
+                    top: `${25 + i * 15}%`,
+                    left: `${15 + i * 20}%`,
                   }}
                 />
               ))}
