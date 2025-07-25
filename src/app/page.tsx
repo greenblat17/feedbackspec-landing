@@ -1,28 +1,36 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import FeedbackSpecHeader from "../components/FeedbackSpecHeader";
 import { FeedbackSpecHeroEnhanced } from "../components/FeedbackSpecHeroEnhanced";
-import ProblemSectionEnhanced from "../components/ProblemSectionEnhanced";
-import FeedbackSpecBenefitsEnhanced from "../components/FeedbackSpecBenefitsEnhanced";
-import { FeedbackWorkflowEnhanced } from "../components/FeedbackWorkflowEnhanced";
-import FeedbackSpecPricingEnhanced from "../components/FeedbackSpecPricingEnhanced";
 import { FeedbackSpecCTA } from "../components/FeedbackSpecCTA";
 import Footer from "../components/Footer";
 import { FeedbackFormModal } from "../components/FeedbackFormModal";
-import { WallOfLove } from "../components/WallOfLove";
-import { ComparisonTable } from "../components/ComparisonTable";
-import { InteractiveTransformation } from "../components/InteractiveTransformation";
 import { BackToTop } from "../components/BackToTop";
-import { TransformationTimeline } from "../components/TransformationTimeline";
-import { UserJourneySection } from "../components/UserJourneySection";
-import { CareerTimeline } from "@/components/CareerTimeline";
+
+// Performance monitoring (only in dev)
+const PerformanceMonitor = dynamic(
+  () => import("../components/PerformanceMonitor").then(mod => ({ default: mod.PerformanceMonitor })),
+  { ssr: false }
+);
+import {
+  LazyProblemSection,
+  LazyBenefitsSection,
+  LazyCareerTimeline,
+  LazyInteractiveTransformation,
+  LazyComparisonTable,
+  LazyWallOfLove,
+  LazyPricingSection,
+  LazyWorkflowSection,
+} from "../components/LazySection";
 
 export default function Home() {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
+      {process.env.NODE_ENV === "development" && <PerformanceMonitor />}
       <style jsx global>{`
         /* Performance optimizations */
         * {
@@ -73,42 +81,42 @@ export default function Home() {
 
       {/* Problem Section */}
       <section id="problem" className="bg-muted/10">
-        <ProblemSectionEnhanced />
+        <LazyProblemSection />
       </section>
 
       {/* Benefits Section */}
       <section id="features" className="bg-background">
-        <FeedbackSpecBenefitsEnhanced />
+        <LazyBenefitsSection />
       </section>
 
-      {/* Interactive Transformation */}
+      {/* Career Timeline */}
       <section id="career-timeline" className="bg-muted/10">
-        <CareerTimeline />
+        <LazyCareerTimeline />
       </section>
 
       {/* Interactive Transformation */}
       <section id="transformation" className="bg-muted/10">
-        <InteractiveTransformation />
+        <LazyInteractiveTransformation />
       </section>
 
       {/* Comparison Table */}
       <section id="comparison" className="bg-background">
-        <ComparisonTable />
+        <LazyComparisonTable />
       </section>
 
       {/* Testimonials */}
       <section id="testimonials" className="bg-muted/10">
-        <WallOfLove />
+        <LazyWallOfLove />
       </section>
 
       {/* How It Works Section */}
       <section id="how-it-works" className="bg-muted/10">
-        <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
+        <LazyWorkflowSection title="From Scattered Feedback to AI-Ready Specs" />
       </section>
 
       {/* Pricing Section */}
       <section id="pricing" className="bg-muted/10">
-        <FeedbackSpecPricingEnhanced onStartTrial={() => setIsFormOpen(true)} />
+        <LazyPricingSection onStartTrial={() => setIsFormOpen(true)} />
       </section>
 
       {/* CTA Section */}
