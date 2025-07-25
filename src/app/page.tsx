@@ -12,7 +12,11 @@ import Footer from "../components/Footer";
 import { FeedbackFormModal } from "../components/FeedbackFormModal";
 import { WallOfLove } from "../components/WallOfLove";
 import { ComparisonTable } from "../components/ComparisonTable";
+import { InteractiveTransformation } from "../components/InteractiveTransformation";
 import { BackToTop } from "../components/BackToTop";
+import { TransformationTimeline } from "../components/TransformationTimeline";
+import { UserJourneySection } from "../components/UserJourneySection";
+import { CareerTimeline } from "@/components/CareerTimeline";
 
 export default function Home() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -75,6 +79,16 @@ export default function Home() {
       {/* Benefits Section */}
       <section id="features" className="bg-background">
         <FeedbackSpecBenefitsEnhanced />
+      </section>
+
+      {/* Interactive Transformation */}
+      <section id="career-timeline" className="bg-muted/10">
+        <CareerTimeline />
+      </section>
+
+      {/* Interactive Transformation */}
+      <section id="transformation" className="bg-muted/10">
+        <InteractiveTransformation />
       </section>
 
       {/* Comparison Table */}
