@@ -120,11 +120,11 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               <Tab setPosition={setPosition} href="#how-it-works">
                 How it Works
               </Tab>
+              <Tab setPosition={setPosition} href="/blog">
+                Blog
+              </Tab>
               <Tab setPosition={setPosition} href="#pricing">
                 Pricing
-              </Tab>
-              <Tab setPosition={setPosition} href="#testimonials">
-                Testimonials
               </Tab>
               <Cursor position={position} />
             </ul>
@@ -198,6 +198,15 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               How it Works
             </a>
             <a
+              href="/blog"
+              className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Blog
+            </a>
+            <a
               href="#pricing"
               className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
               onClick={(e) => {
@@ -207,17 +216,6 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               }}
             >
               Pricing
-            </a>
-            <a
-              href="#testimonials"
-              className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsMobileMenuOpen(false);
-                document.querySelector('#testimonials')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Testimonials
             </a>
             <div className="pt-2 space-y-2">
               <a
