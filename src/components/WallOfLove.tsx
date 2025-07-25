@@ -227,43 +227,44 @@ export function WallOfLove() {
   const columns = createColumns();
 
   return (
-    <div className="py-16 relative">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-8 sm:mb-12 px-4"
-      >
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
-          Loved by Founders Worldwide
-        </h2>
+    <div className="py-16 sm:py-20 md:py-24 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8 sm:mb-12"
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+            Loved by Founders Worldwide
+          </h2>
 
-        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
-          Real feedback from real founders who transformed their development
-          process
-        </p>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
+            Real feedback from real founders who transformed their development
+            process
+          </p>
 
-        <p className="text-sm text-muted-foreground">
-          Hover to pause and read • Updated in real-time
-        </p>
-      </motion.div>
+          <p className="text-sm text-muted-foreground">
+            Hover to pause and read • Updated in real-time
+          </p>
+        </motion.div>
 
-      {/* Scrolling wall container */}
-      <div
-        className="relative overflow-hidden h-[600px] md:h-[700px] lg:h-[800px]"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
+        {/* Scrolling wall container */}
+        <div
+          className="relative overflow-hidden h-[500px] md:h-[600px] lg:h-[650px]"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
         {/* Gradient overlays for fade effect */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
 
-        {/* The wall grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-0">
-          {columns.map((column, columnIndex) => (
-            <div key={columnIndex} className="relative">
-              <motion.div
-                className="flex flex-col gap-6"
+          {/* The wall grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {columns.map((column, columnIndex) => (
+              <div key={columnIndex} className="relative">
+                <motion.div
+                  className="flex flex-col gap-4"
                 animate={{
                   y: isPaused
                     ? 0
@@ -292,32 +293,32 @@ export function WallOfLove() {
                     >
                       <Card
                         className={cn(
-                          "p-4 sm:p-6 transition-all duration-300 hover:shadow-xl",
+                          "p-3 sm:p-4 transition-all duration-300 hover:shadow-xl",
                           testimonial.featured &&
                             "border-primary/50 bg-gradient-to-br from-primary/5 to-transparent"
                         )}
                       >
                         {/* Rating */}
-                        <div className="flex items-center gap-1 mb-3">
+                        <div className="flex items-center gap-1 mb-2">
                           {[...Array(testimonial.rating)].map((_, i) => (
                             <Star
                               key={i}
-                              className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                              className="w-3 h-3 fill-yellow-400 text-yellow-400"
                             />
                           ))}
                         </div>
 
                         {/* Quote */}
-                        <blockquote className="text-xs sm:text-sm md:text-base mb-3 sm:mb-4 leading-relaxed">
+                        <blockquote className="text-xs sm:text-sm mb-3 leading-relaxed">
                           "{testimonial.quote}"
                         </blockquote>
 
                         {/* Author info */}
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2">
                             <div
                               className={cn(
-                                "w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-semibold text-xs sm:text-sm",
+                                "w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-semibold text-xs",
                                 testimonial.featured
                                   ? "bg-primary text-primary-foreground"
                                   : "bg-primary/10 text-primary"
@@ -326,13 +327,13 @@ export function WallOfLove() {
                               {testimonial.avatar}
                             </div>
                             <div>
-                              <p className="font-semibold text-xs sm:text-sm">
+                              <p className="font-semibold text-xs">
                                 {testimonial.author}
                               </p>
-                              <p className="text-[10px] sm:text-xs text-muted-foreground">
+                              <p className="text-xs text-muted-foreground">
                                 {testimonial.role}, {testimonial.company}
                               </p>
-                              <p className="text-[10px] sm:text-xs font-medium text-green-600">
+                              <p className="text-xs font-medium text-green-600">
                                 {testimonial.mrr}
                               </p>
                             </div>
@@ -340,7 +341,7 @@ export function WallOfLove() {
 
                           {/* Source icon */}
                           <div className="text-muted-foreground">
-                            <SourceIcon className="w-4 h-4" />
+                            <SourceIcon className="w-3 h-3" />
                           </div>
                         </div>
 
@@ -354,9 +355,10 @@ export function WallOfLove() {
                     </motion.div>
                   );
                 })}
-              </motion.div>
-            </div>
-          ))}
+                </motion.div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -60,7 +60,7 @@ export default function Home() {
         <FeedbackSpecHeroEnhanced
           title="Turn Scattered Feedback Into Cursor-Ready Specs in Minutes"
           subtitle="The AI-Powered Feedback Engine for Founders Who Ship Daily"
-          description="FeedbackSpec automatically centralizes your scattered feedback AND transforms it into production-ready specifications for Cursor, Claude Code, and GitHub Copilot. The only tool that solves both problems founders face."
+          description="FeedbackSpec automatically centralizes your scattered feedback AND transforms it into production-ready specifications for Cursor, Claude Code, and Cline."
           primaryCtaText="Try free for 14 days"
           secondaryCtaText="No card required • Instant setup"
           onPrimaryCtaClick={() => setIsFormOpen(true)}
@@ -77,11 +77,6 @@ export default function Home() {
         <FeedbackSpecBenefitsEnhanced />
       </section>
 
-      {/* How It Works Section */}
-      <section id="how-it-works" className="bg-muted/10">
-        <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
-      </section>
-
       {/* Comparison Table */}
       <section id="comparison" className="bg-background">
         <ComparisonTable />
@@ -90,6 +85,11 @@ export default function Home() {
       {/* Testimonials */}
       <section id="testimonials" className="bg-muted/10">
         <WallOfLove />
+      </section>
+
+      {/* How It Works Section */}
+      <section id="how-it-works" className="bg-muted/10">
+        <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
       </section>
 
       {/* Pricing Section */}

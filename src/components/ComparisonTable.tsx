@@ -142,23 +142,24 @@ function StatusIcon({ status }: { status: string }) {
 
 export function ComparisonTable() {
   return (
-    <div className="relative">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-8 sm:mb-12 px-4"
-      >
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
-          Why FeedbackSpec Beats Everything Else
-        </h2>
-        <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
-          The only tool that solves both feedback chaos AND slow development
-        </p>
-      </motion.div>
+    <div className="relative py-16 sm:py-20 md:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8 sm:mb-12"
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+            Why FeedbackSpec Beats Everything Else
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
+            The only tool that solves both feedback chaos AND slow development
+          </p>
+        </motion.div>
 
-      {/* Desktop Table */}
-      <div className="hidden lg:block overflow-x-auto">
+        {/* Desktop Table */}
+        <div className="hidden lg:block overflow-x-auto">
         <motion.table
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -167,19 +168,19 @@ export function ComparisonTable() {
         >
           <thead>
             <tr className="bg-muted/50 border-b border-border">
-              <th className="text-left p-3 sm:p-4 text-sm sm:text-base font-semibold">Feature</th>
-              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-muted-foreground">
-                Traditional Feedback Tools
+              <th className="text-left p-2 sm:p-3 text-xs sm:text-sm font-semibold">Feature</th>
+              <th className="text-center p-2 sm:p-3 text-xs sm:text-sm font-semibold text-muted-foreground">
+                Traditional Tools
               </th>
-              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-muted-foreground">
-                Generic Project Management
+              <th className="text-center p-2 sm:p-3 text-xs sm:text-sm font-semibold text-muted-foreground">
+                Project Mgmt
               </th>
-              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-muted-foreground">
-                Manual Process
+              <th className="text-center p-2 sm:p-3 text-xs sm:text-sm font-semibold text-muted-foreground">
+                Manual
               </th>
-              <th className="text-center p-3 sm:p-4 text-sm sm:text-base font-semibold bg-primary/5">
+              <th className="text-center p-2 sm:p-3 text-xs sm:text-sm font-semibold bg-primary/5">
                 <div className="flex items-center justify-center">
-                  <FeedbackSpecLogo size="lg" showText={true} />
+                  <FeedbackSpecLogo size="md" showText={true} />
                 </div>
               </th>
             </tr>
@@ -197,37 +198,37 @@ export function ComparisonTable() {
                   index % 2 === 0 ? "bg-card" : "bg-muted/30"
                 )}
               >
-                <td className="p-3 sm:p-4 text-sm sm:text-base font-medium">{row.feature}</td>
-                <td className="p-3 sm:p-4 text-center">
-                  <div className="flex items-center justify-center gap-2">
+                <td className="p-2 sm:p-3 text-xs sm:text-sm font-medium">{row.feature}</td>
+                <td className="p-2 sm:p-3 text-center">
+                  <div className="flex items-center justify-center gap-1.5">
                     <StatusIcon status={row.traditional.status} />
-                    <span className="text-xs sm:text-sm text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       {row.traditional.text}
                     </span>
                   </div>
                 </td>
-                <td className="p-3 sm:p-4 text-center">
-                  <div className="flex items-center justify-center gap-2">
+                <td className="p-2 sm:p-3 text-center">
+                  <div className="flex items-center justify-center gap-1.5">
                     <StatusIcon status={row.projectMgmt.status} />
-                    <span className="text-xs sm:text-sm text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       {row.projectMgmt.text}
                     </span>
                   </div>
                 </td>
-                <td className="p-3 sm:p-4 text-center">
-                  <div className="flex items-center justify-center gap-2">
+                <td className="p-2 sm:p-3 text-center">
+                  <div className="flex items-center justify-center gap-1.5">
                     <StatusIcon status={row.manual.status} />
-                    <span className="text-xs sm:text-sm text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       {row.manual.text}
                     </span>
                   </div>
                 </td>
-                <td className="p-3 sm:p-4 text-center bg-primary/5">
-                  <div className="flex items-center justify-center gap-2">
+                <td className="p-2 sm:p-3 text-center bg-primary/5">
+                  <div className="flex items-center justify-center gap-1.5">
                     <StatusIcon status={row.feedbackSpec.status} />
                     <span
                       className={cn(
-                        "text-xs sm:text-sm font-medium",
+                        "text-xs font-medium",
                         row.feedbackSpec.highlight
                           ? "text-primary"
                           : "text-gray-700"
@@ -243,53 +244,53 @@ export function ComparisonTable() {
         </motion.table>
       </div>
 
-      {/* Mobile Cards */}
-      <div className="lg:hidden space-y-4">
-        {comparisonData.map((row, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.05 }}
-            className="bg-card rounded-lg border border-border p-3 sm:p-4"
-          >
-            <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base">{row.feature}</h3>
+        {/* Mobile Cards */}
+        <div className="lg:hidden space-y-3">
+          {comparisonData.map((row, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              className="bg-card rounded-lg border border-border p-3"
+            >
+              <h3 className="font-semibold mb-2 text-sm">{row.feature}</h3>
             <div className="space-y-2">
               <div className="flex items-start gap-2">
                 <StatusIcon status={row.traditional.status} />
                 <div className="flex-1">
-                  <p className="text-[10px] sm:text-xs font-medium text-gray-500">
+                  <p className="text-xs font-medium text-gray-500">
                     Traditional Tools
                   </p>
-                  <p className="text-xs sm:text-sm">{row.traditional.text}</p>
+                  <p className="text-xs">{row.traditional.text}</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <StatusIcon status={row.projectMgmt.status} />
                 <div className="flex-1">
-                  <p className="text-[10px] sm:text-xs font-medium text-gray-500">
-                    Project Management
+                  <p className="text-xs font-medium text-gray-500">
+                    Project Mgmt
                   </p>
-                  <p className="text-xs sm:text-sm">{row.projectMgmt.text}</p>
+                  <p className="text-xs">{row.projectMgmt.text}</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <StatusIcon status={row.manual.status} />
                 <div className="flex-1">
-                  <p className="text-[10px] sm:text-xs font-medium text-gray-500">
-                    Manual Process
+                  <p className="text-xs font-medium text-gray-500">
+                    Manual
                   </p>
-                  <p className="text-xs sm:text-sm">{row.manual.text}</p>
+                  <p className="text-xs">{row.manual.text}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-2 p-2 sm:p-3 bg-primary/5 rounded-lg">
+              <div className="flex items-start gap-2 p-2 bg-primary/5 rounded-lg">
                 <StatusIcon status={row.feedbackSpec.status} />
                 <div className="flex-1">
                   <div className="mb-1">
-                    <FeedbackSpecLogo size="lg" showText={true} />
+                    <FeedbackSpecLogo size="md" showText={true} />
                   </div>
-                  <p className="text-xs sm:text-sm font-medium text-primary">
+                  <p className="text-xs font-medium text-primary">
                     {row.feedbackSpec.text}
                   </p>
                 </div>
@@ -297,6 +298,7 @@ export function ComparisonTable() {
             </div>
           </motion.div>
         ))}
+        </div>
       </div>
     </div>
   );
