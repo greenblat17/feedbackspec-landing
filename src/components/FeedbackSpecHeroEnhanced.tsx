@@ -15,6 +15,7 @@ import {
   CheckCircle2,
   Star,
   Github,
+  Rocket,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -419,6 +420,128 @@ const ClineIcon = () => (
   </span>
 );
 
+// Interactive launch button (same as CTA section)
+function LaunchButton({
+  children,
+  ...props
+}: React.ComponentProps<typeof Button>) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIsClicked(true);
+    setTimeout(() => setIsClicked(false), 2000);
+    props.onClick?.(e);
+  };
+
+  return (
+    <div className="relative">
+      {/* Launch particles */}
+      <AnimatePresence>
+        {isClicked && (
+          <>
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{
+                  opacity: 1,
+                  scale: 0,
+                  x: 0,
+                  y: 0,
+                }}
+                animate={{
+                  opacity: 0,
+                  scale: (i % 3) + 1,
+                  x: ((i * 37) % 200) - 100,
+                  y: -((i * 23) % 200) - 50,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: i * 0.02,
+                  ease: "easeOut",
+                }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+              </motion.div>
+            ))}
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Launch pad effect */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className="absolute inset-0 -z-10"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-500/20 blur-xl rounded-full" />
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0"
+            >
+              <div className="absolute top-0 left-1/2 w-2 h-8 bg-primary/50 rounded-full -translate-x-1/2" />
+              <div className="absolute bottom-0 left-1/2 w-2 h-8 bg-primary/50 rounded-full -translate-x-1/2" />
+              <div className="absolute left-0 top-1/2 w-8 h-2 bg-primary/50 rounded-full -translate-y-1/2" />
+              <div className="absolute right-0 top-1/2 w-8 h-2 bg-primary/50 rounded-full -translate-y-1/2" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <Button
+        {...props}
+        onClick={handleClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className={cn(
+          "relative z-10 transition-all duration-300",
+          isHovered && "scale-105",
+          isClicked && "scale-95",
+          props.className
+        )}
+      >
+        <motion.div
+          animate={isClicked ? { y: -20, opacity: 0 } : { y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-2"
+        >
+          {children}
+          <motion.div
+            animate={isHovered ? { x: 5 } : { x: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {isClicked ? (
+              <Rocket className="w-5 h-5" />
+            ) : (
+              <ArrowRight className="w-5 h-5" />
+            )}
+          </motion.div>
+        </motion.div>
+      </Button>
+
+      {/* Countdown */}
+      <AnimatePresence>
+        {isHovered && !isClicked && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-muted-foreground whitespace-nowrap"
+          >
+            <span className="font-mono">LAUNCH IN T-3...2...1...</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 // Rotating text component for AI tools
 function RotatingText() {
   const words = [
@@ -728,23 +851,22 @@ export function FeedbackSpecHeroEnhanced({
           ))}
         </motion.div>
 
-        {/* CTA Button - our style and text */}
+        {/* CTA Button - Enhanced with launch animation */}
         <motion.div
-          className="flex justify-center mb-8 sm:mb-12 px-4 sm:px-0"
+          className="flex justify-center mb-16 sm:mb-20 md:mb-24 px-4 sm:px-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <Button
+          <LaunchButton
             size="lg"
-            className="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 group w-full sm:w-auto max-w-xs sm:max-w-none min-h-[44px] sm:min-h-[48px]"
+            className="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 w-full sm:w-auto max-w-xs sm:max-w-none min-h-[44px] sm:min-h-[48px]"
             onClick={onPrimaryCtaClick}
           >
             <span className="text-sm sm:text-base">
               Start Free 14-Day Trial
             </span>
-            <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
+          </LaunchButton>
         </motion.div>
 
         {/* App Screenshot Demo */}
