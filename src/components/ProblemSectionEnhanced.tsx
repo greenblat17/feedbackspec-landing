@@ -63,12 +63,12 @@ function FeedbackGraveyard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 0.5, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 shadow-sm"
+              className="bg-muted/50 rounded-lg p-3 shadow-sm"
             >
-              <div className="text-xs text-gray-500 mb-1">
+              <div className="text-xs text-muted-foreground mb-1">
                 {msg.platform} • {msg.age}
               </div>
-              <p className="text-sm text-gray-600 line-through">{msg.text}</p>
+              <p className="text-sm text-muted-foreground line-through">{msg.text}</p>
             </motion.div>
           ))}
         </div>
@@ -125,7 +125,7 @@ function FeedbackFlow() {
             transition={{ delay: idx * 0.1 }}
             className="flex items-center gap-2"
           >
-            <platform.icon className={cn("w-5 h-5", platform.color)} />
+            <platform.icon className="w-5 h-5" />
             <span className="text-xs text-muted-foreground">
               {platform.name}
             </span>
@@ -145,7 +145,7 @@ function FeedbackFlow() {
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
-            className="text-gray-300"
+            className="text-muted-foreground/30"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
             transition={{ duration: 2, delay: idx * 0.2, repeat: Infinity }}
@@ -160,11 +160,11 @@ function FeedbackFlow() {
         transition={{ duration: 2, repeat: Infinity }}
       >
         <div className="relative">
-          <div className="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center">
+          <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center">
             <X className="w-10 h-10 text-red-500" />
           </div>
           <motion.div
-            className="absolute inset-0 rounded-full bg-red-200"
+            className="absolute inset-0 rounded-full bg-red-500/20"
             animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
@@ -208,8 +208,8 @@ function DevelopmentCycle() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: idx * 0.2 }}
             >
-              <div className="bg-purple-100 p-2 rounded-full mb-1">
-                <step.icon className="w-4 h-4 text-purple-600" />
+              <div className="bg-purple-500/10 p-2 rounded-full mb-1">
+                <step.icon className="w-4 h-4 text-purple-500" />
               </div>
               <p className="text-xs text-center text-muted-foreground">
                 {step.label}
@@ -220,8 +220,8 @@ function DevelopmentCycle() {
 
         {/* Center timer */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-          <div className="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center">
-            <Timer className="w-7 h-7 text-purple-600" />
+          <div className="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center">
+            <Timer className="w-7 h-7 text-purple-500" />
           </div>
           <p className="text-xs text-center mt-2 text-muted-foreground whitespace-nowrap">
             3-4 hrs/feature
@@ -243,15 +243,15 @@ function WrongPriorities() {
           transition={{ type: "spring", stiffness: 100 }}
           className="relative"
         >
-          <div className="w-24 h-24 rounded-full bg-yellow-200 flex items-center justify-center">
-            <span className="text-2xl font-bold text-yellow-800">73%</span>
+          <div className="w-24 h-24 rounded-full bg-yellow-500/20 flex items-center justify-center">
+            <span className="text-2xl font-bold text-yellow-500">73%</span>
           </div>
           <p className="text-xs text-center mt-2 text-muted-foreground">
             Loud voices
           </p>
         </motion.div>
 
-        <Target className="w-8 h-8 text-gray-400" />
+        <Target className="w-8 h-8 text-muted-foreground" />
 
         <motion.div
           initial={{ scale: 0 }}
@@ -259,8 +259,8 @@ function WrongPriorities() {
           transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
           className="relative"
         >
-          <div className="w-16 h-16 rounded-full bg-green-200 flex items-center justify-center">
-            <span className="text-sm font-bold text-green-800">27%</span>
+          <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center">
+            <span className="text-sm font-bold text-green-500">27%</span>
           </div>
           <p className="text-xs text-center mt-2 text-muted-foreground">
             Real needs
@@ -401,7 +401,7 @@ export default function ProblemSectionEnhanced() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <Card className="inline-block p-6 bg-gradient-to-br from-orange-50 to-red-50 border-accent-orange/30">
+            <Card className="inline-block p-6 bg-gradient-to-br from-orange-500/10 to-red-500/10 border-accent-orange/30">
               <OpportunitiesMissedCounter />
               <p className="text-xs text-muted-foreground mt-2">
                 while you're organizing feedback
@@ -427,10 +427,10 @@ export default function ProblemSectionEnhanced() {
               transition={{ duration: 0.8 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card className="relative h-full p-4 sm:p-5 lg:p-6 overflow-hidden bg-gradient-to-br from-red-50 via-white to-orange-50 border-2 border-red-200 transition-shadow duration-300 hover:shadow-xl">
+              <Card className="relative h-full p-4 sm:p-5 lg:p-6 overflow-hidden bg-gradient-to-br from-red-500/5 via-background to-orange-500/5 border-2 border-red-500/20 transition-shadow duration-300 hover:shadow-xl">
                 <div className="relative z-10">
                   <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-                    <div className="p-2 rounded-full bg-gradient-to-br from-red-100 to-orange-100">
+                    <div className="p-2 rounded-full bg-gradient-to-br from-red-500/10 to-orange-500/10">
                       <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 text-accent-orange" />
                     </div>
                     Problem #1: Feedback Chaos
@@ -519,7 +519,7 @@ export default function ProblemSectionEnhanced() {
                   </div>
 
                   {/* Visual: Feedback Flow */}
-                  <div className="mt-12 pt-8 border-t border-gray-100">
+                  <div className="mt-12 pt-8 border-t border-border">
                     <FeedbackFlow />
                   </div>
                 </div>
@@ -535,10 +535,10 @@ export default function ProblemSectionEnhanced() {
               transition={{ duration: 0.8, delay: 0.1 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card className="relative h-full p-4 sm:p-5 lg:p-6 overflow-hidden bg-gradient-to-br from-purple-50 via-white to-blue-50 border-2 border-purple-200 transition-shadow duration-300 hover:shadow-xl">
+              <Card className="relative h-full p-4 sm:p-5 lg:p-6 overflow-hidden bg-gradient-to-br from-purple-500/5 via-background to-blue-500/5 border-2 border-purple-500/20 transition-shadow duration-300 hover:shadow-xl">
                 <div className="relative z-10">
                   <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-                    <div className="p-2 rounded-full bg-gradient-to-br from-purple-100 to-blue-100">
+                    <div className="p-2 rounded-full bg-gradient-to-br from-purple-500/10 to-blue-500/10">
                       <Timer className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                     </div>
                     Problem #2: Slow Development Cycle
@@ -629,7 +629,7 @@ export default function ProblemSectionEnhanced() {
                   </div>
 
                   {/* Visual: Development Cycle */}
-                  <div className="mt-12 pt-6 border-t border-gray-100">
+                  <div className="mt-12 pt-6 border-t border-border">
                     <DevelopmentCycle />
                   </div>
                 </div>
@@ -645,10 +645,10 @@ export default function ProblemSectionEnhanced() {
               transition={{ duration: 0.8, delay: 0.2 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card className="relative h-full p-4 sm:p-5 lg:p-6 overflow-hidden bg-gradient-to-br from-yellow-50 via-white to-green-50 border-2 border-yellow-200 transition-shadow duration-300 hover:shadow-xl">
+              <Card className="relative h-full p-4 sm:p-5 lg:p-6 overflow-hidden bg-gradient-to-br from-yellow-500/5 via-background to-green-500/5 border-2 border-yellow-500/20 transition-shadow duration-300 hover:shadow-xl">
                 <div className="relative z-10">
                   <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-                    <div className="p-2 rounded-full bg-gradient-to-br from-yellow-100 to-green-100">
+                    <div className="p-2 rounded-full bg-gradient-to-br from-yellow-500/10 to-green-500/10">
                       <Target className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600" />
                     </div>
                     Problem #3: Building the Wrong Things
@@ -737,7 +737,7 @@ export default function ProblemSectionEnhanced() {
                   </div>
 
                   {/* Visual: Wrong Priorities */}
-                  <div className="mt-12 pt-8 border-t border-gray-100">
+                  <div className="mt-12 pt-8 border-t border-border">
                     <WrongPriorities />
                   </div>
                 </div>
@@ -756,10 +756,10 @@ export default function ProblemSectionEnhanced() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <Card className="relative p-12 overflow-hidden bg-gradient-to-r from-blue-50 via-white to-blue-50 border-2 border-blue-300">
+          <Card className="relative p-12 overflow-hidden bg-gradient-to-r from-blue-500/5 via-background to-blue-500/5 border-2 border-blue-500/20">
             <div className="absolute inset-0">
               <motion.div
-                className="absolute inset-0 bg-blue-50/50"
+                className="absolute inset-0 bg-blue-500/10"
                 animate={{ opacity: [0.1, 0.3, 0.1] }}
                 transition={{ duration: 3, repeat: Infinity }}
               />
@@ -772,7 +772,7 @@ export default function ProblemSectionEnhanced() {
                 className="inline-block mb-6"
               >
                 <div className="relative">
-                  <div className="p-6 rounded-full bg-gradient-to-br from-orange-100 to-red-100">
+                  <div className="p-6 rounded-full bg-gradient-to-br from-orange-500/10 to-red-500/10">
                     <Gauge className="w-16 h-16 text-accent-orange" />
                   </div>
                   <motion.div

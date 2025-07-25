@@ -58,7 +58,7 @@ const pricingTiers: PricingTier[] = [
     icon: Zap,
     color: "blue",
     bgGradient:
-      "from-blue-50 to-white dark:from-blue-950/20 dark:to-background",
+      "from-blue-500/10 to-background",
     cta: "Start building faster",
     features: [
       { text: "3 feedback sources" },
@@ -101,7 +101,7 @@ const pricingTiers: PricingTier[] = [
     icon: Building2,
     color: "green",
     bgGradient:
-      "from-green-50 to-white dark:from-green-950/20 dark:to-background",
+      "from-green-500/10 to-background",
     cta: "Contact sales",
     features: [
       { text: "Everything in Pro" },
@@ -264,7 +264,7 @@ export default function FeedbackSpecPricingEnhanced({
               >
                 {/* Subtle background for Pro tier */}
                 {tier.popular && (
-                  <div className="absolute -inset-3 bg-blue-50 dark:bg-blue-950/20 rounded-2xl -z-10" />
+                  <div className="absolute -inset-3 bg-blue-500/10 rounded-2xl -z-10" />
                 )}
 
                 {tier.popular && (
@@ -280,8 +280,8 @@ export default function FeedbackSpecPricingEnhanced({
                   className={cn(
                     "relative h-full transition-all duration-300",
                     tier.popular
-                      ? "bg-blue-50/50 dark:bg-blue-950/10 shadow-lg border-blue-200 dark:border-blue-900"
-                      : "bg-white dark:bg-gray-950",
+                      ? "bg-blue-500/5 shadow-lg border-blue-500/20"
+                      : "bg-card",
                     isHovered && "transform -translate-y-2 shadow-xl"
                   )}
                 >
@@ -293,11 +293,11 @@ export default function FeedbackSpecPricingEnhanced({
                           "w-10 h-10 rounded-lg flex items-center justify-center",
                           tier.color === "primary" && "bg-primary/10",
                           tier.color === "blue" &&
-                            "bg-blue-100 dark:bg-blue-900/50",
+                            "bg-blue-500/10",
                           tier.color === "purple" &&
-                            "bg-purple-100 dark:bg-purple-900/50",
+                            "bg-purple-500/10",
                           tier.color === "green" &&
-                            "bg-green-100 dark:bg-green-900/50"
+                            "bg-green-500/10"
                         )}
                       >
                         <tier.icon

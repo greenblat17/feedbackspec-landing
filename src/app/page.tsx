@@ -12,10 +12,7 @@ import Footer from "../components/Footer";
 import { FeedbackFormModal } from "../components/FeedbackFormModal";
 import { WallOfLove } from "../components/WallOfLove";
 import { ComparisonTable } from "../components/ComparisonTable";
-import { InteractiveTransformation } from "../components/InteractiveTransformation";
-import { CareerTimeline } from "../components/CareerTimeline";
 import { BackToTop } from "../components/BackToTop";
-import { UserJourneySection } from "../components/UserJourneySection";
 
 export default function Home() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -71,27 +68,32 @@ export default function Home() {
       </section>
 
       {/* Problem Section */}
-      <section id="problem" className="bg-gray-50/50 dark:bg-gray-950/50">
+      <section id="problem" className="bg-muted/10">
         <ProblemSectionEnhanced />
       </section>
 
-      {/* User Journey Section */}
-      <section id="journey" className="bg-background">
-        <UserJourneySection />
-      </section>
-
       {/* Benefits Section */}
-      <section id="features" className="bg-gray-50/50 dark:bg-gray-950/50">
+      <section id="features" className="bg-background">
         <FeedbackSpecBenefitsEnhanced />
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="bg-background">
+      <section id="how-it-works" className="bg-muted/10">
         <FeedbackWorkflowEnhanced title="From Scattered Feedback to AI-Ready Specs" />
       </section>
 
+      {/* Comparison Table */}
+      <section id="comparison" className="bg-background">
+        <ComparisonTable />
+      </section>
+
+      {/* Testimonials */}
+      <section id="testimonials" className="bg-muted/10">
+        <WallOfLove />
+      </section>
+
       {/* Pricing Section */}
-      <section id="pricing" className="bg-gray-50/50 dark:bg-gray-950/50">
+      <section id="pricing" className="bg-muted/10">
         <FeedbackSpecPricingEnhanced onStartTrial={() => setIsFormOpen(true)} />
       </section>
 

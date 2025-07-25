@@ -120,19 +120,19 @@ const comparisonData = [
 function StatusIcon({ status }: { status: string }) {
   switch (status) {
     case "yes":
-      return <Check className="w-5 h-5 text-green-600" />;
+      return <Check className="w-5 h-5 text-green-500" />;
     case "no":
-      return <X className="w-5 h-5 text-red-600" />;
+      return <X className="w-5 h-5 text-red-500" />;
     case "partial":
-      return <Check className="w-5 h-5 text-yellow-600" />;
+      return <Check className="w-5 h-5 text-yellow-500" />;
     case "time":
-      return <Clock className="w-5 h-5 text-gray-600" />;
+      return <Clock className="w-5 h-5 text-muted-foreground" />;
     case "fast":
-      return <Zap className="w-5 h-5 text-green-600" />;
+      return <Zap className="w-5 h-5 text-green-500" />;
     case "price":
-      return <DollarSign className="w-5 h-5 text-gray-600" />;
+      return <DollarSign className="w-5 h-5 text-muted-foreground" />;
     case "best-price":
-      return <DollarSign className="w-5 h-5 text-green-600" />;
+      return <DollarSign className="w-5 h-5 text-green-500" />;
     case "target":
       return <Target className="w-5 h-5 text-primary" />;
     default:
@@ -163,18 +163,18 @@ export function ComparisonTable() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="w-full bg-white rounded-lg sm:rounded-xl border border-gray-200 overflow-hidden"
+          className="w-full bg-card rounded-lg sm:rounded-xl border border-border overflow-hidden"
         >
           <thead>
-            <tr className="bg-gray-50 border-b border-gray-200">
+            <tr className="bg-muted/50 border-b border-border">
               <th className="text-left p-3 sm:p-4 text-sm sm:text-base font-semibold">Feature</th>
-              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-gray-600">
+              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-muted-foreground">
                 Traditional Feedback Tools
               </th>
-              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-gray-600">
+              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-muted-foreground">
                 Generic Project Management
               </th>
-              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-gray-600">
+              <th className="text-center p-3 sm:p-4 text-xs sm:text-sm lg:text-base font-semibold text-muted-foreground">
                 Manual Process
               </th>
               <th className="text-center p-3 sm:p-4 text-sm sm:text-base font-semibold bg-primary/5">
@@ -193,15 +193,15 @@ export function ComparisonTable() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
                 className={cn(
-                  "border-b border-gray-100",
-                  index % 2 === 0 ? "bg-white" : "bg-gray-50/50"
+                  "border-b border-border",
+                  index % 2 === 0 ? "bg-card" : "bg-muted/30"
                 )}
               >
                 <td className="p-3 sm:p-4 text-sm sm:text-base font-medium">{row.feature}</td>
                 <td className="p-3 sm:p-4 text-center">
                   <div className="flex items-center justify-center gap-2">
                     <StatusIcon status={row.traditional.status} />
-                    <span className="text-xs sm:text-sm text-gray-600">
+                    <span className="text-xs sm:text-sm text-muted-foreground">
                       {row.traditional.text}
                     </span>
                   </div>
@@ -209,7 +209,7 @@ export function ComparisonTable() {
                 <td className="p-3 sm:p-4 text-center">
                   <div className="flex items-center justify-center gap-2">
                     <StatusIcon status={row.projectMgmt.status} />
-                    <span className="text-xs sm:text-sm text-gray-600">
+                    <span className="text-xs sm:text-sm text-muted-foreground">
                       {row.projectMgmt.text}
                     </span>
                   </div>
@@ -217,7 +217,7 @@ export function ComparisonTable() {
                 <td className="p-3 sm:p-4 text-center">
                   <div className="flex items-center justify-center gap-2">
                     <StatusIcon status={row.manual.status} />
-                    <span className="text-xs sm:text-sm text-gray-600">
+                    <span className="text-xs sm:text-sm text-muted-foreground">
                       {row.manual.text}
                     </span>
                   </div>
@@ -252,7 +252,7 @@ export function ComparisonTable() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.05 }}
-            className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4"
+            className="bg-card rounded-lg border border-border p-3 sm:p-4"
           >
             <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base">{row.feature}</h3>
             <div className="space-y-2">

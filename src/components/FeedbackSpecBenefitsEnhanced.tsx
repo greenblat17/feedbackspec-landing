@@ -87,11 +87,6 @@ function useAnimatedCounter(end: number, duration: number = 2000) {
   return count;
 }
 
-// Import components
-import { InteractiveTransformation } from "./InteractiveTransformation";
-import { WallOfLove } from "./WallOfLove";
-import { CareerTimeline } from "./CareerTimeline";
-import { ComparisonTable } from "./ComparisonTable";
 
 // Main Component
 export default function FeedbackSpecBenefitsEnhanced() {
@@ -135,10 +130,10 @@ export default function FeedbackSpecBenefitsEnhanced() {
             viewport={{ once: true }}
             transition={{ delay: 0 }}
           >
-            <Card className="h-full p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200 hover:shadow-xl transition-shadow">
+            <Card className="h-full p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-blue-500/5 to-purple-500/5 border-2 border-blue-500/20 hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-full bg-blue-100">
-                  <Rocket className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-blue-600" />
+                <div className="p-3 rounded-full bg-blue-500/10">
+                  <Rocket className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-blue-500" />
                 </div>
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-bold">
                   Benefit #1: Become a Feature Shipping Velocity Master
@@ -146,7 +141,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
               </div>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <Clock className="w-5 h-5 text-blue-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       From 20 hours to 20 minutes:
@@ -157,7 +152,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Gauge className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <Gauge className="w-5 h-5 text-blue-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       From 1-2 features to 8+ features monthly:
@@ -168,7 +163,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Brain className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <Brain className="w-5 h-5 text-blue-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">From guessing to knowing:</p>
                     <p className="text-xs sm:text-sm text-muted-foreground">
@@ -177,7 +172,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Target className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <Target className="w-5 h-5 text-blue-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">From reactive to proactive:</p>
                     <p className="text-xs sm:text-sm text-muted-foreground">
@@ -186,7 +181,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Trophy className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <Trophy className="w-5 h-5 text-blue-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       From competitor follower to market leader:
@@ -208,10 +203,10 @@ export default function FeedbackSpecBenefitsEnhanced() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            <Card className="h-full p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 hover:shadow-xl transition-shadow">
+            <Card className="h-full p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-purple-500/5 to-pink-500/5 border-2 border-purple-500/20 hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-full bg-purple-100">
-                  <Code2 className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-purple-600" />
+                <div className="p-3 rounded-full bg-purple-500/10">
+                  <Code2 className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-purple-500" />
                 </div>
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-bold">
                   Benefit #2: Master AI-Powered Development Like a Pro
@@ -219,7 +214,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
               </div>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <FileCode className="w-5 h-5 text-purple-600 mt-0.5" />
+                  <FileCode className="w-5 h-5 text-purple-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       Perfect AI specifications every time:
@@ -230,7 +225,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Terminal className="w-5 h-5 text-purple-600 mt-0.5" />
+                  <Terminal className="w-5 h-5 text-purple-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       Cursor/Claude Code optimization:
@@ -242,7 +237,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Layers className="w-5 h-5 text-purple-600 mt-0.5" />
+                  <Layers className="w-5 h-5 text-purple-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       Technical architecture included:
@@ -254,7 +249,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Copy className="w-5 h-5 text-purple-600 mt-0.5" />
+                  <Copy className="w-5 h-5 text-purple-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">Copy-paste development:</p>
                     <p className="text-xs sm:text-sm text-muted-foreground">
@@ -263,7 +258,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Award className="w-5 h-5 text-purple-600 mt-0.5" />
+                  <Award className="w-5 h-5 text-purple-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">Quality code guaranteed:</p>
                     <p className="text-xs sm:text-sm text-muted-foreground">
@@ -283,10 +278,10 @@ export default function FeedbackSpecBenefitsEnhanced() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="h-full p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200 hover:shadow-xl transition-shadow">
+            <Card className="h-full p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-green-500/5 to-blue-500/5 border-2 border-green-500/20 hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-full bg-green-100">
-                  <DollarSign className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-green-600" />
+                <div className="p-3 rounded-full bg-green-500/10">
+                  <DollarSign className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-green-500" />
                 </div>
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-bold">
                   Benefit #3: Build Exactly What Drives Revenue Growth
@@ -294,7 +289,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
               </div>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <LineChart className="w-5 h-5 text-green-600 mt-0.5" />
+                  <LineChart className="w-5 h-5 text-green-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       Revenue-focused prioritization:
@@ -305,7 +300,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <UserCheck className="w-5 h-5 text-green-600 mt-0.5" />
+                  <UserCheck className="w-5 h-5 text-green-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       User satisfaction explosion:
@@ -316,7 +311,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Shield className="w-5 h-5 text-green-600 mt-0.5" />
+                  <Shield className="w-5 h-5 text-green-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">Churn reduction automatic:</p>
                     <p className="text-xs sm:text-sm text-muted-foreground">
@@ -325,7 +320,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Crosshair className="w-5 h-5 text-green-600 mt-0.5" />
+                  <Crosshair className="w-5 h-5 text-green-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       Product-market fit acceleration:
@@ -336,7 +331,7 @@ export default function FeedbackSpecBenefitsEnhanced() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <TrendingUp className="w-5 h-5 text-green-600 mt-0.5" />
+                  <TrendingUp className="w-5 h-5 text-green-500 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm sm:text-base">
                       Competitive advantage sustained:
@@ -351,45 +346,6 @@ export default function FeedbackSpecBenefitsEnhanced() {
           </motion.div>
         </div>
 
-        {/* Visual separator */}
-        <div className="flex justify-center mb-20 lg:mb-24">
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-        </div>
-
-        {/* Career Timeline */}
-        <div className="mb-20 lg:mb-24 overflow-visible">
-          <CareerTimeline />
-        </div>
-
-        {/* Visual separator */}
-        <div className="flex justify-center mb-20 lg:mb-24">
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-        </div>
-
-        {/* Interactive Transformation */}
-        <div className="mb-20 lg:mb-24">
-          <InteractiveTransformation />
-        </div>
-
-        {/* Visual separator */}
-        <div className="flex justify-center mb-20 lg:mb-24">
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-        </div>
-
-        {/* Comparison Table */}
-        <div className="mb-20 lg:mb-24">
-          <ComparisonTable />
-        </div>
-
-        {/* Visual separator */}
-        <div className="flex justify-center mb-20 lg:mb-24">
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-        </div>
-
-        {/* Wall of Love - Testimonials */}
-        <div className="mb-20 lg:mb-24">
-          <WallOfLove />
-        </div>
       </div>
     </div>
   );

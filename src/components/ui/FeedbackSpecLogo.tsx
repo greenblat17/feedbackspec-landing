@@ -45,163 +45,193 @@ export function FeedbackSpecLogo({
         >
           {variant === "default" && (
             <>
-              {/* Feedback Sources - Multiple circles representing different platforms */}
-              <circle
-                cx="20"
-                cy="25"
-                r="8"
-                className="fill-blue-500 opacity-80"
-              />
-              <circle
-                cx="35"
-                cy="15"
-                r="6"
-                className="fill-green-500 opacity-80"
-              />
+              {/* Modern design optimized for dark mode */}
+              
+              {/* Background circle for contrast */}
               <circle
                 cx="50"
-                cy="20"
-                r="7"
-                className="fill-purple-500 opacity-80"
-              />
-              <circle
-                cx="25"
-                cy="40"
-                r="5"
-                className="fill-orange-500 opacity-80"
-              />
-
-              {/* Connecting Lines - Data flow */}
-              <path
-                d="M20 33 Q40 45 60 50"
-                stroke="url(#flowGradient)"
-                strokeWidth="2"
-                fill="none"
-                className="opacity-60"
-              />
-              <path
-                d="M35 21 Q45 35 60 50"
-                stroke="url(#flowGradient)"
-                strokeWidth="2"
-                fill="none"
-                className="opacity-60"
-              />
-              <path
-                d="M50 27 Q55 38 60 50"
-                stroke="url(#flowGradient)"
-                strokeWidth="2"
-                fill="none"
-                className="opacity-60"
-              />
-              <path
-                d="M25 45 Q42 47 60 50"
-                stroke="url(#flowGradient)"
-                strokeWidth="2"
-                fill="none"
-                className="opacity-60"
-              />
-
-              {/* Central Processing Hub */}
-              <circle
-                cx="65"
                 cy="50"
-                r="10"
-                className="fill-primary stroke-primary/20"
+                r="45"
+                className="fill-white/5 dark:fill-white/10"
+                filter="url(#bgBlur)"
+              />
+              
+              {/* Input streams - representing feedback sources */}
+              <g className="opacity-80 dark:opacity-100">
+                {/* Stream 1 */}
+                <circle cx="15" cy="30" r="3" className="fill-blue-500 dark:fill-blue-400" filter="url(#glow)" />
+                <path
+                  d="M18 30 Q35 35 45 45"
+                  stroke="url(#gradient1)"
+                  strokeWidth="2"
+                  className="opacity-60 dark:opacity-100"
+                />
+                
+                {/* Stream 2 */}
+                <circle cx="15" cy="45" r="3" className="fill-green-500 dark:fill-green-400" filter="url(#glow)" />
+                <path
+                  d="M18 45 Q30 45 45 45"
+                  stroke="url(#gradient2)"
+                  strokeWidth="2"
+                  className="opacity-60 dark:opacity-100"
+                />
+                
+                {/* Stream 3 */}
+                <circle cx="15" cy="60" r="3" className="fill-purple-500 dark:fill-purple-400" filter="url(#glow)" />
+                <path
+                  d="M18 60 Q35 55 45 45"
+                  stroke="url(#gradient3)"
+                  strokeWidth="2"
+                  className="opacity-60 dark:opacity-100"
+                />
+              </g>
+              
+              {/* Central processor - AI brain */}
+              <g filter="url(#centralGlow)">
+                {/* Outer ring */}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="18"
+                  className="fill-transparent stroke-primary/30 dark:stroke-primary/50"
+                  strokeWidth="1"
+                  strokeDasharray="4 2"
+                />
+                
+                {/* Inner circle */}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="14"
+                  className="fill-primary/90 dark:fill-primary"
+                  stroke="url(#innerGradient)"
+                  strokeWidth="2"
+                />
+                
+                {/* AI Brain icon */}
+                <path
+                  d="M45 47 C45 45, 47 43, 50 43 C53 43, 55 45, 55 47 C55 48, 54 49, 54 50 C54 51, 55 52, 55 53 C55 55, 53 57, 50 57 C47 57, 45 55, 45 53 C45 52, 46 51, 46 50 C46 49, 45 48, 45 47 Z M48 47 L52 47 M48 50 L52 50 M48 53 L52 53"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  fill="none"
+                  strokeLinecap="round"
+                  className="drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]"
+                />
+              </g>
+              
+              {/* Output arrow */}
+              <path
+                d="M64 50 L75 50"
+                stroke="url(#outputGradient)"
                 strokeWidth="3"
-              />
-
-              {/* AI/Processing indicator inside hub */}
-              <path
-                d="M60 46 L65 50 L60 54 M65 46 L70 50 L65 54"
-                stroke="white"
-                strokeWidth="2"
-                fill="none"
                 strokeLinecap="round"
-                strokeLinejoin="round"
+                markerEnd="url(#arrowhead)"
+                className="drop-shadow-[0_0_6px_rgba(99,102,241,0.6)]"
               />
-
-              {/* Output - Structured document */}
-              <rect
-                x="60"
-                y="70"
-                width="25"
-                height="20"
-                rx="3"
-                className="fill-primary/10 stroke-primary/30"
-                strokeWidth="1"
-              />
-
-              {/* Document lines */}
-              <line
-                x1="65"
-                y1="75"
-                x2="80"
-                y2="75"
-                className="stroke-primary/40"
-                strokeWidth="1"
-              />
-              <line
-                x1="65"
-                y1="78"
-                x2="75"
-                y2="78"
-                className="stroke-primary/40"
-                strokeWidth="1"
-              />
-              <line
-                x1="65"
-                y1="81"
-                x2="78"
-                y2="81"
-                className="stroke-primary/40"
-                strokeWidth="1"
-              />
-              <line
-                x1="65"
-                y1="84"
-                x2="73"
-                y2="84"
-                className="stroke-primary/40"
-                strokeWidth="1"
-              />
-
-              {/* Connection from hub to document */}
-              <path
-                d="M65 60 Q65 65 70 70"
-                stroke="url(#flowGradient)"
-                strokeWidth="2"
-                fill="none"
-                className="opacity-60"
-              />
-
-              {/* Gradients */}
+              
+              {/* Spec document */}
+              <g filter="url(#docGlow)">
+                <rect
+                  x="78"
+                  y="40"
+                  width="18"
+                  height="20"
+                  rx="3"
+                  className="fill-primary/20 dark:fill-primary/30 stroke-primary/50 dark:stroke-primary/80"
+                  strokeWidth="1.5"
+                />
+                
+                {/* Document lines */}
+                <line x1="82" y1="45" x2="92" y2="45" className="stroke-primary/60 dark:stroke-primary/80" strokeWidth="1" />
+                <line x1="82" y1="48" x2="89" y2="48" className="stroke-primary/50 dark:stroke-primary/70" strokeWidth="1" />
+                <line x1="82" y1="51" x2="91" y2="51" className="stroke-primary/50 dark:stroke-primary/70" strokeWidth="1" />
+                <line x1="82" y1="54" x2="88" y2="54" className="stroke-primary/40 dark:stroke-primary/60" strokeWidth="1" />
+              </g>
+              
+              {/* Floating particles for dynamism */}
+              <g className="opacity-0 dark:opacity-100">
+                <circle cx="30" cy="25" r="1" className="fill-blue-400/50" filter="url(#particleGlow)">
+                  <animate attributeName="cy" values="25;20;25" dur="3s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="70" cy="70" r="1" className="fill-purple-400/50" filter="url(#particleGlow)">
+                  <animate attributeName="cy" values="70;65;70" dur="4s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="85" cy="30" r="1" className="fill-green-400/50" filter="url(#particleGlow)">
+                  <animate attributeName="cy" values="30;25;30" dur="3.5s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0;1;0" dur="3.5s" repeatCount="indefinite" />
+                </circle>
+              </g>
+              
+              {/* Gradients and filters */}
               <defs>
-                <linearGradient
-                  id="flowGradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="100%"
-                >
-                  <stop
-                    offset="0%"
-                    className="stop-color-primary stop-opacity-80"
-                  />
-                  <stop
-                    offset="100%"
-                    className="stop-color-primary stop-opacity-20"
-                  />
+                {/* Glow effects */}
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                
+                <filter id="centralGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                
+                <filter id="docGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                
+                <filter id="particleGlow" x="-200%" y="-200%" width="400%" height="400%">
+                  <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                
+                <filter id="bgBlur">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+                </filter>
+                
+                {/* Gradients */}
+                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#6366F1" stopOpacity="0.3" />
                 </linearGradient>
-                <radialGradient id="hubGradient" cx="50%" cy="50%" r="50%">
-                  <stop
-                    offset="0%"
-                    className="stop-color-primary stop-opacity-100"
-                  />
-                  <stop
-                    offset="100%"
-                    className="stop-color-primary stop-opacity-70"
-                  />
-                </radialGradient>
+                
+                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#10B981" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#6366F1" stopOpacity="0.3" />
+                </linearGradient>
+                
+                <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#6366F1" stopOpacity="0.3" />
+                </linearGradient>
+                
+                <linearGradient id="innerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#818CF8" />
+                  <stop offset="100%" stopColor="#6366F1" />
+                </linearGradient>
+                
+                <linearGradient id="outputGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#6366F1" />
+                  <stop offset="100%" stopColor="#818CF8" />
+                </linearGradient>
+                
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" className="fill-primary dark:fill-primary/90" />
+                </marker>
               </defs>
             </>
           )}
@@ -209,243 +239,76 @@ export function FeedbackSpecLogo({
           {variant === "monochrome" && (
             <>
               {/* Simplified monochrome version */}
-              <circle
-                cx="20"
-                cy="25"
-                r="8"
-                className="fill-current opacity-60"
-              />
-              <circle
-                cx="35"
-                cy="15"
-                r="6"
-                className="fill-current opacity-70"
-              />
-              <circle
-                cx="50"
-                cy="20"
-                r="7"
-                className="fill-current opacity-65"
-              />
-              <circle
-                cx="25"
-                cy="40"
-                r="5"
-                className="fill-current opacity-75"
-              />
-
+              <circle cx="15" cy="30" r="3" className="fill-current opacity-60" />
+              <circle cx="15" cy="45" r="3" className="fill-current opacity-70" />
+              <circle cx="15" cy="60" r="3" className="fill-current opacity-60" />
+              
+              <path d="M18 30 Q35 35 45 45" stroke="currentColor" strokeWidth="2" opacity="0.4" />
+              <path d="M18 45 Q30 45 45 45" stroke="currentColor" strokeWidth="2" opacity="0.4" />
+              <path d="M18 60 Q35 55 45 45" stroke="currentColor" strokeWidth="2" opacity="0.4" />
+              
+              <circle cx="50" cy="50" r="14" className="fill-current" />
               <path
-                d="M20 33 Q40 45 60 50"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                opacity="0.4"
-              />
-              <path
-                d="M35 21 Q45 35 60 50"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                opacity="0.4"
-              />
-              <path
-                d="M50 27 Q55 38 60 50"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                opacity="0.4"
-              />
-              <path
-                d="M25 45 Q42 47 60 50"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                opacity="0.4"
-              />
-
-              <circle cx="65" cy="50" r="10" className="fill-current" />
-              <path
-                d="M60 46 L65 50 L60 54 M65 46 L70 50 L65 54"
+                d="M45 47 C45 45, 47 43, 50 43 C53 43, 55 45, 55 47 C55 48, 54 49, 54 50 C54 51, 55 52, 55 53 C55 55, 53 57, 50 57 C47 57, 45 55, 45 53 C45 52, 46 51, 46 50 C46 49, 45 48, 45 47 Z M48 47 L52 47 M48 50 L52 50 M48 53 L52 53"
                 stroke="white"
-                strokeWidth="2"
+                strokeWidth="1.5"
                 fill="none"
-                strokeLinecap="round"
               />
-
-              <rect
-                x="60"
-                y="70"
-                width="25"
-                height="20"
-                rx="3"
-                className="fill-none stroke-current"
-                strokeWidth="2"
-              />
-              <line
-                x1="65"
-                y1="75"
-                x2="80"
-                y2="75"
-                className="stroke-current"
-                strokeWidth="1"
-                opacity="0.6"
-              />
-              <line
-                x1="65"
-                y1="78"
-                x2="75"
-                y2="78"
-                className="stroke-current"
-                strokeWidth="1"
-                opacity="0.6"
-              />
-              <line
-                x1="65"
-                y1="81"
-                x2="78"
-                y2="81"
-                className="stroke-current"
-                strokeWidth="1"
-                opacity="0.6"
-              />
-
-              <path
-                d="M65 60 Q65 65 70 70"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                opacity="0.4"
-              />
+              
+              <path d="M64 50 L75 50" stroke="currentColor" strokeWidth="3" />
+              <polygon points="73 47, 78 50, 73 53" className="fill-current" />
+              
+              <rect x="78" y="40" width="18" height="20" rx="3" className="fill-none stroke-current" strokeWidth="1.5" />
+              <line x1="82" y1="45" x2="92" y2="45" className="stroke-current" strokeWidth="1" opacity="0.6" />
+              <line x1="82" y1="48" x2="89" y2="48" className="stroke-current" strokeWidth="1" opacity="0.5" />
+              <line x1="82" y1="51" x2="91" y2="51" className="stroke-current" strokeWidth="1" opacity="0.5" />
             </>
           )}
 
           {variant === "gradient" && (
             <>
               {/* Enhanced gradient version */}
-              <circle cx="20" cy="25" r="8" fill="url(#grad1)" />
-              <circle cx="35" cy="15" r="6" fill="url(#grad2)" />
-              <circle cx="50" cy="20" r="7" fill="url(#grad3)" />
-              <circle cx="25" cy="40" r="5" fill="url(#grad4)" />
-
-              <path
-                d="M20 33 Q40 45 60 50"
-                stroke="url(#flowGrad)"
-                strokeWidth="3"
-                fill="none"
-              />
-              <path
-                d="M35 21 Q45 35 60 50"
-                stroke="url(#flowGrad)"
-                strokeWidth="3"
-                fill="none"
-              />
-              <path
-                d="M50 27 Q55 38 60 50"
-                stroke="url(#flowGrad)"
-                strokeWidth="3"
-                fill="none"
-              />
-              <path
-                d="M25 45 Q42 47 60 50"
-                stroke="url(#flowGrad)"
-                strokeWidth="3"
-                fill="none"
-              />
-
-              <circle cx="65" cy="50" r="12" fill="url(#hubGrad)" />
-              <path
-                d="M60 46 L65 50 L60 54 M65 46 L70 50 L65 54"
-                stroke="white"
-                strokeWidth="2.5"
-                fill="none"
-                strokeLinecap="round"
-              />
-
-              <rect
-                x="58"
-                y="68"
-                width="29"
-                height="24"
-                rx="4"
-                fill="url(#docGrad)"
-              />
-              <line
-                x1="63"
-                y1="74"
-                x2="82"
-                y2="74"
-                stroke="white"
-                strokeWidth="1.5"
-                opacity="0.9"
-              />
-              <line
-                x1="63"
-                y1="78"
-                x2="77"
-                y2="78"
-                stroke="white"
-                strokeWidth="1.5"
-                opacity="0.8"
-              />
-              <line
-                x1="63"
-                y1="82"
-                x2="80"
-                y2="82"
-                stroke="white"
-                strokeWidth="1.5"
-                opacity="0.7"
-              />
-
-              <path
-                d="M65 62 Q65 65 72 68"
-                stroke="url(#flowGrad)"
-                strokeWidth="3"
-                fill="none"
-              />
-
               <defs>
                 <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3B82F6" />
-                  <stop offset="100%" stopColor="#1D4ED8" />
+                  <stop offset="0%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#3B82F6" />
                 </linearGradient>
                 <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#10B981" />
-                  <stop offset="100%" stopColor="#059669" />
+                  <stop offset="0%" stopColor="#34D399" />
+                  <stop offset="100%" stopColor="#10B981" />
                 </linearGradient>
                 <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#8B5CF6" />
-                  <stop offset="100%" stopColor="#7C3AED" />
+                  <stop offset="0%" stopColor="#A78BFA" />
+                  <stop offset="100%" stopColor="#8B5CF6" />
                 </linearGradient>
-                <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#F59E0B" />
-                  <stop offset="100%" stopColor="#D97706" />
-                </linearGradient>
-                <linearGradient
-                  id="flowGrad"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="100%"
-                >
-                  <stop offset="0%" stopColor="#6366F1" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.3" />
-                </linearGradient>
-                <radialGradient id="hubGrad" cx="50%" cy="50%" r="60%">
-                  <stop offset="0%" stopColor="#6366F1" />
-                  <stop offset="100%" stopColor="#4F46E5" />
+                <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#818CF8" />
+                  <stop offset="100%" stopColor="#6366F1" />
                 </radialGradient>
-                <linearGradient
-                  id="docGrad"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="100%"
-                >
-                  <stop offset="0%" stopColor="#6366F1" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#4F46E5" stopOpacity="0.7" />
-                </linearGradient>
               </defs>
+              
+              <circle cx="15" cy="30" r="4" fill="url(#grad1)" />
+              <circle cx="15" cy="45" r="4" fill="url(#grad2)" />
+              <circle cx="15" cy="60" r="4" fill="url(#grad3)" />
+              
+              <path d="M19 30 Q35 35 45 45" stroke="url(#grad1)" strokeWidth="3" opacity="0.8" />
+              <path d="M19 45 Q30 45 45 45" stroke="url(#grad2)" strokeWidth="3" opacity="0.8" />
+              <path d="M19 60 Q35 55 45 45" stroke="url(#grad3)" strokeWidth="3" opacity="0.8" />
+              
+              <circle cx="50" cy="50" r="16" fill="url(#centerGrad)" />
+              <path
+                d="M45 47 C45 45, 47 43, 50 43 C53 43, 55 45, 55 47 C55 48, 54 49, 54 50 C54 51, 55 52, 55 53 C55 55, 53 57, 50 57 C47 57, 45 55, 45 53 C45 52, 46 51, 46 50 C46 49, 45 48, 45 47 Z M48 47 L52 47 M48 50 L52 50 M48 53 L52 53"
+                stroke="white"
+                strokeWidth="2"
+                fill="none"
+                filter="url(#glow)"
+              />
+              
+              <path d="M66 50 L75 50" stroke="url(#centerGrad)" strokeWidth="4" />
+              <polygon points="73 46, 80 50, 73 54" fill="url(#centerGrad)" />
+              
+              <rect x="78" y="38" width="20" height="24" rx="4" fill="url(#centerGrad)" opacity="0.3" />
+              <rect x="78" y="38" width="20" height="24" rx="4" fill="none" stroke="url(#centerGrad)" strokeWidth="2" />
             </>
           )}
         </svg>
@@ -458,13 +321,16 @@ export function FeedbackSpecLogo({
             className={cn(
               "font-bold tracking-tight",
               textSize,
-              variant === "monochrome" ? "text-current" : "text-foreground"
+              variant === "monochrome" ? "text-current" : "text-foreground dark:text-white"
             )}
           >
-            Feedback<span className="text-primary">Spec</span>
+            <span className="dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">Feedback</span>
+            <span className="text-primary dark:text-blue-400 dark:drop-shadow-[0_0_15px_rgba(96,165,250,0.8)]">
+              Spec
+            </span>
           </span>
           {size === "lg" || size === "xl" ? (
-            <span className="text-xs text-muted-foreground font-medium tracking-wide">
+            <span className="text-xs text-muted-foreground dark:text-blue-300/60 font-medium tracking-wide">
               AI-POWERED SPECS
             </span>
           ) : null}

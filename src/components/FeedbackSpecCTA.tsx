@@ -345,7 +345,7 @@ export function FeedbackSpecCTA() {
 
   return (
     <section
-      className="relative overflow-hidden py-32 bg-white"
+      className="relative overflow-hidden py-32 bg-background"
       onMouseMove={handleMouseMove}
     >
       {/* Dynamic background */}
@@ -406,9 +406,9 @@ export function FeedbackSpecCTA() {
               {/* Keep Struggling */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="p-4 sm:p-6 lg:p-8 rounded-xl bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-200"
+                className="p-4 sm:p-6 lg:p-8 rounded-xl bg-gradient-to-br from-red-500/10 to-orange-500/10 border-2 border-red-500/20"
               >
-                <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-red-900">
+                <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-red-600 dark:text-red-400">
                   Keep Struggling:
                 </h4>
                 <ul className="space-y-3 text-left">
@@ -420,7 +420,7 @@ export function FeedbackSpecCTA() {
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <X className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm sm:text-base text-gray-700">{item}</span>
+                      <span className="text-sm sm:text-base text-muted-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -429,9 +429,9 @@ export function FeedbackSpecCTA() {
               {/* Or Transform Today */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="p-4 sm:p-6 lg:p-8 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200"
+                className="p-4 sm:p-6 lg:p-8 rounded-xl bg-gradient-to-br from-green-500/10 to-blue-500/10 border-2 border-green-500/20"
               >
-                <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-green-900">
+                <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-green-600 dark:text-green-400">
                   Or Transform Today:
                 </h4>
                 <ul className="space-y-3 text-left">
@@ -443,7 +443,7 @@ export function FeedbackSpecCTA() {
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm sm:text-base text-gray-700">{item}</span>
+                      <span className="text-sm sm:text-base text-muted-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>
