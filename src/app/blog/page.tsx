@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import FeedbackSpecHeader from "@/components/FeedbackSpecHeader";
+import { SimpleHeader } from "@/components/SimpleHeader";
 import { ResourcesSection } from "@/components/ResourcesSection";
 import Footer from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
@@ -10,7 +10,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <FeedbackSpecHeader />
+      <SimpleHeader />
 
       {/* Main Content */}
       <main className="pt-20">

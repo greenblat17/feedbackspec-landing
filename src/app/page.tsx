@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import FeedbackSpecHeader from "../components/FeedbackSpecHeader";
+import { SimpleHeader } from "../components/SimpleHeader";
 import { FeedbackSpecHeroEnhanced } from "../components/FeedbackSpecHeroEnhanced";
 import { FeedbackSpecCTA } from "../components/FeedbackSpecCTA";
 import Footer from "../components/Footer";
@@ -29,46 +29,48 @@ export default function Home() {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
-      {process.env.NODE_ENV === "development" && <PerformanceMonitor />}
-      <style jsx global>{`
-        /* Performance optimizations */
-        * {
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* GPU acceleration for animations */
-        [data-animate] {
-          will-change: transform, opacity;
-        }
-
-        /* Reduce layout thrashing */
-        img,
-        video {
-          will-change: auto;
-        }
-
-        /* Optimize scrolling */
-        html {
-          scroll-behavior: smooth;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          *,
-          *::before,
-          *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
+    <>
+      {/* Simple Sticky Header */}
+      <SimpleHeader />
+      
+      <div className="min-h-screen bg-background relative">
+        {process.env.NODE_ENV === "development" && <PerformanceMonitor />}
+        <style jsx global>{`
+          /* Performance optimizations */
+          * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
           }
-        }
-      `}</style>
-      {/* Header */}
-      <FeedbackSpecHeader />
+
+          /* GPU acceleration for animations */
+          [data-animate] {
+            will-change: transform, opacity;
+          }
+
+          /* Reduce layout thrashing */
+          img,
+          video {
+            will-change: auto;
+          }
+
+          /* Optimize scrolling */
+          html {
+            scroll-behavior: smooth;
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+              animation-duration: 0.01ms !important;
+              animation-iteration-count: 1 !important;
+              transition-duration: 0.01ms !important;
+            }
+          }
+        `}</style>
 
       {/* Hero Section */}
-      <section id="hero" className="bg-background">
+      <section id="hero" className="bg-background pt-20">
         <FeedbackSpecHeroEnhanced
           title="Turn Scattered Feedback Into Cursor-Ready Specs in Minutes"
           subtitle="The AI-Powered Feedback Engine for Founders Who Ship Daily"
@@ -142,6 +144,7 @@ export default function Home() {
 
       {/* Back to Top Button */}
       <BackToTop />
-    </div>
+      </div>
+    </>
   );
 }
