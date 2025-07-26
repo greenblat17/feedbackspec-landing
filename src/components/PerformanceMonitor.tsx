@@ -9,7 +9,9 @@ export function PerformanceMonitor() {
       try {
         // First Contentful Paint
         const paintEntries = performance.getEntriesByType("paint");
-        const fcp = paintEntries.find((entry) => entry.name === "first-contentful-paint");
+        const fcp = paintEntries.find(
+          (entry) => entry.name === "first-contentful-paint"
+        );
         if (fcp) {
           console.log(`FCP: ${fcp.startTime.toFixed(2)}ms`);
         }
@@ -26,7 +28,14 @@ export function PerformanceMonitor() {
         const fidObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
           entries.forEach((entry) => {
-            console.log(`FID: ${entry.processingStart - entry.startTime}ms`);
+            const firstInputEntry = entry as PerformanceEntry & {
+              processingStart: number;
+            };
+            console.log(
+              `FID: ${
+                firstInputEntry.processingStart - firstInputEntry.startTime
+              }ms`
+            );
           });
         });
         fidObserver.observe({ entryTypes: ["first-input"] });
@@ -35,8 +44,12 @@ export function PerformanceMonitor() {
         let clsValue = 0;
         const clsObserver = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
-            if (!entry.hadRecentInput) {
-              clsValue += entry.value;
+            const layoutShiftEntry = entry as PerformanceEntry & {
+              hadRecentInput: boolean;
+              value: number;
+            };
+            if (!layoutShiftEntry.hadRecentInput) {
+              clsValue += layoutShiftEntry.value;
               console.log(`CLS: ${clsValue.toFixed(3)}`);
             }
           }
@@ -62,7 +75,7 @@ export function PerformanceMonitor() {
 export function measureRenderTime(componentName: string) {
   if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
     performance.mark(`${componentName}-start`);
-    
+
     return () => {
       performance.mark(`${componentName}-end`);
       performance.measure(
@@ -70,11 +83,13 @@ export function measureRenderTime(componentName: string) {
         `${componentName}-start`,
         `${componentName}-end`
       );
-      
+
       const measure = performance.getEntriesByName(componentName)[0];
-      console.log(`${componentName} render time: ${measure.duration.toFixed(2)}ms`);
+      console.log(
+        `${componentName} render time: ${measure.duration.toFixed(2)}ms`
+      );
     };
   }
-  
+
   return () => {};
 }

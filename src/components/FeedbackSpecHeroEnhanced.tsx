@@ -412,11 +412,7 @@ const ClaudeIcon = () => (
 
 const ClineIcon = () => (
   <span className="relative inline-block top-4 sm:top-3 md:top-2">
-    <Cline.Combine
-      size={72}
-      type={"color"}
-      className="w-auto h-18 sm:h-20 md:h-24"
-    />
+    <Cline.Combine size={72} className="w-auto h-18 sm:h-20 md:h-24" />
   </span>
 );
 
@@ -582,7 +578,6 @@ function RotatingText() {
   }, []);
 
   const CurrentIcon = words[currentIndex].icon;
-  const CurrentTextIcon = words[currentIndex].textIcon;
 
   return (
     <span className="relative inline-flex items-center gap-2">
@@ -614,10 +609,10 @@ function RotatingText() {
         </motion.div>
       </AnimatePresence>
 
-      {words[currentIndex].textIcon ? (
+      {words[currentIndex].showText && (
         <AnimatePresence mode="wait">
-          <motion.div
-            key={`text-${currentIndex}`}
+          <motion.span
+            key={currentIndex}
             initial={{
               opacity: 0,
               y: 20,
@@ -637,40 +632,11 @@ function RotatingText() {
               duration: 0.5,
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
+            className={`inline-block bg-gradient-to-r ${words[currentIndex].color} bg-clip-text text-transparent font-extrabold`}
           >
-            <CurrentTextIcon />
-          </motion.div>
+            {words[currentIndex].text}
+          </motion.span>
         </AnimatePresence>
-      ) : (
-        words[currentIndex].showText && (
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={currentIndex}
-              initial={{
-                opacity: 0,
-                y: 20,
-                scale: 0.9,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                y: -20,
-                scale: 0.9,
-              }}
-              transition={{
-                duration: 0.5,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-              className={`inline-block bg-gradient-to-r ${words[currentIndex].color} bg-clip-text text-transparent font-extrabold`}
-            >
-              {words[currentIndex].text}
-            </motion.span>
-          </AnimatePresence>
-        )
       )}
     </span>
   );
