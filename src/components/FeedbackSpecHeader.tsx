@@ -39,18 +39,18 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
     onClick?: () => void;
   }) => {
     const ref = useRef<HTMLLIElement>(null);
-    
+
     const handleClick = (e: React.MouseEvent) => {
-      if (href.startsWith('#')) {
+      if (href.startsWith("#")) {
         e.preventDefault();
         const element = document.querySelector(href);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }
       onClick?.();
     };
-    
+
     return (
       <li
         ref={ref}
@@ -65,7 +65,9 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
         }}
         className="relative z-10 block cursor-pointer px-4 py-2 text-sm font-medium text-foreground mix-blend-difference transition-colors hover:text-primary font-ui tracking-ui"
       >
-        <a href={href} onClick={handleClick}>{children}</a>
+        <a href={href} onClick={handleClick}>
+          {children}
+        </a>
       </li>
     );
   };
@@ -128,7 +130,7 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => window.location.href = '/blog'}
+                onClick={() => (window.location.href = "/blog")}
                 className="font-semibold"
               >
                 Blog
@@ -136,7 +138,7 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               <Button
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6"
                 size="sm"
-                onClick={() => window.location.href = '/login'}
+                onClick={() => (window.location.href = "/login")}
               >
                 Login
               </Button>
@@ -175,7 +177,9 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               onClick={(e) => {
                 e.preventDefault();
                 setIsMobileMenuOpen(false);
-                document.querySelector('#features')?.scrollIntoView({ behavior: 'smooth' });
+                document
+                  .querySelector("#features")
+                  ?.scrollIntoView({ behavior: "smooth" });
               }}
             >
               Features
@@ -186,7 +190,9 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               onClick={(e) => {
                 e.preventDefault();
                 setIsMobileMenuOpen(false);
-                document.querySelector('#how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+                document
+                  .querySelector("#how-it-works")
+                  ?.scrollIntoView({ behavior: "smooth" });
               }}
             >
               How it Works
@@ -197,7 +203,9 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
               onClick={(e) => {
                 e.preventDefault();
                 setIsMobileMenuOpen(false);
-                document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' });
+                document
+                  .querySelector("#pricing")
+                  ?.scrollIntoView({ behavior: "smooth" });
               }}
             >
               Pricing
@@ -209,7 +217,7 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
                 size="sm"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  window.location.href = '/blog';
+                  window.location.href = "/blog";
                 }}
               >
                 Blog
@@ -219,7 +227,7 @@ const FeedbackSpecHeader: React.FC<FeedbackSpecHeaderProps> = ({
                 size="sm"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  window.location.href = '/login';
+                  window.location.href = "/login";
                 }}
               >
                 Login
