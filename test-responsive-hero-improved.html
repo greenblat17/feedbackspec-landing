@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improved Responsive Hero Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Simulate the responsive font sizes from the component */
+        .hero-title {
+            font-weight: bold;
+            line-height: 1.1;
+            text-align: center;
+        }
+        
+        /* Icon placeholder that scales with font size */
+        .icon-placeholder {
+            display: inline-block;
+            height: 1.2em;
+            width: 5.5ch;
+            background: linear-gradient(45deg, #3b82f6, #60a5fa);
+            border-radius: 8px;
+            vertical-align: middle;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .icon-placeholder::after {
+            content: "AI";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.5em;
+        }
+        
+        /* Responsive text sizes matching the component */
+        @media (min-width: 640px) { .hero-title { font-size: 1.875rem; } }
+        @media (min-width: 768px) { .hero-title { font-size: 2.25rem; } }
+        @media (min-width: 1024px) { .hero-title { font-size: 3rem; } }
+        @media (min-width: 1280px) { .hero-title { font-size: 3.75rem; } }
+        @media (min-width: 1536px) { .hero-title { font-size: 4.5rem; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-xl mb-8 text-center">Improved Responsive Hero Layout Test</h2>
+        
+        <!-- Test at different viewport sizes -->
+        <div class="space-y-12">
+            <!-- Mobile (320px - 640px) -->
+            <div>
+                <h3 class="text-lg mb-4">Mobile View (text-2xl)</h3>
+                <div class="bg-gray-800 p-6 rounded-lg max-w-sm mx-auto">
+                    <h1 class="hero-title" style="font-size: 1.5rem;">
+                        <span class="block">Turn Scattered Feedback Into</span>
+                        <span class="block">
+                            <span class="icon-placeholder"></span>
+                            <span>-Ready Specs</span>
+                        </span>
+                        <span class="block text-blue-500">in Minutes</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Small Tablet (640px - 768px) -->
+            <div>
+                <h3 class="text-lg mb-4">Small Tablet (sm:text-3xl)</h3>
+                <div class="bg-gray-800 p-6 rounded-lg max-w-md mx-auto">
+                    <h1 class="hero-title" style="font-size: 1.875rem;">
+                        <span class="block">Turn Scattered Feedback Into</span>
+                        <span class="block">
+                            <span class="icon-placeholder"></span>
+                            <span>-Ready Specs</span>
+                        </span>
+                        <span class="block text-blue-500">in Minutes</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Medium (768px - 1024px) -->
+            <div>
+                <h3 class="text-lg mb-4">Medium Tablet (md:text-4xl)</h3>
+                <div class="bg-gray-800 p-6 rounded-lg max-w-2xl mx-auto">
+                    <h1 class="hero-title" style="font-size: 2.25rem;">
+                        <span class="block">Turn Scattered Feedback Into</span>
+                        <span class="block">
+                            <span class="icon-placeholder"></span>
+                            <span>-Ready Specs</span>
+                        </span>
+                        <span class="block text-blue-500">in Minutes</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Large Desktop (1024px+) -->
+            <div>
+                <h3 class="text-lg mb-4">Desktop (lg:text-5xl)</h3>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h1 class="hero-title" style="font-size: 3rem;">
+                        <span class="block">Turn Scattered Feedback Into</span>
+                        <span class="block">
+                            <span class="icon-placeholder"></span>
+                            <span>-Ready Specs</span>
+                        </span>
+                        <span class="block text-blue-500">in Minutes</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demonstration of icon scaling -->
+        <div class="mt-16">
+            <h3 class="text-lg mb-4">Icon Scaling Demonstration</h3>
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <p class="mb-4">The icon height is set to 1.2em, so it scales with the font size:</p>
+                <div class="space-y-4">
+                    <div style="font-size: 1rem;">
+                        Font size: 1rem - Icon: <span class="icon-placeholder"></span>
+                    </div>
+                    <div style="font-size: 1.5rem;">
+                        Font size: 1.5rem - Icon: <span class="icon-placeholder"></span>
+                    </div>
+                    <div style="font-size: 2rem;">
+                        Font size: 2rem - Icon: <span class="icon-placeholder"></span>
+                    </div>
+                    <div style="font-size: 3rem;">
+                        Font size: 3rem - Icon: <span class="icon-placeholder"></span>
+                    </div>
+                    <div style="font-size: 4rem;">
+                        Font size: 4rem - Icon: <span class="icon-placeholder"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key improvements -->
+        <div class="mt-16 bg-blue-900/20 p-6 rounded-lg">
+            <h3 class="text-lg mb-4 font-bold">Key Improvements:</h3>
+            <ul class="list-disc list-inside space-y-2">
+                <li>Three-line structure is enforced with <code>block</code> spans</li>
+                <li>Icons use <code>em</code> units (1.2em height) for proportional scaling</li>
+                <li>Icon container has fixed width of 5.5ch to prevent layout shifts</li>
+                <li>No fixed pixel sizes - everything scales with font size</li>
+                <li>Vertical alignment uses <code>vertical-align: middle</code> instead of positioning</li>
+                <li>Clean, predictable layout at all screen sizes</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

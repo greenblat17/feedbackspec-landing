@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refactored Icon Scaling Test - FeedbackSpec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .icon-placeholder {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        .icon-container {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px dashed rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <div class="max-w-7xl mx-auto space-y-12">
+        <h1 class="text-3xl font-bold mb-8 text-center">Refactored Hero Title - Icon Scaling Test</h1>
+        
+        <!-- Mobile Size -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Mobile (default)</h2>
+            <div class="text-2xl font-bold text-center">
+                <span>Turn Scattered Feedback Into</span>
+                <span class="icon-container relative inline-flex items-center justify-center w-24 h-16 mx-1">
+                    <span class="icon-placeholder w-auto h-12">AI</span>
+                </span>
+                <span>-Ready Specs</span>
+                <span class="block mt-2 text-blue-500">in Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-4 text-center">
+                Text: text-2xl (24px) | Icon Container: w-24 h-16 | Icon: h-12 (48px)
+            </p>
+        </div>
+
+        <!-- Small Screen -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Small Screen (sm:)</h2>
+            <div class="text-3xl font-bold text-center">
+                <span>Turn Scattered Feedback Into</span>
+                <span class="icon-container relative inline-flex items-center justify-center w-32 h-20 mx-1">
+                    <span class="icon-placeholder w-auto h-14">AI</span>
+                </span>
+                <span>-Ready Specs</span>
+                <span class="block mt-2 text-blue-500">in Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-4 text-center">
+                Text: text-3xl (30px) | Icon Container: w-32 h-20 | Icon: h-14 (56px)
+            </p>
+        </div>
+
+        <!-- Medium Screen -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Medium Screen (md:)</h2>
+            <div class="text-4xl font-bold text-center">
+                <span>Turn Scattered Feedback Into</span>
+                <span class="icon-container relative inline-flex items-center justify-center w-40 h-24 mx-2">
+                    <span class="icon-placeholder w-auto h-16">AI</span>
+                </span>
+                <span>-Ready Specs</span>
+                <span class="block mt-2 text-blue-500">in Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-4 text-center">
+                Text: text-4xl (36px) | Icon Container: w-40 h-24 | Icon: h-16 (64px)
+            </p>
+        </div>
+
+        <!-- Large Screen -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Large Screen (lg:)</h2>
+            <div class="text-5xl font-bold text-center">
+                <span>Turn Scattered Feedback Into</span>
+                <span class="icon-container relative inline-flex items-center justify-center w-48 h-28 mx-2">
+                    <span class="icon-placeholder w-auto h-20">AI</span>
+                </span>
+                <span>-Ready Specs</span>
+                <span class="block mt-2 text-blue-500">in Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-4 text-center">
+                Text: text-5xl (48px) | Icon Container: w-48 h-28 | Icon: h-20 (80px)
+            </p>
+        </div>
+
+        <!-- Key Improvements -->
+        <div class="border border-green-600 p-6 rounded-lg bg-green-900/20">
+            <h2 class="text-xl font-semibold mb-4 text-green-400">✓ Refactoring Improvements</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold mb-3">Icon Components</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>Standard Tailwind height classes (h-12, h-14, h-16, h-20)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>align-middle for proper vertical alignment</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>w-auto for natural width based on height</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>Removed non-standard classes and size props</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-3">RotatingText Container</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>Fixed-size responsive container prevents layout shifts</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>Absolute positioning for smooth animations</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>Container scales with screen size</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>No more jumping during icon transitions</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Title Layout -->
+        <div class="border border-purple-600 p-6 rounded-lg bg-purple-900/20">
+            <h2 class="text-xl font-semibold mb-4 text-purple-400">✓ Enhanced Title Structure</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="font-semibold mb-2">Dynamic Title Parsing</h3>
+                    <p class="text-sm text-gray-300">
+                        The title now dynamically checks for "Cursor-Ready" and splits appropriately,
+                        allowing the RotatingText component to replace "Cursor" with the animated icons.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2">Flexible Layout</h3>
+                    <p class="text-sm text-gray-300">
+                        "in Minutes" uses <code class="bg-gray-800 px-1 rounded">block mt-2</code> for consistent
+                        line breaking across all screen sizes with proper spacing.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2">Better Line Height</h3>
+                    <p class="text-sm text-gray-300">
+                        Changed from <code class="bg-gray-800 px-1 rounded">leading-[1.1]</code> to 
+                        <code class="bg-gray-800 px-1 rounded">leading-tight</code> for improved readability.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animation Demo -->
+        <div class="border border-yellow-600 p-6 rounded-lg bg-yellow-900/20">
+            <h2 class="text-xl font-semibold mb-4 text-yellow-400">Animation Behavior</h2>
+            <div class="text-center space-y-4">
+                <p class="text-sm text-gray-300">
+                    The icon container maintains its size during transitions, preventing layout shifts:
+                </p>
+                <div class="flex justify-center items-center gap-8">
+                    <div class="text-center">
+                        <p class="text-sm mb-2">Exit Animation</p>
+                        <div class="icon-container relative inline-flex items-center justify-center w-32 h-20">
+                            <span class="icon-placeholder w-auto h-14 opacity-50 scale-75">AI</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm mb-2">Enter Animation</p>
+                        <div class="icon-container relative inline-flex items-center justify-center w-32 h-20">
+                            <span class="icon-placeholder w-auto h-14">AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Icon Fix Test - FeedbackSpec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .icon-placeholder {
+            background: #3b82f6;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <div class="max-w-6xl mx-auto space-y-12">
+        <h1 class="text-3xl font-bold mb-8">Simple Icon Scaling Fix</h1>
+        
+        <div class="text-center bg-gray-800 p-8 rounded-lg">
+            <h2 class="text-xl mb-4 text-green-400">✓ What We Fixed</h2>
+            <p class="mb-4">Only changed the icon sizes - kept everything else the same!</p>
+            
+            <!-- Mobile -->
+            <div class="mb-8">
+                <h3 class="text-lg mb-2">Mobile (text-2xl)</h3>
+                <div class="text-2xl font-bold">
+                    <span>Turn Scattered Feedback Into</span>
+                    <span class="icon-placeholder w-auto h-7 mx-1 align-middle">AI</span>
+                    <span>-Ready Specs in Minutes</span>
+                </div>
+                <p class="text-sm text-gray-400 mt-2">Icon: h-7 (28px) - Much better proportion!</p>
+            </div>
+            
+            <!-- Desktop -->
+            <div>
+                <h3 class="text-lg mb-2">Desktop (text-6xl)</h3>
+                <div class="text-6xl font-bold">
+                    <span>Turn Scattered Feedback Into</span>
+                    <span class="icon-placeholder w-auto h-20 mx-2 align-middle">AI</span>
+                    <span>-Ready Specs in Minutes</span>
+                </div>
+                <p class="text-sm text-gray-400 mt-2">Icon: h-20 (80px) - Maintains visual impact!</p>
+            </div>
+        </div>
+        
+        <!-- All Breakpoints -->
+        <div class="space-y-4">
+            <h2 class="text-xl mb-4 text-blue-400">Icon Sizes Across All Breakpoints</h2>
+            
+            <div class="grid gap-4">
+                <div class="bg-gray-800 p-4 rounded">
+                    <span class="text-sm text-gray-400">Mobile (default):</span>
+                    <span class="ml-2">h-7 (28px)</span>
+                </div>
+                <div class="bg-gray-800 p-4 rounded">
+                    <span class="text-sm text-gray-400">Small (sm):</span>
+                    <span class="ml-2">h-9 (36px)</span>
+                </div>
+                <div class="bg-gray-800 p-4 rounded">
+                    <span class="text-sm text-gray-400">Medium (md):</span>
+                    <span class="ml-2">h-12 (48px)</span>
+                </div>
+                <div class="bg-gray-800 p-4 rounded">
+                    <span class="text-sm text-gray-400">Large (lg):</span>
+                    <span class="ml-2">h-16 (64px)</span>
+                </div>
+                <div class="bg-gray-800 p-4 rounded">
+                    <span class="text-sm text-gray-400">Extra Large (xl):</span>
+                    <span class="ml-2">h-20 (80px)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-green-900/20 border border-green-600 p-6 rounded-lg">
+            <h2 class="text-xl mb-4 text-green-400">✓ Simple Solution Benefits</h2>
+            <ul class="space-y-2">
+                <li>• Minimal changes - less risk of breaking things</li>
+                <li>• Icons now scale proportionally with text</li>
+                <li>• Original layout and animations preserved</li>
+                <li>• No complex refactoring needed</li>
+                <li>• Mobile issue fixed without affecting desktop</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

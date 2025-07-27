@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Scaling Test - FeedbackSpec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .icon-placeholder {
+            background: #3b82f6;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <div class="max-w-6xl mx-auto space-y-12">
+        <h1 class="text-3xl font-bold mb-8">FeedbackSpec Hero Title - Icon Scaling Test</h1>
+        
+        <!-- Mobile Size (default) -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Mobile (default)</h2>
+            <div class="text-2xl font-bold">
+                <span>Turn Scattered Feedback Into</span><br>
+                <span class="inline-flex items-center">
+                    <span class="icon-placeholder w-6 h-6 mx-2">AI</span>
+                    <span>-Ready Specs</span>
+                </span><br>
+                <span>In Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-2">Text: text-2xl (24px) | Icon: w-6 h-6 (24px)</p>
+        </div>
+
+        <!-- Small Screen -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Small Screen (sm:)</h2>
+            <div class="text-3xl font-bold">
+                <span>Turn Scattered Feedback Into</span><br>
+                <span class="inline-flex items-center">
+                    <span class="icon-placeholder w-7 h-7 mx-2">AI</span>
+                    <span>-Ready Specs</span>
+                </span><br>
+                <span>In Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-2">Text: text-3xl (30px) | Icon: w-7 h-7 (28px)</p>
+        </div>
+
+        <!-- Medium Screen -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Medium Screen (md:)</h2>
+            <div class="text-4xl font-bold">
+                <span>Turn Scattered Feedback Into</span><br>
+                <span class="inline-flex items-center">
+                    <span class="icon-placeholder w-9 h-9 mx-2">AI</span>
+                    <span>-Ready Specs</span>
+                </span><br>
+                <span>In Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-2">Text: text-4xl (36px) | Icon: w-9 h-9 (36px)</p>
+        </div>
+
+        <!-- Large Screen -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Large Screen (lg:)</h2>
+            <div class="text-5xl font-bold">
+                <span>Turn Scattered Feedback Into</span><br>
+                <span class="inline-flex items-center">
+                    <span class="icon-placeholder w-12 h-12 mx-2">AI</span>
+                    <span>-Ready Specs</span>
+                </span><br>
+                <span>In Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-2">Text: text-5xl (48px) | Icon: w-12 h-12 (48px)</p>
+        </div>
+
+        <!-- XL Screen -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">XL Screen (xl:)</h2>
+            <div class="text-6xl font-bold">
+                <span>Turn Scattered Feedback Into</span><br>
+                <span class="inline-flex items-center">
+                    <span class="icon-placeholder w-[60px] h-[60px] mx-2">AI</span>
+                    <span>-Ready Specs</span>
+                </span><br>
+                <span>In Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-2">Text: text-6xl (60px) | Icon: w-[15] h-[15] (60px)</p>
+        </div>
+
+        <!-- 2XL Screen -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">2XL Screen (2xl:)</h2>
+            <div class="text-7xl font-bold">
+                <span>Turn Scattered Feedback Into</span><br>
+                <span class="inline-flex items-center">
+                    <span class="icon-placeholder w-[72px] h-[72px] mx-2">AI</span>
+                    <span>-Ready Specs</span>
+                </span><br>
+                <span>In Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-2">Text: text-7xl (72px) | Icon: w-[18] h-[18] (72px)</p>
+        </div>
+
+        <!-- Comparison: Different Approaches -->
+        <div class="border border-yellow-600 p-6 rounded-lg bg-yellow-900/20">
+            <h2 class="text-xl font-semibold mb-4 text-yellow-400">Scaling Approaches Comparison</h2>
+            <div class="space-y-6">
+                <!-- Mobile Comparison -->
+                <div>
+                    <h3 class="font-semibold mb-2">Mobile (text-2xl)</h3>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <p class="text-sm mb-2">Original (Too Large)</p>
+                            <div class="text-2xl font-bold">
+                                <span class="inline-flex items-center">
+                                    <span class="icon-placeholder w-8 h-8 mx-2">AI</span>
+                                    <span>-Ready</span>
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">32px icon vs 24px text</p>
+                        </div>
+                        <div>
+                            <p class="text-sm mb-2">Too Small</p>
+                            <div class="text-2xl font-bold">
+                                <span class="inline-flex items-center">
+                                    <span class="icon-placeholder w-6 h-6 mx-2">AI</span>
+                                    <span>-Ready</span>
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">24px icon = 24px text</p>
+                        </div>
+                        <div>
+                            <p class="text-sm mb-2">Balanced ✓</p>
+                            <div class="text-2xl font-bold">
+                                <span class="inline-flex items-center">
+                                    <span class="icon-placeholder w-7 h-7 mx-2">AI</span>
+                                    <span>-Ready</span>
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">28px icon vs 24px text</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Comparison -->
+                <div>
+                    <h3 class="font-semibold mb-2">Desktop (text-6xl)</h3>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <p class="text-sm mb-2">Original</p>
+                            <div class="text-5xl font-bold">
+                                <span class="inline-flex items-center">
+                                    <span class="icon-placeholder w-20 h-20 mx-2">AI</span>
+                                    <span>-Ready</span>
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">80px icon vs 60px text</p>
+                        </div>
+                        <div>
+                            <p class="text-sm mb-2">Too Small</p>
+                            <div class="text-5xl font-bold">
+                                <span class="inline-flex items-center">
+                                    <span class="icon-placeholder w-[60px] h-[60px] mx-2">AI</span>
+                                    <span>-Ready</span>
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">60px icon = 60px text</p>
+                        </div>
+                        <div>
+                            <p class="text-sm mb-2">Balanced ✓</p>
+                            <div class="text-5xl font-bold">
+                                <span class="inline-flex items-center">
+                                    <span class="icon-placeholder w-20 h-20 mx-2">AI</span>
+                                    <span>-Ready</span>
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">80px icon vs 60px text</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Updated Sizes -->
+        <div class="border border-green-600 p-6 rounded-lg bg-green-900/20">
+            <h2 class="text-xl font-semibold mb-4 text-green-400">✓ Final Balanced Scaling</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <h3 class="font-semibold mb-2">Mobile → Desktop</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li>Mobile: w-7 (28px) vs text-2xl (24px) - 117%</li>
+                        <li>Small: w-9 (36px) vs text-3xl (30px) - 120%</li>
+                        <li>Medium: w-12 (48px) vs text-4xl (36px) - 133%</li>
+                        <li>Large: w-16 (64px) vs text-5xl (48px) - 133%</li>
+                        <li>XL: w-20 (80px) vs text-6xl (60px) - 133%</li>
+                        <li>2XL: w-24 (96px) vs text-7xl (72px) - 133%</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2">Benefits</h3>
+                    <ul class="space-y-1 text-sm text-green-400">
+                        <li>✓ Icons more proportional on mobile</li>
+                        <li>✓ Maintains visual impact on desktop</li>
+                        <li>✓ Smooth scaling progression</li>
+                        <li>✓ Icons remain prominent at all sizes</li>
+                        <li>✓ Better readability on small screens</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

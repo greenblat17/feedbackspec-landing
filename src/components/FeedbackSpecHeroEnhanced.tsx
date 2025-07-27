@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Claude, Cursor, Cline } from "@lobehub/icons";
+import Image from "next/image";
 import {
   Sparkles,
   Users,
@@ -389,30 +389,43 @@ const INTEGRATION_LOGOS = [
   { name: "Reddit", icon: RedditIcon },
 ];
 
-// Tool icons
+// Tool icons using SVG files
 const CursorIcon = () => (
-  <span className="relative inline-block top-4 sm:top-3 md:top-2">
-    <Cursor.Combine
-      size={60}
-      color={"color"}
-      className="w-auto h-15 sm:h-17 md:h-20"
+  <span className="relative inline-block text-foreground">
+    <Image
+      src="/Cursor Logo (3).svg"
+      alt="Cursor"
+      width={250}
+      height={48}
+      className="h-[1.2rem] sm:h-[1.5rem] md:h-[2rem] lg:h-[3rem] xl:h-[3.5rem] 2xl:h-[4rem] w-auto"
+      style={{ filter: 'brightness(0) invert(1)' }}
     />
   </span>
 );
 
 const ClaudeIcon = () => (
-  <span className="relative inline-block top-4 sm:top-3 md:top-2">
-    <Claude.Combine
-      size={65}
-      type={"color"}
-      className="w-auto h-18 sm:h-20 md:h-24"
+  <span className="relative inline-block text-foreground">
+    <Image
+      src="/Claude Logo.svg"
+      alt="Claude"
+      width={194}
+      height={48}
+      className="h-[1.2rem] sm:h-[1.5rem] md:h-[2rem] lg:h-[3rem] xl:h-[3.5rem] 2xl:h-[4rem] w-auto"
+      style={{ filter: 'brightness(0) invert(1)' }}
     />
   </span>
 );
 
 const ClineIcon = () => (
-  <span className="relative inline-block top-4 sm:top-3 md:top-2">
-    <Cline.Combine size={72} className="w-auto h-18 sm:h-20 md:h-24" />
+  <span className="relative inline-block text-foreground">
+    <Image
+      src="/Cline Logo.svg"
+      alt="Cline"
+      width={176}
+      height={48}
+      className="h-[1.2rem] sm:h-[1.5rem] md:h-[2rem] lg:h-[3rem] xl:h-[3.5rem] 2xl:h-[4rem] w-auto"
+      style={{ filter: 'brightness(0) invert(1)' }}
+    />
   </span>
 );
 
@@ -580,9 +593,9 @@ function RotatingText() {
   const CurrentIcon = words[currentIndex].icon;
 
   return (
-    <span className="relative inline-flex items-center gap-2">
+    <span className="relative inline-flex items-center justify-center mx-2">
       <AnimatePresence mode="wait">
-        <motion.div
+        <motion.span
           key={`icon-${currentIndex}`}
           initial={{
             opacity: 0,
@@ -603,10 +616,10 @@ function RotatingText() {
             duration: 0.5,
             ease: [0.25, 0.46, 0.45, 0.94],
           }}
-          className="w-32 sm:w-40 md:w-48 h-18 sm:h-20 md:h-24 flex items-center justify-center"
+          className="inline-flex items-center"
         >
           <CurrentIcon />
-        </motion.div>
+        </motion.span>
       </AnimatePresence>
 
       {words[currentIndex].showText && (
@@ -712,14 +725,14 @@ export function FeedbackSpecHeroEnhanced({
           {/* Static ambient glow effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary/15 via-primary/20 to-primary/15 blur-2xl opacity-25" />
 
-          <h1 className="relative font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight leading-[1.1] text-center">
+          <h1 className="relative font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight leading-tight text-center">
             {/* Layered text effect for depth */}
             <span className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 bg-clip-text text-transparent blur-sm scale-105">
               {title.includes("Cursor-Ready") ? (
                 <>
                   {title.split("Cursor-Ready")[0]}
                   <span className="inline-flex items-baseline gap-2">
-                    <span className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">
+                    <span className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40 2xl:w-48 2xl:h-48">
                       ⚡
                     </span>
                     Cursor
@@ -736,16 +749,17 @@ export function FeedbackSpecHeroEnhanced({
             <span className="relative">
               {title.includes("Cursor-Ready") ? (
                 <>
-                  <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">
+                  <span className="block lg:inline bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">
                     {title.split("Cursor-Ready")[0]}
                   </span>
-                  <RotatingText />
-                  <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent ml-12">
-                    -Ready Specs
+                  <span className="block lg:inline whitespace-nowrap">
+                    <RotatingText />
+                    <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">
+                      -Ready Specs
+                    </span>
                   </span>
-                  <br />
-                  <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent font-extrabold">
-                    in Minutes
+                  <span className="block mt-2 lg:mt-0 lg:inline bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent font-extrabold">
+                    <span className="hidden lg:inline"> </span>in Minutes
                   </span>
                 </>
               ) : (

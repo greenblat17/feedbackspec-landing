@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Icon Solution Test - FeedbackSpec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .icon-container {
+            display: inline-flex;
+            align-items: center;
+            vertical-align: middle;
+        }
+        
+        .icon-svg {
+            display: block;
+            width: auto;
+        }
+        
+        /* Responsive heights matching our implementation */
+        .h-8 { height: 32px; }
+        .sm\:h-10 { height: 40px; }
+        .md\:h-12 { height: 48px; }
+        .lg\:h-16 { height: 64px; }
+        .xl\:h-20 { height: 80px; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <div class="max-w-7xl mx-auto space-y-12">
+        <h1 class="text-3xl font-bold mb-8 text-center">SVG-Based Icon Solution</h1>
+        
+        <!-- Success Message -->
+        <div class="bg-green-900/20 border border-green-600 p-6 rounded-lg text-center">
+            <h2 class="text-2xl font-bold text-green-400 mb-4">✅ SVG Icons Implementation</h2>
+            <p class="text-lg">Using actual SVG files with predictable sizing!</p>
+        </div>
+        
+        <!-- Mobile Preview -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Mobile (text-2xl)</h2>
+            <div class="text-2xl font-bold text-center">
+                <span>Turn Scattered Feedback Into</span>
+                <span class="icon-container mx-2">
+                    <svg class="icon-svg h-8" viewBox="0 0 125 24" fill="currentColor">
+                        <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="16">CURSOR</text>
+                    </svg>
+                </span>
+                <span>-Ready Specs</span>
+                <br>
+                <span class="text-blue-500">in Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-4 text-center">
+                Text: 24px | Icon: h-8 (32px) - Perfect proportion!
+            </p>
+        </div>
+        
+        <!-- Desktop Preview -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Desktop (text-6xl)</h2>
+            <div class="text-6xl font-bold text-center">
+                <span>Turn Scattered Feedback Into</span>
+                <span class="icon-container mx-2">
+                    <svg class="icon-svg xl:h-20" viewBox="0 0 125 24" fill="currentColor">
+                        <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="16">CURSOR</text>
+                    </svg>
+                </span>
+                <span>-Ready Specs</span>
+                <br>
+                <span class="text-blue-500">in Minutes</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-4 text-center">
+                Text: 60px | Icon: h-20 (80px) - Maintains impact!
+            </p>
+        </div>
+        
+        <!-- All Breakpoints -->
+        <div class="border border-gray-700 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-purple-400">Responsive Scaling</h2>
+            <div class="grid gap-4">
+                <div class="flex items-center justify-between bg-gray-800 p-3 rounded">
+                    <span class="text-sm">Mobile (default)</span>
+                    <span class="font-mono">h-8 (32px)</span>
+                </div>
+                <div class="flex items-center justify-between bg-gray-800 p-3 rounded">
+                    <span class="text-sm">Small (sm:)</span>
+                    <span class="font-mono">h-10 (40px)</span>
+                </div>
+                <div class="flex items-center justify-between bg-gray-800 p-3 rounded">
+                    <span class="text-sm">Medium (md:)</span>
+                    <span class="font-mono">h-12 (48px)</span>
+                </div>
+                <div class="flex items-center justify-between bg-gray-800 p-3 rounded">
+                    <span class="text-sm">Large (lg:)</span>
+                    <span class="font-mono">h-16 (64px)</span>
+                </div>
+                <div class="flex items-center justify-between bg-gray-800 p-3 rounded">
+                    <span class="text-sm">Extra Large (xl:)</span>
+                    <span class="font-mono">h-20 (80px)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Key Benefits -->
+        <div class="bg-blue-900/20 border border-blue-600 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">🎯 SVG Solution Benefits</h2>
+            <ul class="space-y-3">
+                <li class="flex items-start gap-3">
+                    <span class="text-green-400 mt-1">✓</span>
+                    <span><strong>Predictable Sizing:</strong> SVGs respect the height classes exactly</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-green-400 mt-1">✓</span>
+                    <span><strong>No Library Conflicts:</strong> Direct control over the elements</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-green-400 mt-1">✓</span>
+                    <span><strong>Proper Aspect Ratio:</strong> Width auto-adjusts based on height</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-green-400 mt-1">✓</span>
+                    <span><strong>Standard Tailwind:</strong> Uses real classes (h-8, h-10, etc.)</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-green-400 mt-1">✓</span>
+                    <span><strong>Smooth Animations:</strong> Works perfectly with Framer Motion</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Implementation Details -->
+        <div class="bg-gray-800 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-gray-300">Implementation</h2>
+            <pre class="text-sm overflow-x-auto"><code>const CursorIcon = () => (
+  &lt;span className="relative inline-block"&gt;
+    &lt;Image
+      src="/Cursor Logo (3).svg"
+      alt="Cursor"
+      width={125}
+      height={24}
+      className="h-8 sm:h-10 md:h-12 lg:h-16 xl:h-20 w-auto"
+      style={{ height: 'auto' }}
+    /&gt;
+  &lt;/span&gt;
+);</code></pre>
+        </div>
+    </div>
+</body>
+</html>

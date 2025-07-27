@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Color Fix Test - FeedbackSpec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Dark theme colors matching your app */
+        :root {
+            --background: 0 0% 3.9%;
+            --foreground: 0 0% 98%;
+        }
+        
+        body {
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+        }
+        
+        /* Fix for dark background visibility */
+        .icon-white {
+            filter: brightness(0) invert(1);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-8">
+    <div class="max-w-7xl mx-auto space-y-12">
+        <h1 class="text-3xl font-bold mb-8 text-center">SVG Icons with Color Fix</h1>
+        
+        <!-- Success Message -->
+        <div class="bg-green-900/20 border border-green-600 p-6 rounded-lg text-center">
+            <h2 class="text-2xl font-bold text-green-400 mb-4">✅ Color Issue Fixed!</h2>
+            <p class="text-lg">Icons now visible on dark background using CSS filter</p>
+        </div>
+        
+        <!-- Mobile Preview -->
+        <div class="border border-gray-700 p-6 rounded-lg bg-gray-900">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Mobile (text-2xl)</h2>
+            <div class="text-2xl font-bold text-center">
+                <span>Turn Scattered Feedback Into</span>
+                <span class="inline-block mx-2">
+                    <img 
+                        src="data:image/svg+xml,%3Csvg fill='currentColor' viewBox='0 0 125 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 12C2 5.8 5.94 2.329 11.699 2.329h6.914v3.693H11.92c-3.526 0-5.923 2.012-5.923 5.978 0 3.966 2.397 5.978 5.923 5.978h6.694v3.693H11.7C5.94 21.67 2 18.145 2 12zm20.194 3.5V2.331h3.857v12.37c0 2.396 1.24 3.25 3.278 3.25h2.313c2.012 0 3.278-.854 3.278-3.25V2.33h3.83v13.197c0 4.16-2.754 6.143-6.475 6.143h-3.581c-3.746 0-6.502-1.984-6.502-6.17h.002zM42.909 2.331h11.433c3.913 0 5.87 2.094 5.87 5.455 0 2.149-1.02 3.885-2.646 4.353 1.681.192 2.48 1.405 2.48 2.865v6.667h-3.884v-5.758c0-1.02-.304-1.736-1.68-1.736h-7.688v7.494H42.91V2.33z'/%3E%3C/svg%3E" 
+                        class="h-8 w-auto icon-white"
+                        alt="Cursor"
+                    >
+                </span>
+                <span>-Ready Specs</span>
+                <br>
+                <span class="text-blue-500">in Minutes</span>
+            </div>
+        </div>
+        
+        <!-- Desktop Preview -->
+        <div class="border border-gray-700 p-6 rounded-lg bg-gray-900">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">Desktop (text-6xl)</h2>
+            <div class="text-6xl font-bold text-center">
+                <span>Turn Scattered Feedback Into</span>
+                <span class="inline-block mx-2">
+                    <img 
+                        src="data:image/svg+xml,%3Csvg fill='currentColor' viewBox='0 0 125 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 12C2 5.8 5.94 2.329 11.699 2.329h6.914v3.693H11.92c-3.526 0-5.923 2.012-5.923 5.978 0 3.966 2.397 5.978 5.923 5.978h6.694v3.693H11.7C5.94 21.67 2 18.145 2 12zm20.194 3.5V2.331h3.857v12.37c0 2.396 1.24 3.25 3.278 3.25h2.313c2.012 0 3.278-.854 3.278-3.25V2.33h3.83v13.197c0 4.16-2.754 6.143-6.475 6.143h-3.581c-3.746 0-6.502-1.984-6.502-6.17h.002zM42.909 2.331h11.433c3.913 0 5.87 2.094 5.87 5.455 0 2.149-1.02 3.885-2.646 4.353 1.681.192 2.48 1.405 2.48 2.865v6.667h-3.884v-5.758c0-1.02-.304-1.736-1.68-1.736h-7.688v7.494H42.91V2.33z'/%3E%3C/svg%3E" 
+                        class="h-20 w-auto icon-white"
+                        alt="Cursor"
+                    >
+                </span>
+                <span>-Ready Specs</span>
+                <br>
+                <span class="text-blue-500">in Minutes</span>
+            </div>
+        </div>
+        
+        <!-- Explanation -->
+        <div class="bg-blue-900/20 border border-blue-600 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">How the Fix Works</h2>
+            <div class="space-y-3">
+                <div>
+                    <h3 class="font-semibold mb-1">The Problem:</h3>
+                    <p class="text-sm">SVGs use `fill="currentColor"` which inherits the text color. On dark backgrounds, black icons are invisible.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1">The Solution:</h3>
+                    <p class="text-sm">Applied CSS filter: `brightness(0) invert(1)` which makes the icons white on dark backgrounds.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1">Implementation:</h3>
+                    <pre class="text-xs bg-gray-800 p-2 rounded overflow-x-auto"><code>style={{ 
+  height: 'auto', 
+  filter: 'brightness(0) invert(1)' 
+}}</code></pre>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Responsive Sizes -->
+        <div class="bg-gray-800 p-6 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4">Responsive Icon Sizes</h2>
+            <div class="grid gap-3">
+                <div class="flex items-center justify-between">
+                    <span>Mobile:</span>
+                    <code class="bg-gray-700 px-2 py-1 rounded">h-8 (32px)</code>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span>Small:</span>
+                    <code class="bg-gray-700 px-2 py-1 rounded">h-10 (40px)</code>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span>Medium:</span>
+                    <code class="bg-gray-700 px-2 py-1 rounded">h-12 (48px)</code>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span>Large:</span>
+                    <code class="bg-gray-700 px-2 py-1 rounded">h-16 (64px)</code>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span>XL:</span>
+                    <code class="bg-gray-700 px-2 py-1 rounded">h-20 (80px)</code>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
