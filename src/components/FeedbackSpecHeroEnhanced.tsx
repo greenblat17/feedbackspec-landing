@@ -713,7 +713,7 @@ export function FeedbackSpecHeroEnhanced({
 
         {/* Main Headline - Enhanced with world-class design principles */}
         <motion.div
-          className="relative mb-6 max-w-5xl mx-auto px-4 sm:px-0"
+          className="relative mb-6 max-w-6xl mx-auto px-4 sm:px-0"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -728,45 +728,29 @@ export function FeedbackSpecHeroEnhanced({
           <h1 className="relative font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight leading-tight text-center">
             {/* Layered text effect for depth */}
             <span className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 bg-clip-text text-transparent blur-sm scale-105">
-              {title.includes("Cursor-Ready") ? (
-                <>
-                  {title.split("Cursor-Ready")[0]}
-                  <span className="inline-flex items-baseline gap-2">
-                    <span className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40 2xl:w-48 2xl:h-48">
-                      ⚡
-                    </span>
-                    Cursor
+              <span className="block">
+                Turn Scattered Feedback Into
+              </span>
+              <span className="block">
+                <span className="inline-flex items-baseline gap-2">
+                  <span className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40 2xl:w-48 2xl:h-48">
+                    ⚡
                   </span>
-                  -Ready
-                  {title.split("Cursor-Ready")[1]}
-                </>
-              ) : (
-                title
-              )}
+                  <span>Cursor-Ready Specs in Minutes</span>
+                </span>
+              </span>
             </span>
 
             {/* Main text with enhanced gradients */}
             <span className="relative">
-              {title.includes("Cursor-Ready") ? (
-                <>
-                  <span className="block lg:inline bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">
-                    {title.split("Cursor-Ready")[0]}
-                  </span>
-                  <span className="block lg:inline whitespace-nowrap">
-                    <RotatingText />
-                    <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">
-                      -Ready Specs
-                    </span>
-                  </span>
-                  <span className="block mt-2 lg:mt-0 lg:inline bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent font-extrabold">
-                    <span className="hidden lg:inline"> </span>in Minutes
-                  </span>
-                </>
-              ) : (
-                <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">
-                  {title}
-                </span>
-              )}
+              <span className="block bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">
+                Turn Scattered Feedback Into
+              </span>
+              <span className="block text-[0.9em] lg:text-[1em] whitespace-nowrap">
+                <RotatingText />
+                <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground bg-clip-text text-transparent">-Ready Specs </span>
+                <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent font-extrabold">in Minutes</span>
+              </span>
             </span>
 
             {/* Animated underline accent */}
