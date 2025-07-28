@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { SimpleHeader } from "../components/SimpleHeader";
 import { FeedbackSpecHeroEnhanced } from "../components/FeedbackSpecHeroEnhanced";
 import { FeedbackSpecCTA } from "../components/FeedbackSpecCTA";
+import { FAQSection } from "../components/FAQSection";
 import Footer from "../components/Footer";
 import { FeedbackFormModal } from "../components/FeedbackFormModal";
 import { BackToTop } from "../components/BackToTop";
@@ -121,8 +122,13 @@ export default function Home() {
         <LazyPricingSection onStartTrial={() => setIsFormOpen(true)} />
       </section>
 
+      {/* FAQ Section */}
+      <section id="faq" className="bg-background">
+        <FAQSection />
+      </section>
+
       {/* CTA Section */}
-      <section className="bg-background">
+      <section className="bg-muted/10">
         <FeedbackSpecCTA />
       </section>
 
