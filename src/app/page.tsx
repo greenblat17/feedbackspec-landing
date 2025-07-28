@@ -6,6 +6,7 @@ import { SimpleHeader } from "../components/SimpleHeader";
 import { FeedbackSpecHeroEnhanced } from "../components/FeedbackSpecHeroEnhanced";
 import { FeedbackSpecCTA } from "../components/FeedbackSpecCTA";
 import { FAQSection } from "../components/FAQSection";
+import { RiskReversalSection } from "../components/RiskReversalSection";
 import Footer from "../components/Footer";
 import { FeedbackFormModal } from "../components/FeedbackFormModal";
 import { BackToTop } from "../components/BackToTop";
@@ -127,8 +128,13 @@ export default function Home() {
         <FAQSection />
       </section>
 
+      {/* Risk Reversal Section */}
+      <section id="risk-reversal" className="bg-muted/10">
+        <RiskReversalSection />
+      </section>
+
       {/* CTA Section */}
-      <section className="bg-muted/10">
+      <section className="bg-background">
         <FeedbackSpecCTA />
       </section>
 
